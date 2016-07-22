@@ -1,2 +1,17 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<style>
+  #map {
+    height: 100%
+  }
+</style>
+<div id="map"></div>
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.3059, lng: -89.5181 },
+      zoom: 12
+    });
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC6bfH0lLAZQeSgFFuB-TA5-iDimdQ7DQ&callback=initMap">
+</script>
