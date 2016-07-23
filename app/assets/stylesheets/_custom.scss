@@ -1,0 +1,133 @@
+/* Variables */
+
+// Adjust width accordingly (use even #'s)
+$logo-width: 118px;
+// Reduce px value to increase space between logo and menu text
+$logo-padding: $logo-width - 32px; 
+// Leave alone
+$logo-margin: - ($logo-width / 2);
+
+/* Small Navigation */
+.logo-small {
+  float: right;
+}
+
+.title-bar {
+  padding: 0 .5rem;
+}
+
+.menu-icon,
+.title-bar-title {
+  position: relative;
+  top: 10px;
+}
+
+
+/* Medium-Up Navigation */
+@media only screen and (min-width: 40rem) { 
+    .full-width{
+        max-width: none !important;
+    }
+  .logo-wrapper {
+    position: relative;
+    
+    .logo {
+      width: $logo-width;
+      height:  92px;
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      top: -6px;
+      margin-left: $logo-margin;
+    }
+  }
+
+  // Right part
+  .top-bar-right {
+    width: 50%;
+    padding-left: $logo-padding;
+    
+    ul {
+      float: left;
+    }
+  }
+  
+  // Left part
+  .top-bar-left {
+    width:  50%;
+    padding-right: $logo-padding;
+    
+    ul {
+      float: right;
+    }
+  }
+    #one{
+        
+    }
+    #map{
+        height:1000px;
+    }
+    // product card
+    $primary-color: #008cba;
+
+.item-wrapper {
+  padding: 20px;
+  border: 2px solid #efefef;
+  border-radius: 7px;
+  margin-top: 40px;
+  
+  &:hover {
+    .img-wrapper {
+      
+      
+      .add-to-cart { bottom: 0; }
+    }
+  }
+}
+
+.img-wrapper {
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+
+  .add-to-cart {
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    background-color: #333;
+    padding: 16px 8px;
+    bottom: -50px;
+    position: absolute;
+    z-index: 2;
+    color: #fff;
+    margin: 0 auto;
+    border: none;
+    box-shadow: none;
+
+    &:hover { background-color: $primary-color; }
+  }
+
+  
+}  
+
+h3 { font-size: 22px; }
+h5 { font-weight: bold; }
+
+p {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+    //end of product card
+    //cirlce pagination
+    // Color used for medium gray UI items within Foundation.
+$medium-gray: #cacaca;
+
+.pagination li {
+  border: 1px solid $medium-gray;
+  border-radius: 50%;
+}
+
+.pagination a {
+  border-radius: 50%;
+}
+}
