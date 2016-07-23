@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723020552) do
+ActiveRecord::Schema.define(version: 20160723054333) do
+
+  create_table "amenities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "timestamps", limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "amenities_properties", id: false, force: :cascade do |t|
+    t.integer "amenity_id",  limit: 4
+    t.integer "property_id", limit: 4
+  end
+
+  add_index "amenities_properties", ["amenity_id"], name: "index_amenities_properties_on_amenity_id", using: :btree
+  add_index "amenities_properties", ["property_id"], name: "index_amenities_properties_on_property_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
     t.string   "address1",       limit: 255
