@@ -11,24 +11,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="large-6 columns">
-                  <div class="item-wrapper">
-                    <div class="img-wrapper">
-                      <a href="#"><img src="http://placehold.it/300x400" /></a>
-                    </div>
-                    <a href="#"><h3>1829 N Hampton Dr</h3></a>
-                    <p>3 Bedroom Ranch</p>
-                  </div>
+              <div class="large-12 columns">
+                <div id="properties-list" class="row small-up-1 medium-up-2">
                 </div>
-                <div class="large-6 columns">
-                    <div class="item-wrapper">
-                    <div class="img-wrapper">
-                      <a href="#"><img src="http://placehold.it/300x400" /></a>
-                    </div>
-                    <a href="#"><h3>1829 N Hampton Dr</h3></a>
-                    <p>3 Bedroom Ranch</p>
-                  </div>
-                </div>
+              </div>
             </div>
             <div class="row head-room">
             <div class="large-12 text-center columns">
@@ -50,3 +36,13 @@
         </div>
     </div>
 </section>
+
+<script>
+ $(document).ready(function() {
+   initProperties();
+ });
+
+ function renderedProperty() {
+   return '<%= escape_javascript(render partial: "properties/card") %>';
+ }
+ </script>

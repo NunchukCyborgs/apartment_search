@@ -1,5 +1,6 @@
 module Api
   class PropertiesController < ::ApplicationController
+    skip_before_action :require_login
 
     #  Both of the following endpoints expect a list of facet filters to be sent
     #  This list will look something like:

@@ -27,6 +27,7 @@ gem 'foundation-rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'geocoder'
+gem 'annotate'
 
 gem 'sorcery'
 

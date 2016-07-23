@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723030301) do
+ActiveRecord::Schema.define(version: 20160723091755) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.string   "timestamps", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -45,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160723030301) do
 
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
->>>>>>> faceted
 
   create_table "properties", force: :cascade do |t|
     t.string   "address1",       limit: 255
@@ -65,7 +63,6 @@ ActiveRecord::Schema.define(version: 20160723030301) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.date     "rented_at"
-    t.integer  "location_id",    limit: 4
   end
 
   create_table "properties_types", id: false, force: :cascade do |t|

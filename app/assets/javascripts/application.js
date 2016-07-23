@@ -17,3 +17,18 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+function initProperties() {
+  $.get('/api/properties/filtered_results', {}, function(data) {
+    data.forEach(function(property) {
+      if(typeof renderedProperty == 'function') {
+        var propertyHtml = $.parseHTML(renderedProperty());
+        $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
+        $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
+        $('#properties-list').append(propertyHtml);
+      }
+    });
+    console.log("RESULTS");
+    console.log(data);
+    });
+}
