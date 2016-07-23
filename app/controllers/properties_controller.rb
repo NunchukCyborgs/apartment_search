@@ -4,7 +4,8 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
+    #@properties = Property.all
+    @es_results = PropertyResults.returned_records(params[:facets])
   end
 
   # GET /properties/1

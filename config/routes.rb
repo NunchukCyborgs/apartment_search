@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'welcome#index'
+  root 'welcome#index'
+
+  namespace :api, :defaults => { :format => 'json' } do
+    match "/properties/facets" => "properties#facets", via: :get
+    match "/properties/filtered_results" => "properties#filtered_results", via: :get
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

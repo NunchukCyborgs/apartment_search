@@ -1,0 +1,84 @@
+---
+:property:
+  :properties:
+    :id:
+      :type: long
+    :address1:
+      :type: string
+    :address2:
+      :type: string
+    :zipcode:
+      :type: string
+    :price:
+      :type: long
+    :square_footage:
+      :type: long
+    :contact_number:
+      :type: string
+      :fields:
+        :raw:
+          :type: string
+          :index: not_analyzed
+    :contact_email:
+      :type: string
+      :fields:
+        :raw:
+          :type: string
+          :index: not_analyzed
+    :latitude:
+      :type: double
+    :longitude:
+      :type: double
+    :description:
+      :type: string
+    :bedrooms:
+      :type: long
+    :bathrooms:
+      :type: long
+    :lease_length:
+      :type: long
+    :rented_at:
+      :type: date
+    :locations:
+      :type: object
+      :properties:
+        :facet_name:
+          :type: string
+          :fields:
+            :raw:
+              :type: string
+              :index: not_analyzed
+        :full_name:
+          :type: string
+          :fields:
+            :raw:
+              :type: string
+              :index: not_analyzed
+        :data_name:
+          :type: string
+          :fields:
+            :raw:
+              :type: string
+              :index: not_analyzed
+        :latitude:
+          :type: double
+        :longitude:
+          :type: double
+    :amenities:
+      :type: object
+      :properties:
+        :name:
+          :type: string
+          :fields:
+            :raw:
+              :type: string
+              :index: not_analyzed
+    :types:
+      :type: object
+      :properties:
+        :name:
+          :type: string
+          :fields:
+            :raw:
+              :type: string
+              :index: not_analyzed
