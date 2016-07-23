@@ -35,7 +35,23 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
+# precompile assets - locations that we will look for changed assets to determine whether to precompile
+set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile config/routes.rb)
+
+set :assets_roles, [:web, :app]
+
 namespace :deploy do
+
+  #overwrite precompile to only precompile if assets changed
+  namespace :assets do
+    desc "Precompile assets if changed"
+    task :precompile do
+      on roles(fetch(:assets_roles)) do
+        invoke 'deploy:assets:precompile_changed'
+        #Rake::Task["deploy:assets:precompile_changed"].invoke
+      end
+    end
+  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

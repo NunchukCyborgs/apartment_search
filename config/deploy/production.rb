@@ -18,8 +18,8 @@
 # Don't use `:all`, it's a meta role.
 
 role :app, %w{ubuntu@ec2-52-38-214-230.us-west-2.compute.amazonaws.com}
-# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
-# role :db,  %w{deploy@example.com}
+role :web, %w{ubuntu@ec2-52-38-214-230.us-west-2.compute.amazonaws.com}
+role :db, %w{ubuntu@ec2-52-38-214-230.us-west-2.compute.amazonaws.com}
 
 
 
