@@ -3,9 +3,17 @@
 // Adjust width accordingly (use even #'s)
 $logo-width: 118px;
 // Reduce px value to increase space between logo and menu text
-$logo-padding: $logo-width - 32px; 
+$logo-padding: $logo-width - 32px;
 // Leave alone
 $logo-margin: - ($logo-width / 2);
+
+.left-margin-fix {
+  margin-left: auto !important;
+}
+
+.head-room {
+  margin-top: 1em !important;
+}
 
 /* Small Navigation */
 .logo-small {
@@ -24,13 +32,13 @@ $logo-margin: - ($logo-width / 2);
 
 
 /* Medium-Up Navigation */
-@media only screen and (min-width: 40rem) { 
+@media only screen and (min-width: 40rem) {
     .full-width{
         max-width: none !important;
     }
   .logo-wrapper {
     position: relative;
-    
+
     .logo {
       width: $logo-width;
       height:  92px;
@@ -46,23 +54,23 @@ $logo-margin: - ($logo-width / 2);
   .top-bar-right {
     width: 50%;
     padding-left: $logo-padding;
-    
+
     ul {
       float: left;
     }
   }
-  
+
   // Left part
   .top-bar-left {
     width:  50%;
     padding-right: $logo-padding;
-    
+
     ul {
       float: right;
     }
   }
     #one{
-        
+
     }
     #map{
         height:1000px;
@@ -75,11 +83,11 @@ $logo-margin: - ($logo-width / 2);
   border: 2px solid #efefef;
   border-radius: 7px;
   margin-top: 40px;
-  
+
   &:hover {
     .img-wrapper {
-      
-      
+
+
       .add-to-cart { bottom: 0; }
     }
   }
@@ -106,8 +114,8 @@ $logo-margin: - ($logo-width / 2);
     &:hover { background-color: $primary-color; }
   }
 
-  
-}  
+
+}
 
 h3 { font-size: 22px; }
 h5 { font-weight: bold; }
