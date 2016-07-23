@@ -19,16 +19,35 @@
 $(function(){ $(document).foundation(); });
 
 function initProperties() {
-  $.get('/api/properties/filtered_results', {}, function(data) {
-    data.forEach(function(property) {
-      if(typeof renderedProperty == 'function') {
-        var propertyHtml = $.parseHTML(renderedProperty());
-        $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
-        $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
-        $('#properties-list').append(propertyHtml);
-      }
+  $.post('/api/properties/filtered_results', {}, function(data) {
+    renderPropertyData(data);
+  });
+}
+
+function initFacets() {
+  $('.js-types-facet input[type=checkbox]').change(function() {
+    var types = [];
+    $('.js-types-facet input:checked').each(function(index,checkbox) {
+      types.push($(checkbox).val());
     });
-    console.log("RESULTS");
-    console.log(data);
-    });
+    facetsChanged(types);
+  });
+}
+
+function facetsChanged(types) {
+  $.post('/api/properties/filtered_results', { "types" : JSON.stringify(types) }, function(data) {
+    $('#properties-list').empty();
+    renderPropertyData(data);
+  });
+}
+
+function renderPropertyData(data) {
+  data.forEach(function(property) {
+    if(typeof renderedProperty == 'function') {
+      var propertyHtml = $.parseHTML(renderedProperty());
+      $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
+      $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
+      $('#properties-list').append(propertyHtml);
+    }
+  });
 }

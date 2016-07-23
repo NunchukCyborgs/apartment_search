@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :api, :defaults => { :format => 'json' } do
-    match "/properties/facets" => "properties#facets", via: :get
-    match "/properties/filtered_results" => "properties#filtered_results", via: :get
+    post "/properties/facets" => "properties#facets"
+    post "/properties/filtered_results" => "properties#filtered_results"
   end
 
   # Example of regular route:
