@@ -18,8 +18,7 @@ default: &default
 development:
   <<: *default
   database: apartment_search_development
-  username: apartment_search
-  password: apartment_search_dev_pw
+  username: root
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
