@@ -13,8 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  socket: /var/run/mysqld/mysqld.sock
-  #socket: /tmp/mysql.sock
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
@@ -52,6 +51,7 @@ test:
 #
 production:
   <<: *default
+  socket: /var/run/mysqld/mysqld.sock
   database: apartment_search_production
   username: apartment_search
   password: <%= ENV['APARTMENT_SEARCH_DATABASE_PASSWORD'] %>
