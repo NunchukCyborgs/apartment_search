@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @property.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @property.address2 %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @property.zipcode %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @property.price %>
+</p>
+
+<p>
+  <strong>Square footage:</strong>
+  <%= @property.square_footage %>
+</p>
+
+<p>
+  <strong>Contact number:</strong>
+  <%= @property.contact_number %>
+</p>
+
+<p>
+  <strong>Contact email:</strong>
+  <%= @property.contact_email %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @property.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @property.longitude %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @property.description %>
+</p>
+
+<p>
+  <strong>Rented at:</strong>
+  <%= @property.rented_at %>
+</p>
+
+<p>
+  <strong>Bedrooms:</strong>
+  <%= @property.bedrooms %>
+</p>
+
+<p>
+  <strong>Bathrooms:</strong>
+  <%= @property.bathrooms %>
+</p>
+
+<p>
+  <strong>Lease length:</strong>
+  <%= @property.lease_length %>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+  <%= @property.owner_id %>
+</p>
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>

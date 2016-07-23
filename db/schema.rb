@@ -11,6 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160723030301) do
+
+  create_table "properties", force: :cascade do |t|
+    t.string   "address1",       limit: 255
+    t.string   "address2",       limit: 255
+    t.string   "zipcode",        limit: 255
+    t.integer  "price",          limit: 4
+    t.integer  "square_footage", limit: 4
+    t.string   "contact_number", limit: 255
+    t.string   "contact_email",  limit: 255
+    t.float    "latitude",       limit: 24
+    t.float    "longitude",      limit: 24
+    t.text     "description",    limit: 65535
+    t.integer  "bedrooms",       limit: 4
+    t.integer  "bathrooms",      limit: 4
+    t.integer  "lease_length",   limit: 4
+    t.integer  "owner_id",       limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.date     "rented_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",            limit: 255, null: false
+    t.string   "crypted_password", limit: 255
+    t.string   "salt",             limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
