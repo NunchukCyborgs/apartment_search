@@ -44,7 +44,7 @@ module Api
     #   per_page
     # returns: array of properties
     def filtered_results
-      results = PropertyResults.parsed_results(params[:facets])
+      results = PropertyResults.parsed_results(params[:facets], params[:page], params[:per_page])
       respond_to do |format|
         format.json { render json: results.to_json }
       end
