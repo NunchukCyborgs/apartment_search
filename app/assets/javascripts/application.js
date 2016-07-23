@@ -19,9 +19,7 @@
 $(function(){ $(document).foundation(); });
 
 function initProperties() {
-  $.post('/api/properties/filtered_results', {}, function(data) {
-    renderPropertyData(data);
-  });
+  facetsChanged([]);
 }
 
 function initFacets() {
@@ -47,6 +45,7 @@ function renderPropertyData(data) {
       var propertyHtml = $.parseHTML(renderedProperty());
       $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
       $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
+      $(propertyHtml).find('.js-property-link').attr("href", "/properties/" + property["id"]);
       $('#properties-list').append(propertyHtml);
     }
   });
