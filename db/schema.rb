@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723091755) do
+ActiveRecord::Schema.define(version: 20160723091956) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.string   "timestamps", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20160723091755) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.date     "rented_at"
+    t.integer  "location_id",    limit: 4
   end
 
   create_table "properties_types", id: false, force: :cascade do |t|

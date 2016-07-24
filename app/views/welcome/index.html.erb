@@ -24,14 +24,16 @@
             </div>
             <div class="row head-room">
             <div class="large-12 text-center columns">
-            <ul class="pagination" role="navigation" aria-label="Pagination">
-              <li class="disabled">« <span class="show-for-sr">Previous page</span></li>
-              <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
-              <li><a href="#" aria-label="Page 2">2</a></li>
-              <li><a href="#" aria-label="Page 3">3</a></li>
-              <li><a href="#" aria-label="Page 4">4</a></li>
-              <li><a href="#" aria-label="Page 5">5</a></li>
-              <li><a href="#" aria-label="Next page">» <span class="show-for-sr">Next page</span></a></li>
+            <ul class="pagination js-pagination" role="navigation" aria-label="Pagination">
+              <%= raw previous_page_link %>
+              <% @pages_to_display.times do |i| %>
+                <%= raw generic_page_link(i + 1) %>
+              <% end %>
+              <% if @pages_to_display < @num_pages %>
+                ...
+                <%= raw generic_page_link(@num_pages) %>
+              <%end%>
+              <%= raw next_page_link %>
             </ul>
             </div>
             </div>
@@ -45,8 +47,8 @@
 
 <script>
  $(document).ready(function() {
-   initProperties();
-   initFacets();
+   Facetr.initProperties();
+   Facetr.initFacets();
  });
 
  function renderedProperty() {

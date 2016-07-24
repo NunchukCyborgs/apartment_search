@@ -13,21 +13,31 @@ class PropertyFacet
 
   def get_new_facet_values
     {
-      min_price: raw_results["min_price"]["value"],
-      max_price: raw_results["max_price"]["value"],
-      min_lease_length: raw_results["min_lease_length"]["value"],
-      bedrooms: raw_results["bedrooms"]["buckets"].map { |b| b["key"] },
-      bathrooms: raw_results["bathrooms"]["buckets"].map { |b| b["key"] },
-      amenities: raw_results["amenities"]["buckets"].map { |b| b["key"] },
-      locations: raw_results["locations"]["buckets"].map { |b| b["key"] },
-      types: raw_results["types"]["buckets"].map { |b| b["key"] },
+      min_price: aggregations["min_price"]["value"],
+      max_price: aggregations["max_price"]["value"],
+      min_lease_length: aggregations["min_lease_length"]["value"],
+      bedrooms: aggregations["bedrooms"]["buckets"].map { |b| b["key"] },
+      bathrooms: aggregations["bathrooms"]["buckets"].map { |b| b["key"] },
+      amenities: aggregations["amenities"]["buckets"].map { |b| b["key"] },
+      locations: aggregations["locations"]["buckets"].map { |b| b["key"] },
+      types: aggregations["types"]["buckets"].map { |b| b["key"] },
+      total_count: aggregations["total_count"]["value"],
+      number_of_pages: number_of_pages
     }
   end
 
   private
 
+  def number_of_pages
+    (aggregations["total_count"]["value"].to_i / Settings.properties_per_page) + 1
+  end
+
+  def aggregations
+    raw_results.fetch("aggregations")
+  end
+
   def raw_results
-    @raw_results ||= Property.search(query).response.fetch("aggregations")
+    @raw_results ||= Property.search(query).response
   end
 
   def query
@@ -49,6 +59,9 @@ class PropertyFacet
             field: "id",
             size: 0
           }
+        },
+        total_count: {
+          value_count: { field: "id" }
         },
         min_price: {
           min: { field: "price" }

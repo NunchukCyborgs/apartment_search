@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
     post "/properties/facets" => "properties#facets"
     post "/properties/filtered_results" => "properties#filtered_results"
+    get "/properties/facets" => "properties#facets"
+    get "/properties/filtered_results" => "properties#filtered_results"
   end
 
   # Example of regular route:

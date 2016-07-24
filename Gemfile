@@ -28,6 +28,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'geocoder'
 gem 'annotate'
+gem 'config'
 
 gem 'sorcery'
 

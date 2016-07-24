@@ -11,11 +11,11 @@ class PropertyFilter
 
   def initialize(facets)
     @facets = facets || {}
-    @min_price = @facets[:min_price].to_i if @facets[:min_price]
-    @max_price = @facets[:max_price].to_i if @facets[:max_price]
-    @min_bedrooms = @facets[:min_bedrooms].to_i if @facets[:min_bedrooms]
-    @min_bathrooms = @facets[:min_bathrooms].to_i if @facets[:min_bathrooms]
-    @max_lease_length = @facets[:max_lease_length].to_i if @facets[:max_lease_length]
+    @min_price = @facets[:min_price].to_i unless @facets[:min_price].blank?
+    @max_price = @facets[:max_price].to_i unless @facets[:max_price].blank?
+    @min_bedrooms = @facets[:min_bedrooms].to_i unless @facets[:min_bedrooms].blank?
+    @min_bathrooms = @facets[:min_bathrooms].to_i unless @facets[:min_bathrooms].blank?
+    @max_lease_length = @facets[:max_lease_length].to_i unless @facets[:max_lease_length]
     @amenities = @facets.fetch(:amenities, []).map(&:to_s)
     @types = @facets.fetch(:types, []).map(&:to_s)
     @locations = @facets.fetch(:locations, []).map(&:to_s)
@@ -28,9 +28,9 @@ class PropertyFilter
     arr << min_bedrooms_filter if min_bedrooms
     arr << min_bathrooms_filter if min_bathrooms
     arr << max_lease_length_filter if max_lease_length
-    arr << amenities_filter unless amenities.empty?
-    arr << types_filter unless types.empty?
-    arr << locations_filter unless locations.empty?
+    arr << amenities_filter unless amenities.empty? || amenities.all?(&:blank?)
+    arr << types_filter unless types.empty? || types.all?(&:blank?)
+    arr << locations_filter unless locations.empty? || locations.all?(&:blank?)
     arr
   end
 
