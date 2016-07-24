@@ -94,11 +94,11 @@ Facetr = {
         $('#properties-list').append(propertyHtml);
       }
       if(typeof Facetr.map !== 'undefined') {
-        new RichMarker({
+        var marker = new RichMarker({
           map: Facetr.map,
           position:  new google.maps.LatLng(property["latitude"], property["longitude"]),
-          anchor: RichMarkerPosition.BOTTOM,
-          content: '<span class="map-marker has-tip tooltip" title="">' + number_to_currency(property["price"], { precision: 0 }) + '</span>'
+          anchor: new google.maps.Size(-20, -30),
+          content: '<span class="map-marker tooltip top" title="">$' + property["price"] + '</span>'
         });
       }
     });

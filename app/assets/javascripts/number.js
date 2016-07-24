@@ -2,7 +2,7 @@
 function number_to_currency(number, options) {
   try {
     var options   = options || {};
-    var precision = options["precision"] || 2;
+    var precision = options["precision"] || 0;
     var unit      = options["unit"] || "$";
     var separator = precision > 0 ? options["separator"] || "." : "";
     var delimiter = options["delimiter"] || ",";
