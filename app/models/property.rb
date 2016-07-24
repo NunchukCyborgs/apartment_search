@@ -41,7 +41,7 @@ class Property < ActiveRecord::Base
 
   after_save :set_locations
 
-  validates :address1, :zipcode, :price, :lease_length, presence: true
+  validates :address1, :zipcode, presence: true
   #for contact_number contact_email, maybe we default back to these properties
   #on the owner if they have not entered them for the property
 
@@ -76,6 +76,10 @@ class Property < ActiveRecord::Base
 
   def main_image
     images.first
+  end
+
+  def unclaimed?
+    owner.nil?
   end
 
   private

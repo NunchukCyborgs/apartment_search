@@ -33,7 +33,13 @@
             <label><%= @property.bathrooms %> Bath</label><br>
             <!-- <label>Lease</label><br> -->
             <h5><%= number_to_currency(@property.price) %> Monthly Rent</h5><br>
-            <a class="button large expanded" href="#">Rent Now</a>
+            <% if @property.unclaimed? %>
+              <%= link_to "Claim Property", claim_property_path(@property), class: "button large expanded" %>
+            <% elsif @property.owner == current_user %>
+              <%= link_to "Edit Property", edit_property_path(@property), class: "button large expanded" %>
+            <% else %>
+              <a class="button large expanded" href="#">Rent Now</a>
+            <% end %>
             <div class="small secondary expanded button-group">
                 <a class="button">Facebook</a> <a class="button">Twitter</a>
                 <a class="button">Instagram</a>
