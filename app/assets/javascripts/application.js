@@ -35,6 +35,7 @@ Facetr = {
     types: [],
   },
   returnedFacets: { },
+  markers: [],
 
   initProperties: function() {
     this.getProperties();
@@ -67,6 +68,7 @@ Facetr = {
       console.log(data);
       self.properties = data;
       $('#properties-list').empty();
+      self.clearMarkers();
       self.renderPropertyData(data);
     });
   },
@@ -103,9 +105,17 @@ Facetr = {
           anchor: new google.maps.Size(-20, -30),
           content: '<span class="map-marker tooltip top" title="">$' + property["price"] + '</span>'
         });
+        Facetr.markers.push(marker);
       }
     });
 
+  },
+
+  clearMarkers: function() {
+    Facetr.markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    Facetr.markers = [];
   },
 
   initPagination: function() {
