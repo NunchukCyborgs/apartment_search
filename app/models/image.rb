@@ -17,7 +17,7 @@
 class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
 
-  has_attached_file :file, default_url: "/images/:style/missing.png"
+  has_attached_file :file, default_url: "http://placehold.it/600x400"
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
   delegate :url, to: :file, prefix: false
