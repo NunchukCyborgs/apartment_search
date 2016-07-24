@@ -18,6 +18,7 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+var offsetPct = null;
 
 function initProperties() {
   facetsChanged([]);
