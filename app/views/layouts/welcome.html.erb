@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Neuton:400,700" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body{
+          margin: 0px;
+          height: 100%;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="top-bar" id="top-menu">
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><%= link_to "Home", root_path %></li>
+          <% if current_user %>
+            <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
+            <li><%= link_to "Logout", :logout %></li>
+          <% else %>
+            <li><%= link_to "Register", new_user_path %></li>
+            <li><%= link_to "Login", :login %></li>
+          <% end %>
+        </ul>
+      </div>
+</div>
+
+    <div class="row collapse full-height">
+      <div class="small-12 columns full-height">
+        <%= yield %>
+      </div>
+    </div>
+
+  </body>
+</html>
