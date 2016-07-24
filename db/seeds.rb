@@ -26,7 +26,7 @@ end
 
 locations = [
   {
-    full_name: "Southeast Missouri State University",
+    full_name: "SEMO University",
     facet_name: "Near College",
     data_name: "near_college",
     latitude: 37.3124913,

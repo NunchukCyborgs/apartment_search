@@ -19,6 +19,7 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
 var offsetPct = null;
 
 Facetr = {
@@ -36,12 +37,10 @@ Facetr = {
   returnedFacets: { },
 
   initProperties: function() {
-    console.log("initializing properties");
     this.getProperties();
   },
 
   initFacets: function() {
-    console.log("initializing facets");
     var self = this;
     /* load facets data */
     self.getFacets(self.initPagination);
@@ -49,14 +48,12 @@ Facetr = {
   },
 
   getFacets: function(optionalCallback) {
-    console.log("getting facets");
     var self = this;
     $.post('/api/properties/facets', { facets: self.selectedFacets }, function(data) {
         console.log(data);
         self.returnedFacets = data;
         self.getProperties()
-        self.setCallbacks();
-        self.updateFacetValuesOnPage();
+        /*self.setCallbacks();*/
         if(typeof optionalCallback === 'function') {
           optionalCallback();
         }
@@ -64,7 +61,6 @@ Facetr = {
   },
 
   getProperties: function(page) {
-    console.log("getting properties");
     var self = this;
     var page = typeof page !== 'undefined' ? page : 1;
     $.post('/api/properties/filtered_results', { facets: self.selectedFacets }, function(data) {
@@ -76,36 +72,7 @@ Facetr = {
   },
 
   setCallbacks: function() {
-    console.log("setting callbacks");
-    var self = this;
-    /* set callbacks on types */
-    $('.js-types-facet input[type=checkbox]').change(function() {
-        self.selectedFacets.types = [];
-      $('.js-types-facet input:checked').each(function(index,checkbox) {
-        self.selectedFacets.types.push($(checkbox).val());
-      });
-      self.facetsChanged();
-    });
-    /* set callbacks on amenities */
-    $('.js-amenities-facet input[type=checkbox]').change(function() {
-        self.selectedFacets.amenities = [];
-      $('.js-amenities-facet input:checked').each(function(index,checkbox) {
-        self.selectedFacets.amenities.push($(checkbox).val());
-      });
-      self.facetsChanged();
-    });
-    /* set callbacks on locations */
-    $('.js-locations-facet input[type=checkbox]').change(function() {
-        self.selectedFacets.locations = [];
-      $('.js-locations-facet input:checked').each(function(index,checkbox) {
-        self.selectedFacets.locations.push($(checkbox).val());
-      });
-      self.facetsChanged();
-    });
-  },
-
-  updateFacetValuesOnPage: function() {
-    /* using rendering set up by stephen for facet columns*/
+    Callbackr.setAllCallbacks();
   },
 
   /* gets updated whe na facet is selected on page */
@@ -140,3 +107,81 @@ Facetr = {
   }
 
 }
+
+Callbackr = {
+
+  setAllCallbacks: function() {
+    var self = this
+    self.setCallbacksOnPriceSlider();
+    self.setCallbacksOnTypes();
+    self.setCallbacksOnBedrooms();
+    self.setCallbacksOnLocations();
+    self.setCallbacksOnAmenities();
+    self.setFacetReductionCallbacks();
+  },
+
+  setCallbacksOnPriceSlider: function() {
+    $("body").on("changed.zf.slider", function() {
+      Facetr.selectedFacets.min_price = parseInt($('input#sliderOutput1').val());
+      Facetr.selectedFacets.max_price = parseInt($('input#sliderOutput2').val());
+      Facetr.facetsChanged();
+    });
+  },
+
+  setCallbacksOnTypes: function() {
+    $('.js-types-facet a.button').click(function() {
+      var button = $(this);
+      var type = button.text()
+      if(button.hasClass('selected')) {
+        button.removeClass('selected');
+        new_array = jQuery.grep(Facetr.selectedFacets.types, function(value) {
+          return value != type;
+        })
+        Facetr.selectedFacets.types = new_array
+      } else {
+        button.addClass('selected')
+        Facetr.selectedFacets.types.push(type);
+      }
+      Facetr.facetsChanged();
+    });
+  },
+
+  setCallbacksOnBedrooms: function() {
+    $('.js-bedrooms-facet a.button').click(function() {
+      var button = $(this);
+      var min_bedrooms = button.data('value');
+      /* remove selected from all other bedroom buttons */
+      $('.js-bedrooms-facet a.button').removeClass('selected');
+      /* add 'selected' to clicked button and add to facets*/
+      button.addClass('selected')
+      Facetr.selectedFacets.min_bedrooms = min_bedrooms
+      Facetr.facetsChanged();
+    });
+  },
+
+  setCallbacksOnLocations: function() {
+    $('.js-locations-facet input[type=checkbox]').change(function() {
+        Facetr.selectedFacets.locations = [];
+      $('.js-locations-facet input:checked').each(function(index,checkbox) {
+        Facetr.selectedFacets.locations.push($(checkbox).val());
+      });
+      Facetr.facetsChanged();
+    });
+  },
+
+  setCallbacksOnAmenities: function() {
+    $('.js-amenities-facet input[type=checkbox]').change(function() {
+        Facetr.selectedFacets.amenities = [];
+      $('.js-amenities-facet input:checked').each(function(index,checkbox) {
+        Facetr.selectedFacets.amenities.push($(checkbox).val());
+      });
+      Facetr.facetsChanged();
+    });
+  },
+
+  /* reduce selection boxes when they no longer apply to previously selected facets */
+  setFacetReductionCallbacks: function() {
+    
+  }
+}
+

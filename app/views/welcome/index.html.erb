@@ -12,9 +12,9 @@
                 </div>
                 <div class="large-8 columns">
                     <div class="slider round" data-slider data-initial-start="25" data-initial-end="10000" data-options="start: <%=min_price%>; end: <%=max_price%>;">
-                      <span class="slider-handle" data-slider-handle role="slider"  tabindex="1" aria-controls="sliderOutput1"></span>
+                      <span class="slider-handle js-min-price-facet" data-slider-handle role="slider"  tabindex="1" aria-controls="sliderOutput1"></span>
                       <span class="slider-fill" data-slider-fill></span>
-                      <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
+                      <span class="slider-handle js-max-price-facet" data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
                     </div>
                 </div>
                 <div class="large-2 columns">
@@ -42,10 +42,10 @@
                               <p class="lead">Bedrooms:</p>
                             </div>
                             <div class="large-10 columns">
-                              <div class="input-group button-group secondary expanded">
-                                  <a class="button">One Bedroom</a>
-                                  <a class="button">Two Bedroom</a>
-                                  <a class="button">Three Bedroom</a>
+                              <div class="input-group button-group secondary expanded js-bedrooms-facet">
+                                  <a class="button" data-value='1'>One Bedroom +</a>
+                                  <a class="button" data-value='2'>Two Bedroom + </a>
+                                  <a class="button" data-value='3'>Three Bedroom +</a>
                               </div>
                             </div>
                           </div>
@@ -55,9 +55,12 @@
                             </div>
                             <div class="large-10 columns">
                               <div class="row small-up-2 medium-up-3 js-locations-facet">
-                                <div class="column"><input id="checkbox1" type="checkbox"><label for="checkbox1">Semo University</label></div>
-                                <div class="column"><input id="checkbox2" type="checkbox"><label for="checkbox2">St. Francis Hospital</label></div>
-                                <div class="column"><input id="checkbox3" type="checkbox"><label for="checkbox3">Downtown</label></div>
+                                <% Location.all.each do |location| %>
+                                  <div class="column">
+                                    <input id="<%=location.data_name%>" value="<%= location.facet_name %>" type="checkbox">
+                                    <label for="<%=location.data_name%>"><%= location.facet_name %></label>
+                                  </div>
+                                <% end %>
                               </div>
                             </div>
                           </div>
@@ -67,11 +70,12 @@
                             </div>
                             <div class="large-10 columns">
                               <div class="row small-up-2 medium-up-3 js-amenities-facet">
-                                <div class="column"><input id="checkbox1" type="checkbox"><label for="checkbox1">Pet Friendly</label></div>
-                                <div class="column"><input id="checkbox2" type="checkbox"><label for="checkbox2">Wheelchair Accessible</label></div>
-                                <div class="column"><input id="checkbox3" type="checkbox"><label for="checkbox3">Washer & Dryer</label></div>
-                                <div class="column"><input id="checkbox4" type="checkbox"><label for="checkbox4">On Location Laundry</label></div>
-                                <div class="column"><input id="checkbox5" type="checkbox"><label for="checkbox5">Gym</label></div>
+                                <% Amenity.all.each do |amenity| %>
+                                  <div class="column">
+                                    <input id="<%= amenity.name.downcase.underscore %>" value="<%= amenity.name %>"  type="checkbox">
+                                    <label for="<%= amenity.name %>"><%= amenity.name %></label>
+                                  </div>
+                                <% end %>
                               </div>
                             </div>
                           </div>
