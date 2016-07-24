@@ -25,8 +25,8 @@ class PropertyFilter
     arr = []
     arr << min_price_filter if min_price && !min_price.blank? && min_price > 0
     arr << max_price_filter if max_price && !max_price.blank?
-    arr << min_bedrooms_filter if min_bedrooms && !min_bedrooms.blank?
-    arr << min_bathrooms_filter if min_bathrooms && !min_bathrooms.blank?
+    arr << min_bedrooms_filter if min_bedrooms && !min_bedrooms.blank? && min_bedrooms > 0
+    arr << min_bathrooms_filter if min_bathrooms && !min_bathrooms.blank? && min_bathrooms > 0
     arr << max_lease_length_filter if max_lease_length && !max_lease_length.blank?
     arr << amenities_filter unless amenities.empty? || amenities.all?(&:blank?)
     arr << types_filter unless types.empty? || types.all?(&:blank?)
@@ -48,10 +48,15 @@ class PropertyFilter
 
   def max_price_filter
     {
-      "range" => {
-        "price" => {
-          "lte" => max_price
-        }
+      "bool" => {
+        "should" => [
+          "range" => {
+            "price" => {
+              "lte" => max_price
+            }
+          },
+          "term" => { "price" => nil }
+        ]
       }
     }
   end
