@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
-  resources :properties
+  resources :properties do
+    member do
+      get 'claim', to: 'claim_property#index', as: :claim
+      post 'claim', to: 'claim_property#create'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

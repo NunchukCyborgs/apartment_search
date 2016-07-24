@@ -5,8 +5,8 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    #@properties = Property.all
-    @es_results = PropertyResults.returned_records(params[:facets])
+    @properties = Property.all
+    # @properties = PropertyResults.returned_records(params[:facets])
   end
 
   # GET /properties/1
@@ -71,6 +71,7 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length)
+      images_params = [:id, :_destroy, :name, :file]
+      params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, images_attributes: images_params)
     end
 end

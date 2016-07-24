@@ -15,9 +15,11 @@
 //= require foundation
 //= require_tree ../../../vendor
 //= require turbolinks
+//= require cocoon
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+var offsetPct = null;
 
 Facetr = {
   properties: [],

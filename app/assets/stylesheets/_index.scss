@@ -1,0 +1,68 @@
+.dropdown-pane.large {
+    width: 900px !important;
+}
+#scrolldiv{
+      overflow: scroll;
+      overflow-x: hidden;
+      height: 700px;
+      border-top:solid 2px grey;
+      max-width: none !important;
+    }
+#one{
+    overflow: hidden;
+}
+#map{
+    height: 100vh;
+}
+body{
+    margin: 0px;
+    height: 100%;
+    overflow: hidden;
+}
+ // product card
+    $primary-color: #008cba;
+
+.item-wrapper {
+  padding: 5px;
+  margin-top: 40px;
+
+  &:hover {
+    .img-wrapper {
+
+}
+      .add-to-cart { bottom: 0; }
+    
+  }
+}
+
+.img-wrapper {
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+
+  .add-to-cart {
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    background-color: #333;
+    padding: 16px 8px;
+    bottom: -50px;
+    position: absolute;
+    z-index: 2;
+    color: #fff;
+    margin: 0 auto;
+    border: none;
+    box-shadow: none;
+
+    &:hover { background-color: $primary-color; }
+  }
+
+
+}
+
+c
+p {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+    //end of product card

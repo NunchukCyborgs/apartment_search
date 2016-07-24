@@ -2,82 +2,107 @@
     <div class="row full-width left-margin-fix">
         <div class="large-7 columns">
 
-            <div class="row">
-                <div class="large-2 columns">
-                    <p class="ext-head-room">Rental Type</p>
+            <div class="row marg40top">
+                <div class="large-12 columns">
+                    <p>Price Range</p>
                 </div>
-                <div class="large-10 columns">
-                  <div class="row js-types-facet">
-                    <% Type.find_each do |type| %>
-                      <div class="small-3 columns">
-                        <%= label_tag nil, type.name %>
-                        <%= check_box_tag :types, type.name %>
-                      </div>
-                    <% end %>
+
+                <div class="large-2 columns">
+                    <input type="number" id="sliderOutput1">
+                </div>
+                <div class="large-8 columns">
+                    <div class="slider round" data-slider data-initial-start="25" data-initial-end="10000" data-options="start: 0; end: 10000;">
+                      <span class="slider-handle" data-slider-handle role="slider"  tabindex="1" aria-controls="sliderOutput1"></span>
+                      <span class="slider-fill" data-slider-fill></span>
+                      <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
+                    </div>
+                </div>
+                <div class="large-2 columns">
+                    <input type="number" id="sliderOutput2">
+                </div>
+                <div class="large-12 columns">
+                    <button class="button hollow" type="button" data-toggle="example-dropdown">Filters</button>
+                    <div class="dropdown-pane large" id="example-dropdown" data-dropdown data-auto-focus="true">
+                      <form>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Rental Type:</p>
+                            </div>
+                            <div class="large-10 columns">
+                            <div class="input-group button-group secondary expanded js-types-facet">
+                                  <a class="button">Apartment</a>
+                                  <a class="button">Home</a>
+                                  <a class="button">Duplex</a>
+                                  <a class="button">Townhouse</a>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Bedrooms:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="input-group button-group secondary expanded">
+                                  <a class="button">One Bedroom</a>
+                                  <a class="button">Two Bedroom</a>
+                                  <a class="button">Three Bedroom</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Rentals Near:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="row small-up-2 medium-up-3 js-locations-facet">
+                                <div class="column"><input id="checkbox1" type="checkbox"><label for="checkbox1">Semo University</label></div>
+                                <div class="column"><input id="checkbox2" type="checkbox"><label for="checkbox2">St. Francis Hospital</label></div>
+                                <div class="column"><input id="checkbox3" type="checkbox"><label for="checkbox3">Downtown</label></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Amenities:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="row small-up-2 medium-up-3 js-amenities-facet">
+                                <div class="column"><input id="checkbox1" type="checkbox"><label for="checkbox1">Pet Friendly</label></div>
+                                <div class="column"><input id="checkbox2" type="checkbox"><label for="checkbox2">Wheelchair Accessible</label></div>
+                                <div class="column"><input id="checkbox3" type="checkbox"><label for="checkbox3">Washer & Dryer</label></div>
+                                <div class="column"><input id="checkbox4" type="checkbox"><label for="checkbox4">On Location Laundry</label></div>
+                                <div class="column"><input id="checkbox5" type="checkbox"><label for="checkbox5">Gym</label></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="large-4 large-offset-4 columns">
+                                  <input type="submit" class="button expanded" value="Apply">
+                              </div>
+                          </div>
+
+                      </form>
                   </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="large-2 columns">
-                    <p class="ext-head-room">Amenities</p>
-                </div>
-                <div class="large-10 columns">
-                  <div class="row js-amenities-facet">
-                    <% Amenity.find_each do |amenity| %>
-                      <div class="small-3 columns">
-                        <%= label_tag nil, amenity.name %>
-                        <%= check_box_tag :amenities, amenity.name %>
-                      </div>
-                    <% end %>
+            <section id="scrolldiv">
+              <div class="row">
+                <div class="large-12 columns">
+                  <div id="properties-list" class="row small-up-1 medium-up-2">
                   </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="large-2 columns">
-                    <p class="ext-head-room">Locations</p>
-                </div>
-                <div class="large-10 columns">
-                  <div class="row js-locations-facet">
-                    <% Location.find_each do |location| %>
-                      <div class="small-3 columns">
-                        <%= label_tag nil, location.facet_name %>
-                        <%= check_box_tag :locations, location.facet_name %>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="large-2 columns">
-                    <p class="ext-head-room">Min Price</p>
-                </div>
-                <div class="large-10 columns">
-                  <div class="row js-min-price-facet">
-                    <%= select_tag(:min_price, options_for_select(available_prices)) %> 
-                  </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-              <div class="large-12 columns">
-                <div id="properties-list" class="row small-up-1 medium-up-2">
                 </div>
               </div>
-            </div>
             <div class="row head-room">
               <div class="large-12 text-center columns">
                 <div class="js-pagination" role="navigation" aria-label="Pagination">
                 </div>
               </div>
             </div>
+            </section>
         </div>
         <div class="large-5 columns" id="map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101555.94688130058!2d-89.62582613124731!3d37.304059862972146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8877853694cf77fb%3A0x80901cff3a8d5f92!2sCape+Girardeau%2C+MO!5e0!3m2!1sen!2sus!4v1469241266352" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-
+​
         </div>
     </div>
 </section>

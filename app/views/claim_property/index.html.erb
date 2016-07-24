@@ -1,0 +1,11 @@
+<div class="row ext-head-room">
+  <div class="small-12 medium-9 columns small-centered text-center">
+    <p>This property has not been claimed yet. To manage it, please enter the parcel number associated with the property below.</p>
+    <%= form_tag claim_property_path(@property.id) do %>
+      <%= label_tag :parcel_number %>
+      <%= text_field_tag :parcel_number %>
+
+      <%= submit_tag "SUBMIT", class: "button large" %>
+    <% end %>
+  </div>
+</div>
