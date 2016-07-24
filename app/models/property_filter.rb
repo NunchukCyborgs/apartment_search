@@ -55,7 +55,6 @@ class PropertyFilter
               "lte" => max_price
             }
           },
-          "term" => { "price" => nil }
         ]
       }
     }
