@@ -33,7 +33,7 @@ class PropertyResults
   def parsed_results_with_images
     parsed_results.map do |result|
       image = Image.find_by(imageable_id: result[:id], imageable_type: "Property")
-      result[:image_url] = image.try(:url)
+      result[:image_url] = image.try(:url) || "http://placehold.it/600x400"
       result
     end
   end

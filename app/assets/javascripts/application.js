@@ -90,7 +90,10 @@ Facetr = {
         var propertyHtml = $.parseHTML(renderedProperty());
         $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
         $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
+        $(propertyHtml).find('.js-description').html(property["bedrooms"] + " Bedroom " + property["bathrooms"] + " Bath");
+        $(propertyHtml).find('.js-price').html(number_to_currency(property["price"]));
         $(propertyHtml).find('.js-property-link').attr("href", "/properties/"+property["id"]);
+        $(propertyHtml).find('.js-property-image').attr("src", property["image_url"]);
         $('#properties-list').append(propertyHtml);
       }
       if(typeof Facetr.map !== 'undefined') {
