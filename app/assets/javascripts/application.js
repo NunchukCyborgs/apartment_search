@@ -81,8 +81,7 @@ Facetr = {
   facetsChanged: function() {
     var self = this;
     /* updates facets lists */
-    /* then updates properties lists */
-    /* then re-sets callbacks */
+    /* then updates the amenities list*/
     self.getFacets()
   },
 
@@ -146,7 +145,6 @@ Callbackr = {
     self.setCallbacksOnBedrooms();
     self.setCallbacksOnLocations();
     self.setCallbacksOnAmenities();
-    self.setFacetReductionCallbacks();
     self.setApplySubmitCallback();
   },
 
@@ -159,14 +157,17 @@ Callbackr = {
   },
 
   setCallbacksOnPriceSlider: function() {
+    var self = this;
     $("body").on("changed.zf.slider", function() {
       Facetr.selectedFacets.min_price = parseInt($('input#sliderOutput1').val());
       Facetr.selectedFacets.max_price = parseInt($('input#sliderOutput2').val());
       Facetr.facetsChanged();
+      self.reduceAvailableAmenities();
     });
   },
 
   setCallbacksOnTypes: function() {
+    var self = this;
     $('.js-types-facet a.button').click(function() {
       var button = $(this);
       var type = button.text()
@@ -180,10 +181,12 @@ Callbackr = {
         button.addClass('selected')
         Facetr.selectedFacets.types.push(type);
       }
+      self.reduceAvailableAmenities();
     });
   },
 
   setCallbacksOnBedrooms: function() {
+    var self = this;
     $('.js-bedrooms-facet a.button').click(function() {
       var button = $(this);
       var min_bedrooms = button.data('value');
@@ -192,19 +195,23 @@ Callbackr = {
       /* add 'selected' to clicked button and add to facets*/
       button.addClass('selected')
       Facetr.selectedFacets.min_bedrooms = min_bedrooms
+      self.reduceAvailableAmenities();
     });
   },
 
   setCallbacksOnLocations: function() {
+    var self = this;
     $('.js-locations-facet input[type=checkbox]').change(function() {
         Facetr.selectedFacets.locations = [];
       $('.js-locations-facet input:checked').each(function(index,checkbox) {
         Facetr.selectedFacets.locations.push($(checkbox).val());
       });
+      self.reduceAvailableAmenities();
     });
   },
 
   setCallbacksOnAmenities: function() {
+    var self = this;
     $('.js-amenities-facet input[type=checkbox]').change(function() {
         Facetr.selectedFacets.amenities = [];
       $('.js-amenities-facet input:checked').each(function(index,checkbox) {
@@ -214,7 +221,26 @@ Callbackr = {
   },
 
   /* reduce selection boxes when they no longer apply to previously selected facets */
-  setFacetReductionCallbacks: function() {
-
+  /* some notes: we will have to create a 'stagedFacets' attribute, this will
+   * also facilitate resetting the ui elements if they don't hit apply and
+   * navigate back to the page */
+  reduceAvailableAmenities: function() {
+   // $.post('/api/properties/facets', { facets: self.selectedFacets }, function(data) {
+   //   var amenities = data.amenities;
+   //   console.log(amenities);
+   //   $('.js-amenities-facet input[type=checkbox]').each(function() {
+   //     var element = $(this)
+   //     var elementText = element.val();
+   //     if(!$.inArray(elementText, amenities)) {
+   //       console.log("NOT IN ARRAY")
+   //       element.attr("disabled", true);
+   //       element.parent().css("opacity", ".5");
+   //     } else {
+   //       console.log("IN ARRAY")
+   //       element.attr("disabled", false);
+   //       element.parent().css("opacity", "1");
+   //     }
+   //   });
+   // });
   }
 }

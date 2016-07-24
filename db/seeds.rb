@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 amenities = [
-  "Pet Friendly", "Wheelchair Accessible", "Washer/Dryer", "Electricity Inclued",
+  "Pet Friendly", "Wheelchair Accessible", "Washer/Dryer", "Electricity Included",
   "Gas Included", "Water Included", "Trash Included", "Central Air", "Indoor Fireplace",
   "Smoking Allowed"
 ]
@@ -31,7 +31,22 @@ locations = [
     data_name: "near_college",
     latitude: 37.3124913,
     longitude: -89.5310413
+  },
+  {
+    full_name: "Southeast Hospital",
+    facet_name: "Near Hospital",
+    data_name: "near_hospital",
+    latitude: 37.311372,
+    longitude: -89.539869
+  },
+  {
+    full_name: "Downtown",
+    facet_name: "Near Downtown",
+    data_name: "near_downtown",
+    latitude: 37.303957,
+    longitude: -89.519235
   }
+
 ]
 
 locations.each do |l|
