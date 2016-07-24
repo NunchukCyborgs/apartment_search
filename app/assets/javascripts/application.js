@@ -90,6 +90,7 @@ Facetr = {
         var propertyHtml = $.parseHTML(renderedProperty());
         $(propertyHtml).find('.js-address-line-1').html(property["address1"]);
         $(propertyHtml).find('.js-address-line-2').html(property["address2"]);
+        $(propertyHtml).find('.js-property-link').attr("href", "/properties/"+property["id"]);
         $('#properties-list').append(propertyHtml);
       }
     });
@@ -181,7 +182,6 @@ Callbackr = {
 
   /* reduce selection boxes when they no longer apply to previously selected facets */
   setFacetReductionCallbacks: function() {
-    
+
   }
 }
-
