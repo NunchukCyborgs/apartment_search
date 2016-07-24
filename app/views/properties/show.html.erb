@@ -10,25 +10,29 @@
     <div class="section rental"></div>
     <div class="row">
         <div class="medium-6 columns">
-            <%= image_tag @property.main_image.url %>
-            <div class="row small-up-4">
-                <div class="column"><img class="thumbnail" src=
-                "http://placehold.it/250x200"></div>
-                <div class="column"><img class="thumbnail" src=
-                "http://placehold.it/250x200"></div>
-                <div class="column"><img class="thumbnail" src=
-                "http://placehold.it/250x200"></div>
-                <div class="column"><img class="thumbnail" src=
-                "http://placehold.it/250x200"></div>
-            </div>
+          <% unless @property.images.empty? %>
+            <div class="orbit" role="region" aria-label="Pictures" data-orbit>
+            <ul class="orbit-container">
+                <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+                <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+          <% @property.images.each do |image| %>
+            <li class="orbit-slide <%= "is-active" if image == @property.main_image %>">
+              <%= image_tag image.url, class: "orbit-image" %>
+              <figcaption class="orbit-caption"></figcaption>
+            </li>
+          <% end %>
+            </ul>
         </div>
-        <div class="medium-6 large-5 columns">
+        <% end %>
+        </div>
+        <div class="medium-6 large-5 columns" id="firstdesc">
             <h3><%= @property.address1 %></h3>
-            <p><%= @property.description %></p><label><%= @property.square_footage %> Sq. Ft.</label><br>
+            <p><%= @property.description %></p>
+
             <label><%= @property.bedrooms %> Bedrooms</label><br>
             <label><%= @property.bathrooms %> Bath</label><br>
             <!-- <label>Lease</label><br> -->
-            <label><%= number_to_currency(@property.price) %> Monthly Rent</label><br>
+            <h5><%= number_to_currency(@property.price) %> Monthly Rent</h5><br>
             <a class="button large expanded" href="#">Rent Now</a>
             <div class="small secondary expanded button-group">
                 <a class="button">Facebook</a> <a class="button">Twitter</a>
@@ -98,7 +102,6 @@
             </div>
         </div>
 
-    </div>
     </div>
     <div class="column row">
         <hr>

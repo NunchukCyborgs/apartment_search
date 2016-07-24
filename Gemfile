@@ -31,6 +31,7 @@ gem 'annotate'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'cocoon'
+gem 'config'
 
 gem 'sorcery'
 
