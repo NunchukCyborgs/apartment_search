@@ -105,6 +105,12 @@ Facetr = {
           anchor: new google.maps.Size(-20, -30),
           content: '<span class="map-marker tooltip top" title="">$' + property["price"] + '</span>'
         });
+        marker.addListener('click', function() {
+          var link = "/properties/"+property["id"];
+          var win = window.open(link, '_blank');
+          win.focus();
+
+        });
         Facetr.markers.push(marker);
       }
     });
