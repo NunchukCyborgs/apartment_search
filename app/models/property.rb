@@ -27,6 +27,10 @@ class Property < ActiveRecord::Base
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
+  has_many :images, as: :imageable
+  belongs_to :owner, class_name: "User"
+  accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
+
   geocoded_by :full_address
 
   after_validation :geocode, if: ->(obj) do
@@ -39,7 +43,7 @@ class Property < ActiveRecord::Base
 
   validates :address1, :zipcode, :price, :lease_length, presence: true
   #for contact_number contact_email, maybe we default back to these properties
-  #on the owner if they have not entered them for the property 
+  #on the owner if they have not entered them for the property
 
   has_and_belongs_to_many :amenities,
     after_add: [ lambda { |p,a| p.__elasticsearch__.index_document } ],
@@ -68,6 +72,10 @@ class Property < ActiveRecord::Base
         locations: { }
       }
     )
+  end
+
+  def main_image
+    images.first
   end
 
   private

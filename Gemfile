@@ -28,6 +28,9 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'geocoder'
 gem 'annotate'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'cocoon'
 
 gem 'sorcery'
 

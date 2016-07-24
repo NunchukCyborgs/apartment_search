@@ -1,79 +1,194 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Address1:</strong>
-  <%= @property.address1 %>
-</p>
+    <style>
+    .rental {
+      height: 0px;
+    }
+    </style>
 
-<p>
-  <strong>Address2:</strong>
-  <%= @property.address2 %>
-</p>
+    <div class="row">
+      <div class="small-12 medium-9 columns small-centered">
+    <div class="section rental"></div>
+    <div class="row">
+        <div class="medium-6 columns">
+            <%= image_tag @property.main_image.url %>
+            <div class="row small-up-4">
+                <div class="column"><img class="thumbnail" src=
+                "http://placehold.it/250x200"></div>
+                <div class="column"><img class="thumbnail" src=
+                "http://placehold.it/250x200"></div>
+                <div class="column"><img class="thumbnail" src=
+                "http://placehold.it/250x200"></div>
+                <div class="column"><img class="thumbnail" src=
+                "http://placehold.it/250x200"></div>
+            </div>
+        </div>
+        <div class="medium-6 large-5 columns">
+            <h3><%= @property.address1 %></h3>
+            <p><%= @property.description %></p><label><%= @property.square_footage %> Sq. Ft.</label><br>
+            <label><%= @property.bedrooms %> Bedrooms</label><br>
+            <label><%= @property.bathrooms %> Bath</label><br>
+            <!-- <label>Lease</label><br> -->
+            <label><%= number_to_currency(@property.price) %> Monthly Rent</label><br>
+            <a class="button large expanded" href="#">Rent Now</a>
+            <div class="small secondary expanded button-group">
+                <a class="button">Facebook</a> <a class="button">Twitter</a>
+                <a class="button">Instagram</a>
+            </div>
+        </div>
+    </div>
+    <div class="row column">
+        <hr>
+    </div>
+    <div class="row column">
+        <h3>About This Listing</h3>
+    </div>
+    <div class="row">
+    <div class="large-4 columns">
+        <h5>
+            This Space
+        </h5>
+        <hr>
+        <br>
+        <label>
+            Bathrooms: <%= @property.bathrooms %>
+        </label>
+        <br>
+        <label>
+            Bedrooms: <%= @property.bedrooms %>
+        </label>
+        <br>
+        <label>
+            Property Type: <%= @property.types.pluck(:name).uniq.join(", ") %>
+        </label>
+        <br>
+        <label>
+            Owner Email: <%= @property.contact_email %>
+        </label>
+        <br>
+        <label>
+            School District
+        </label>
+        <br>
+        <label>
+            Nearby: <%= @property.locations.pluck(:full_name).uniq.join(", ") %>
+        </label>
+        <br>
+    </div>
+    <div class="large-8 columns">
+        <h5>
+            Amenenities
+        </h5>
+        <hr>
+        <div class="row small-up-2">
+            <%= Amenity.find_each do |amenity| %>
+            <% if @property.amenities.include?(amenity) %>
+            <div class="column">
+                <label>
+                    <%= amenity.name %>
+                </label>
+              </div>
+              <% else %>
+              <div class="column">
+                  <label>
+                      <del><%= amenity.name %></del>
+                  </label>
+                </div>
+              <% end %>
+              <% end %>
+            </div>
+        </div>
 
-<p>
-  <strong>Zipcode:</strong>
-  <%= @property.zipcode %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @property.price %>
-</p>
-
-<p>
-  <strong>Square footage:</strong>
-  <%= @property.square_footage %>
-</p>
-
-<p>
-  <strong>Contact number:</strong>
-  <%= @property.contact_number %>
-</p>
-
-<p>
-  <strong>Contact email:</strong>
-  <%= @property.contact_email %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @property.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @property.longitude %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @property.description %>
-</p>
-
-<p>
-  <strong>Rented at:</strong>
-  <%= @property.rented_at %>
-</p>
-
-<p>
-  <strong>Bedrooms:</strong>
-  <%= @property.bedrooms %>
-</p>
-
-<p>
-  <strong>Bathrooms:</strong>
-  <%= @property.bathrooms %>
-</p>
-
-<p>
-  <strong>Lease length:</strong>
-  <%= @property.lease_length %>
-</p>
-
-<p>
-  <strong>Owner:</strong>
-  <%= @property.owner_id %>
-</p>
-
-<%= link_to 'Edit', edit_property_path(@property) %> |
-<%= link_to 'Back', properties_path %>
+    </div>
+    </div>
+    <div class="column row">
+        <hr>
+        <ul class="tabs" data-tabs="" id="example-tabs">
+            <li class="tabs-title is-active">
+                <a aria-selected="true" href="#panel1">Reviews</a>
+            </li>
+            <li class="tabs-title">
+                <a href="#panel2">Similar Rentals</a>
+            </li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel is-active" id="panel1">
+                <h4>Reviews</h4>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section"><img class="thumbnail"
+                    src="http://placehold.it/200x200"></div>
+                    <div class="media-object-section">
+                        <h5>Mike Stevenson</h5>
+                        <p>I'm going to improvise. Listen, there's something
+                        you should know about me... about inception. An idea is
+                        like a virus, resilient, highly contagious. The
+                        smallest seed of an idea can grow. It can grow to
+                        define or destroy you.</p>
+                    </div>
+                </div>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section"><img class="thumbnail"
+                    src="http://placehold.it/200x200"></div>
+                    <div class="media-object-section">
+                        <h5>Mike Stevenson</h5>
+                        <p>I'm going to improvise. Listen, there's something
+                        you should know about me... about inception. An idea is
+                        like a virus, resilient, highly contagious. The
+                        smallest seed of an idea can grow. It can grow to
+                        define or destroy you</p>
+                    </div>
+                </div>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section"><img class="thumbnail"
+                    src="http://placehold.it/200x200"></div>
+                    <div class="media-object-section">
+                        <h5>Mike Stevenson</h5>
+                        <p>I'm going to improvise. Listen, there's something
+                        you should know about me... about inception. An idea is
+                        like a virus, resilient, highly contagious. The
+                        smallest seed of an idea can grow. It can grow to
+                        define or destroy you</p>
+                    </div>
+                </div><label>My Review
+                <textarea placeholder="None"></textarea></label> <button class=
+                "button">Submit Review</button>
+            </div>
+            <div class="tabs-panel" id="panel2">
+                <div class="row medium-up-3 large-up-5">
+                    <div class="column">
+                        <img class="thumbnail" src=
+                        "http://placehold.it/350x200">
+                        <h5>Other Rental <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam
+                        mattis viverra. Nulla fringilla, orci ac euismod
+                        semper, magna diam.</p><a class=
+                        "button hollow tiny expanded" href="#">view now</a>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src=
+                        "http://placehold.it/350x200">
+                        <h5>Other Rental <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam
+                        mattis viverra. Nulla fringilla, orci ac euismod
+                        semper, magna diam.</p><a class=
+                        "button hollow tiny expanded" href="#">view now</a>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src=
+                        "http://placehold.it/350x200">
+                        <h5>Other Rental <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam
+                        mattis viverra. Nulla fringilla, orci ac euismod
+                        semper, magna diam.</p><a class=
+                        "button hollow tiny expanded" href="#">view now</a>
+                    </div>
+                    <div class="column">
+                        <img class="thumbnail" src=
+                        "http://placehold.it/350x200">
+                        <h5>Other Rental <small>$22</small></h5>
+                        <p>In condimentum facilisis porta. Sed nec diam eu diam
+                        mattis viverra. Nulla fringilla, orci ac euismod
+                        semper, magna diam.</p><a class=
+                        "button hollow tiny expanded" href="#">view now</a>
+                    </div>
+                  </div>
+                </div>

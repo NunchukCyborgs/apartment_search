@@ -1,0 +1,7 @@
+development:
+  access_key_id: AKIAIRUWPYD4BBCNI7IA
+  secret_access_key: 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
+
+production:
+  access_key_id: AWS_ACCESS_KEY_ID
+  secret_access_key: AWS_SECRET_KEY_ID

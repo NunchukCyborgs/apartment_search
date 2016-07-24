@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723091755) do
+ActiveRecord::Schema.define(version: 20160723205811) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(version: 20160723091755) do
 
   add_index "amenities_properties", ["amenity_id"], name: "index_amenities_properties_on_amenity_id", using: :btree
   add_index "amenities_properties", ["property_id"], name: "index_amenities_properties_on_property_id", using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
+    t.integer  "file_file_size",    limit: 4
+    t.datetime "file_updated_at"
+    t.integer  "imageable_id",      limit: 4
+    t.string   "imageable_type",    limit: 255
+  end
+
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "full_name",  limit: 255

@@ -1,4 +1,4 @@
-<%= form_for(@property) do |f| %>
+<%= form_for(@property, html: { multipart: true }) do |f| %>
   <% if @property.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
@@ -58,6 +58,15 @@
   <div class="field">
     <%= f.label :lease_length %><br>
     <%= f.number_field :lease_length %>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for :images do |image_form| %>
+      <%= render 'image_fields', f: image_form %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Image', f, :images %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
