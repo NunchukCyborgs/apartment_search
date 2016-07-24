@@ -23,11 +23,11 @@ class PropertyFilter
 
   def filter_array
     arr = []
-    arr << min_price_filter if min_price && min_price > 0
-    arr << max_price_filter if max_price
-    arr << min_bedrooms_filter if min_bedrooms
-    arr << min_bathrooms_filter if min_bathrooms
-    arr << max_lease_length_filter if max_lease_length
+    arr << min_price_filter if min_price && !min_price.blank? && min_price > 0
+    arr << max_price_filter if max_price && !max_price.blank?
+    arr << min_bedrooms_filter if min_bedrooms && !min_bedrooms.blank?
+    arr << min_bathrooms_filter if min_bathrooms && !min_bathrooms.blank?
+    arr << max_lease_length_filter if max_lease_length && !max_lease_length.blank?
     arr << amenities_filter unless amenities.empty? || amenities.all?(&:blank?)
     arr << types_filter unless types.empty? || types.all?(&:blank?)
     arr << locations_filter unless locations.empty? || locations.all?(&:blank?)
