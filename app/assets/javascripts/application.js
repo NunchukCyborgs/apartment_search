@@ -93,7 +93,16 @@ Facetr = {
         $(propertyHtml).find('.js-property-link').attr("href", "/properties/"+property["id"]);
         $('#properties-list').append(propertyHtml);
       }
+      if(typeof Facetr.map !== 'undefined') {
+        new RichMarker({
+          map: Facetr.map,
+          position:  new google.maps.LatLng(property["latitude"], property["longitude"]),
+          anchor: RichMarkerPosition.BOTTOM,
+          content: '<span class="map-marker has-tip tooltip" title="">' + number_to_currency(property["price"], { precision: 0 }) + '</span>'
+        });
+      }
     });
+
   },
 
   initPagination: function() {
