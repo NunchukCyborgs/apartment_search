@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require_tree ../../../vendor
 //= require turbolinks
 //= require_tree .
 
@@ -20,7 +21,7 @@ $(function(){ $(document).foundation(); });
 
 Facetr = {
   properties: [],
-  facets: {
+  selectedFacets: {
     min_price: 0,
     max_price: null,
     min_bedrooms: 0,
@@ -30,7 +31,7 @@ Facetr = {
     amenities: [],
     types: [],
   },
-  currentPage: 1,
+  returnedFacets: { },
 
   initProperties: function() {
     console.log("initializing properties");
@@ -41,27 +42,30 @@ Facetr = {
     console.log("initializing facets");
     var self = this;
     /* load facets data */
-    self.getFacets();
+    self.getFacets(self.initPagination);
     self.setCallbacks();
   },
 
-  getFacets: function() {
+  getFacets: function(optionalCallback) {
     console.log("getting facets");
     var self = this;
-    $.post('/api/properties/facets', self.facets, function(data) {
+    $.post('/api/properties/facets', { facets: self.selectedFacets }, function(data) {
         console.log(data);
-        self.facets = data;
+        self.returnedFacets = data;
         self.getProperties()
         self.setCallbacks();
         self.updateFacetValuesOnPage();
+        if(typeof optionalCallback === 'function') {
+          optionalCallback();
+        }
       });
   },
 
   getProperties: function(page) {
     console.log("getting properties");
     var self = this;
-    var page = typeof page !== 'undefined' ? page : self.currentPage;
-    $.post('/api/properties/filtered_results', self.facets, function(data) {
+    var page = typeof page !== 'undefined' ? page : 1;
+    $.post('/api/properties/filtered_results', { facets: self.selectedFacets }, function(data) {
       console.log(data);
       self.properties = data;
       $('#properties-list').empty();
@@ -74,18 +78,36 @@ Facetr = {
     var self = this;
     /* set callbacks on types */
     $('.js-types-facet input[type=checkbox]').change(function() {
+        self.selectedFacets.types = [];
       $('.js-types-facet input:checked').each(function(index,checkbox) {
-        self.facets.types.push($(checkbox).val());
+        self.selectedFacets.types.push($(checkbox).val());
       });
-      self.facetsChanged(types);
+      self.facetsChanged();
+    });
+    /* set callbacks on amenities */
+    $('.js-amenities-facet input[type=checkbox]').change(function() {
+        self.selectedFacets.amenities = [];
+      $('.js-amenities-facet input:checked').each(function(index,checkbox) {
+        self.selectedFacets.amenities.push($(checkbox).val());
+      });
+      self.facetsChanged();
+    });
+    /* set callbacks on locations */
+    $('.js-locations-facet input[type=checkbox]').change(function() {
+        self.selectedFacets.locations = [];
+      $('.js-locations-facet input:checked').each(function(index,checkbox) {
+        self.selectedFacets.locations.push($(checkbox).val());
+      });
+      self.facetsChanged();
     });
   },
 
   updateFacetValuesOnPage: function() {
+    /* using rendering set up by stephen for facet columns*/
   },
 
   /* gets updated whe na facet is selected on page */
-  facetsChanged: function(types) {
+  facetsChanged: function() {
     var self = this;
     /* updates facets lists */
     /* then updates properties lists */
@@ -104,36 +126,15 @@ Facetr = {
     });
   },
 
-  numPages: function() {
-    return this.facets.numPages;
+  initPagination: function() {
+    $(".js-pagination").pagination({
+        items: Facetr.returnedFacets.total_count,
+        itemsOnPage: 16,
+        cssStyle: 'light-theme',
+        onPageClick: function(pageNumber, event) {
+          Facetr.getProperties(pageNumber)
+        }
+    });
   }
-
-}
-
-Paginatr = {
-
-  moveToPage: function(pageNumber) {
-    if(pageNumber === 1) {
-      var html = this.firstPageNumberListItemHtml();
-    } else if(pageNumber === Facetr.numPages) {
-      var html = this.lastPageNumberListItemHtml();
-    } else {
-      var html = this.pageNumberListItemHtml(pageNumber);
-    }
-    $(".js-pagination").html(html);
-  },
-
-  lastPageNumberListItemHtml: function() {
-    var html = "<li>";
-  },
-
-  firstPageNumberListItemHtml: function() {
-    var html = "<li>";
-  },
-
-  pageNumberListItemHtml: function() {
-    var html = "<li>";
-  }
-
 
 }

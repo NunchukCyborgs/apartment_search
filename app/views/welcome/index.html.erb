@@ -1,6 +1,7 @@
 <section id="one">
     <div class="row full-width left-margin-fix">
         <div class="large-7 columns">
+
             <div class="row">
                 <div class="large-2 columns">
                     <p class="ext-head-room">Rental Type</p>
@@ -12,10 +13,55 @@
                         <%= label_tag nil, type.name %>
                         <%= check_box_tag :types, type.name %>
                       </div>
-                  <% end %>
-                </div>
+                    <% end %>
+                  </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="large-2 columns">
+                    <p class="ext-head-room">Amenities</p>
+                </div>
+                <div class="large-10 columns">
+                  <div class="row js-amenities-facet">
+                    <% Amenity.find_each do |amenity| %>
+                      <div class="small-3 columns">
+                        <%= label_tag nil, amenity.name %>
+                        <%= check_box_tag :amenities, amenity.name %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-2 columns">
+                    <p class="ext-head-room">Locations</p>
+                </div>
+                <div class="large-10 columns">
+                  <div class="row js-locations-facet">
+                    <% Location.find_each do |location| %>
+                      <div class="small-3 columns">
+                        <%= label_tag nil, location.facet_name %>
+                        <%= check_box_tag :locations, location.facet_name %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-2 columns">
+                    <p class="ext-head-room">Min Price</p>
+                </div>
+                <div class="large-10 columns">
+                  <div class="row js-min-price-facet">
+                    <%= select_tag(:min_price, options_for_select(available_prices)) %> 
+                  </div>
+                </div>
+            </div>
+
+
             <div class="row">
               <div class="large-12 columns">
                 <div id="properties-list" class="row small-up-1 medium-up-2">
@@ -23,19 +69,10 @@
               </div>
             </div>
             <div class="row head-room">
-            <div class="large-12 text-center columns">
-            <ul class="pagination js-pagination" role="navigation" aria-label="Pagination">
-              <%= raw previous_page_link %>
-              <% @pages_to_display.times do |i| %>
-                <%= raw generic_page_link(i + 1) %>
-              <% end %>
-              <% if @pages_to_display < @num_pages %>
-                ...
-                <%= raw generic_page_link(@num_pages) %>
-              <%end%>
-              <%= raw next_page_link %>
-            </ul>
-            </div>
+              <div class="large-12 text-center columns">
+                <div class="js-pagination" role="navigation" aria-label="Pagination">
+                </div>
+              </div>
             </div>
         </div>
         <div class="large-5 columns" id="map">
