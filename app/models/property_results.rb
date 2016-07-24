@@ -6,6 +6,12 @@ class PropertyResults
     resultr.parsed_results
   end
 
+  #returns array of hashes directly from ES which includes main image url
+  def self.parsed_results_with_images(facets, page = 1, per_page = Settings.properties_per_page)
+    resultr = PropertyResults.new(facets, page, per_page)
+    resultr.parsed_results_with_images
+  end
+
   #returns an array of the ActiveRecord objects that match the facets
   def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page)
     resultr = PropertyResults.new(facets, page, per_page)
@@ -22,6 +28,14 @@ class PropertyResults
 
   def parsed_results
     raw_es_results.response["hits"]["hits"].map { |r| r["_source"] }
+  end
+
+  def parsed_results_with_images
+    parsed_results.map do |result|
+      image = Image.find_by(imageable_id: result[:id], imageable_type: "Property")
+      result[:image_url] = image.try(:url)
+      result
+    end
   end
 
   def returned_records

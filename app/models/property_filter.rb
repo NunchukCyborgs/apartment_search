@@ -88,8 +88,16 @@ class PropertyFilter
 
   def amenities_filter
     {
-      "terms" => { "amenities.name.raw" => amenities }
+      "bool" => {
+        "must" => amenity_must_array
+      }
     }
+  end
+
+  def amenity_must_array
+    amenities.map do |amenity|
+      { "term" => { "amenities.name.raw" => amenity } }
+    end
   end
 
   def types_filter
