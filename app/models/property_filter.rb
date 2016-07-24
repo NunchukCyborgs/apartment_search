@@ -23,7 +23,7 @@ class PropertyFilter
 
   def filter_array
     arr = []
-    arr << min_price_filter if min_price
+    arr << min_price_filter if min_price && min_price > 0
     arr << max_price_filter if max_price
     arr << min_bedrooms_filter if min_bedrooms
     arr << min_bathrooms_filter if min_bathrooms

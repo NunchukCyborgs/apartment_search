@@ -157,14 +157,16 @@ Callbackr = {
       var type = button.text()
       if(button.hasClass('selected')) {
         button.removeClass('selected');
-        new_array = jQuery.grep(Facetr.selectedFacets.types, function(value) {
-          return value != type;
-        })
-        Facetr.selectedFacets.types = new_array
       } else {
         button.addClass('selected')
         Facetr.selectedFacets.types.push(type);
       }
+    });
+    $('.js-apply-facets').submit(function() {
+      new_array = jQuery.grep(Facetr.selectedFacets.types, function(value) {
+        return value != type;
+      })
+      Facetr.selectedFacets.types = new_array
       Facetr.facetsChanged();
     });
   },

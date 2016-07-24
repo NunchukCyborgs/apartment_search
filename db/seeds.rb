@@ -35,7 +35,6 @@ locations = [
 ]
 
 locations.each do |l|
-  puts l.inspect
   Location.where(l).first_or_create
 end
 
