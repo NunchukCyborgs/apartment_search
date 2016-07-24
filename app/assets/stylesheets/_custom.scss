@@ -19,6 +19,11 @@ $logo-margin: - ($logo-width / 2);
   margin-top: 2em !important;
 }
 
+.menu > li > a:hover {
+  background-color: #2199e8;
+  color: white !important;
+}
+
 /* Small Navigation */
 .logo-small {
   float: right;
@@ -55,7 +60,7 @@ body h1,h2,h3,h4,h5{
     a:visited {
     color: #fff !important;
 }
-    
+
     //labels
     label{
         font-size: 1rem !important;
