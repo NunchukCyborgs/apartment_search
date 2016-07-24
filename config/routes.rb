@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
-  resources :properties
+  resources :properties do
+    member do
+      get 'claim', to: 'claim_property#index', as: :claim
+      post 'claim', to: 'claim_property#create'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -13,8 +18,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   namespace :api, :defaults => { :format => 'json' } do
-    match "/properties/facets" => "properties#facets", via: :get
-    match "/properties/filtered_results" => "properties#filtered_results", via: :get
+    post "/properties/facets" => "properties#facets"
+    post "/properties/filtered_results" => "properties#filtered_results"
+    get "/properties/facets" => "properties#facets"
+    get "/properties/filtered_results" => "properties#filtered_results"
   end
 
   # Example of regular route:

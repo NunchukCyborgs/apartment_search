@@ -26,7 +26,7 @@ end
 
 locations = [
   {
-    full_name: "Southeast Missouri State University",
+    full_name: "SEMO University",
     facet_name: "Near College",
     data_name: "near_college",
     latitude: 37.3124913,
@@ -39,3 +39,15 @@ locations.each do |l|
   Location.where(l).first_or_create
 end
 
+require 'csv'
+puts "Opening CSV"
+CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each do |line|
+  puts line.inspect
+  puts line["Parcel"]
+  property = Property.find_or_create_by(parcel_number: line["Parcel"]) do |prop|
+    prop.address1 = line["Location Address"]
+    prop.zipcode = line["Zip"]
+  end
+  puts property.inspect
+  sleep 1
+end

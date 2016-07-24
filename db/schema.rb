@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723030301) do
+ActiveRecord::Schema.define(version: 20160724052153) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20160723030301) do
 
   add_index "amenities_properties", ["amenity_id"], name: "index_amenities_properties_on_amenity_id", using: :btree
   add_index "amenities_properties", ["property_id"], name: "index_amenities_properties_on_property_id", using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
+    t.integer  "file_file_size",    limit: 4
+    t.datetime "file_updated_at"
+    t.integer  "imageable_id",      limit: 4
+    t.string   "imageable_type",    limit: 255
+  end
+
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "full_name",  limit: 255
@@ -45,7 +59,6 @@ ActiveRecord::Schema.define(version: 20160723030301) do
 
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
->>>>>>> faceted
 
   create_table "properties", force: :cascade do |t|
     t.string   "address1",       limit: 255
@@ -66,7 +79,10 @@ ActiveRecord::Schema.define(version: 20160723030301) do
     t.datetime "updated_at",                   null: false
     t.date     "rented_at"
     t.integer  "location_id",    limit: 4
+    t.string   "parcel_number",  limit: 255
   end
+
+  add_index "properties", ["parcel_number"], name: "index_properties_on_parcel_number", using: :btree
 
   create_table "properties_types", id: false, force: :cascade do |t|
     t.integer "type_id",     limit: 4

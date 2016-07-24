@@ -1,17 +1,123 @@
-<style>
-  #map {
-    height: 100%
-  }
-</style>
-<div id="map"></div>
+<section id="one">
+    <div class="row full-width left-margin-fix">
+        <div class="large-7 columns">
+
+            <div class="row marg40top">
+                <div class="large-12 columns">
+                    <p>Price Range</p>
+                </div>
+
+                <div class="large-2 columns">
+                    <input type="number" id="sliderOutput1">
+                </div>
+                <div class="large-8 columns">
+                    <div class="slider round" data-slider data-initial-start="25" data-initial-end="10000" data-options="start: <%=min_price%>; end: <%=max_price%>;">
+                      <span class="slider-handle js-min-price-facet" data-slider-handle role="slider"  tabindex="1" aria-controls="sliderOutput1"></span>
+                      <span class="slider-fill" data-slider-fill></span>
+                      <span class="slider-handle js-max-price-facet" data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput2"></span>
+                    </div>
+                </div>
+                <div class="large-2 columns">
+                    <input type="number" id="sliderOutput2">
+                </div>
+                <div class="large-12 columns">
+                    <button class="button hollow" type="button" data-toggle="example-dropdown">Filters</button>
+                    <div class="dropdown-pane large" id="example-dropdown" data-dropdown data-auto-focus="true">
+                      <form>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Rental Type:</p>
+                            </div>
+                            <div class="large-10 columns">
+                            <div class="input-group button-group secondary expanded js-types-facet">
+                                  <a class="button">Apartment</a>
+                                  <a class="button">Home</a>
+                                  <a class="button">Duplex</a>
+                                  <a class="button">Townhouse</a>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Bedrooms:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="input-group button-group secondary expanded js-bedrooms-facet">
+                                  <a class="button" data-value='1'>One Bedroom +</a>
+                                  <a class="button" data-value='2'>Two Bedroom + </a>
+                                  <a class="button" data-value='3'>Three Bedroom +</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Rentals Near:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="row small-up-2 medium-up-3 js-locations-facet">
+                                <% Location.all.each do |location| %>
+                                  <div class="column">
+                                    <input id="<%=location.data_name%>" value="<%= location.facet_name %>" type="checkbox">
+                                    <label for="<%=location.data_name%>"><%= location.facet_name %></label>
+                                  </div>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="large-2 columns">
+                              <p class="lead">Amenities:</p>
+                            </div>
+                            <div class="large-10 columns">
+                              <div class="row small-up-2 medium-up-3 js-amenities-facet">
+                                <% Amenity.all.each do |amenity| %>
+                                  <div class="column">
+                                    <input id="<%= amenity.name.downcase.underscore %>" value="<%= amenity.name %>"  type="checkbox">
+                                    <label for="<%= amenity.name %>"><%= amenity.name %></label>
+                                  </div>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="large-4 large-offset-4 columns">
+                                  <input type="submit" class="button expanded" value="Apply">
+                              </div>
+                          </div>
+
+                      </form>
+                  </div>
+                </div>
+            </div>
+            <section id="scrolldiv">
+              <div class="row">
+                <div class="large-12 columns">
+                  <div id="properties-list" class="row small-up-1 medium-up-2">
+                  </div>
+                </div>
+              </div>
+            <div class="row head-room">
+              <div class="large-12 text-center columns">
+                <div class="js-pagination" role="navigation" aria-label="Pagination">
+                </div>
+              </div>
+            </div>
+            </section>
+        </div>
+        <div class="large-5 columns" id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101555.94688130058!2d-89.62582613124731!3d37.304059862972146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8877853694cf77fb%3A0x80901cff3a8d5f92!2sCape+Girardeau%2C+MO!5e0!3m2!1sen!2sus!4v1469241266352" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+​
+        </div>
+    </div>
+</section>
+
 <script>
-  function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 37.3059, lng: -89.5181 },
-      zoom: 12
-    });
-  }
-</script>
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC6bfH0lLAZQeSgFFuB-TA5-iDimdQ7DQ&callback=initMap">
-</script>
+ $(document).ready(function() {
+   Facetr.initProperties();
+   Facetr.initFacets();
+ });
+
+ function renderedProperty() {
+   return '<%= escape_javascript(render partial: "properties/card") %>';
+ }
+ </script>

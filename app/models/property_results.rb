@@ -1,20 +1,20 @@
 class PropertyResults
 
   #returns array of hashes directly from ES
-  def self.parsed_results(facets, page = 1, per_page = 25)
+  def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page)
     resultr = PropertyResults.new(facets, page, per_page)
     resultr.parsed_results
   end
 
   #returns an array of the ActiveRecord objects that match the facets
-  def self.returned_records(facets, page = 1, per_page = 25)
+  def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page)
     resultr = PropertyResults.new(facets, page, per_page)
     resultr.returned_records
   end
 
   attr_accessor :filter_array, :page, :per_page
 
-  def initialize(facets, page = 1, per_page = 25)
+  def initialize(facets, page = 1, per_page = Settings.properties_per_page)
     @filter_array = PropertyFilter.filter_array(facets)
     @page = page
     @per_page = per_page

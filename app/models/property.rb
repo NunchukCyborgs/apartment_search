@@ -1,7 +1,35 @@
+# == Schema Information
+#
+# Table name: properties
+#
+#  id             :integer          not null, primary key
+#  address1       :string(255)
+#  address2       :string(255)
+#  zipcode        :string(255)
+#  price          :integer
+#  square_footage :integer
+#  contact_number :string(255)
+#  contact_email  :string(255)
+#  latitude       :float(24)
+#  longitude      :float(24)
+#  description    :text(65535)
+#  bedrooms       :integer
+#  bathrooms      :integer
+#  lease_length   :integer
+#  owner_id       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  rented_at      :date
+#
+
 class Property < ActiveRecord::Base
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  has_many :images, as: :imageable
+  belongs_to :owner, class_name: "User"
+  accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
   geocoded_by :full_address
 
@@ -13,9 +41,9 @@ class Property < ActiveRecord::Base
 
   after_save :set_locations
 
-  validates :address1, :zipcode, :price, :lease_length, presence: true
+  validates :address1, :zipcode, presence: true
   #for contact_number contact_email, maybe we default back to these properties
-  #on the owner if they have not entered them for the property 
+  #on the owner if they have not entered them for the property
 
   has_and_belongs_to_many :amenities,
     after_add: [ lambda { |p,a| p.__elasticsearch__.index_document } ],
@@ -44,6 +72,14 @@ class Property < ActiveRecord::Base
         locations: { }
       }
     )
+  end
+
+  def main_image
+    images.first
+  end
+
+  def unclaimed?
+    owner.nil?
   end
 
   private
