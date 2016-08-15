@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724052153) do
+ActiveRecord::Schema.define(version: 20160815202744) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "timestamps", limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "icon",       limit: 255
   end
 
   create_table "amenities_properties", id: false, force: :cascade do |t|

@@ -7,13 +7,50 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 amenities = [
-  "Pet Friendly", "Wheelchair Accessible", "Washer/Dryer", "Electricity Included",
-  "Gas Included", "Water Included", "Trash Included", "Central Air", "Indoor Fireplace",
-  "Smoking Allowed"
+  {
+    name: "Pet Friendly",
+    icon: "fa-paw"
+  },
+  {
+    name: "Wheelchair Accessible",
+    icon: "fa-wheelchair"
+  },
+  {
+    name: "Washer/Dryer",
+    icon: "" ## Need me some new icons
+  },
+  {
+    name: "Electricity Included",
+    icon: "fa-bolt"
+  },
+  {
+    name: "Gas Included",
+    icon: "" ## Need me some new icons
+  },
+  {
+    name: "Water Included",
+    icon: "fa-tint"
+  },
+  {
+    name: "Trash Included",
+    icon: "fa-trash"
+  },
+  {
+    name: "Central Air",
+    icon: "" ## Need me some new icons
+  },
+  {
+    name: "Indoor Fireplace",
+    icon: "fa-fire"
+  },
+  {
+    name: "Smoking Allowed",
+    icon: "" ## Need me some new icons
+  },
 ]
 
 amenities.each do |a|
-  Amenity.where(name: a).first_or_create
+  Amenity.create(a)
 end
 
 types = [
