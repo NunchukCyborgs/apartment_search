@@ -90,24 +90,34 @@
         </h5>
         <hr>
         <div class="row small-up-2">
-            <%= Amenity.find_each do |amenity| %>
-            <% if @property.amenities.include?(amenity) %>
-            <div class="column">
-                <label>
-                    <%= amenity.name %>
-                </label>
-              </div>
-              <% else %>
-              <div class="column">
-                  <label>
-                      <del><%= amenity.name %></del>
-                  </label>
+            <div class="js-amenities">
+                <% Amenity
+                    .find_each
+                    .each do |amenity|
+                %>
+                <% if @property.amenities.include?(amenity) %>
+                <div class="column <%= amenity.icon.size == 0 ? 'js-amenityHide' : ''%>">
+                    <label>
+                        <% if amenity.icon.size > 0 %>
+                            <i class="fa <%= amenity.icon %>" aria-hidden="true"></i>
+                        <% end %>
+                        <%= amenity.name %>
+                    </label>
                 </div>
-              <% end %>
-              <% end %>
+                <% else %>
+                <div class="column js-amenityHide">
+                    <label>
+                        <del><%= amenity.name %></del>
+                    </label>
+                    </div>
+                <% end %>
+                <% end %>
+
+                <div class="column">
+                    <a href="#" class="toggle-more">+ more</a>
+                </div>
             </div>
         </div>
-
     </div>
     <div class="column row">
         <hr>
