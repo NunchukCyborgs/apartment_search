@@ -61,6 +61,15 @@ CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each d
   property = Property.find_or_create_by(parcel_number: line["Parcel"]) do |prop|
     prop.address1 = line["Location Address"]
     prop.zipcode = line["Zip"]
+    prop.price = 500 + Random.rand(1499)
+    prop.square_footage = 300 + Random.rand(1000)
+    prop.contact_number = "123-123-1234"
+    prop.contact_email = "user@example.com"
+    prop.description = "This is a beautiful house. It is very pretty. This house has many things you will love"
+    prop.bedrooms = 1 + Random.rand(8)
+    prop.bathrooms = 1 + Random.rand(4)
+    prop.lease_length = 12
+
   end
   puts property.inspect
   sleep 1
