@@ -17,7 +17,7 @@ amenities = [
   },
   {
     name: "Washer/Dryer",
-    icon: "" ## Need me some new icons
+    icon: nil ## Need me some new icons
   },
   {
     name: "Electricity Included",
@@ -25,7 +25,7 @@ amenities = [
   },
   {
     name: "Gas Included",
-    icon: "" ## Need me some new icons
+    icon: nil ## Need me some new icons
   },
   {
     name: "Water Included",
@@ -37,7 +37,7 @@ amenities = [
   },
   {
     name: "Central Air",
-    icon: "" ## Need me some new icons
+    icon: nil ## Need me some new icons
   },
   {
     name: "Indoor Fireplace",
@@ -45,7 +45,7 @@ amenities = [
   },
   {
     name: "Smoking Allowed",
-    icon: "" ## Need me some new icons
+    icon: nil ## Need me some new icons
   },
 ]
 
