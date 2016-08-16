@@ -1,4 +1,12 @@
-
+<% content_for :meta do %>
+  <meta property="og:title" content="<%= @property.address1 %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="<%= truncate(@property.description, length: 160) %>" />
+  <meta property="og:url" content="<%= property_url(@property) %>" />
+  <% unless @property.images.empty? %>
+    <meta property="og:image" content="<%= @property.main_image.url %>" />
+  <% end %>
+<% end %>
     <style>
     .rental {
       height: 0px;
