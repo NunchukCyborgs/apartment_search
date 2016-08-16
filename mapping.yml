@@ -3,6 +3,8 @@
   :properties:
     :id:
       :type: long
+    :slug:
+      :type: string
     :address1:
       :type: string
     :address2:
