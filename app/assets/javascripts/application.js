@@ -244,3 +244,16 @@ Callbackr = {
    // });
   }
 }
+
+// Property.js
+
+$(document).ready(function(){
+  'use strict';
+  $('.js-amenityHide').hide();
+
+  $('.js-amenities .toggle-more').on('click', function(e) {
+    e.preventDefault();
+    $('.js-amenities .toggle-more').hide(500);
+    $('.js-amenityHide').show(500);
+  });
+})

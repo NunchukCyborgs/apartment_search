@@ -7,13 +7,50 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 amenities = [
-  "Pet Friendly", "Wheelchair Accessible", "Washer/Dryer", "Electricity Included",
-  "Gas Included", "Water Included", "Trash Included", "Central Air", "Indoor Fireplace",
-  "Smoking Allowed"
+  {
+    name: "Pet Friendly",
+    icon: "fa-paw"
+  },
+  {
+    name: "Wheelchair Accessible",
+    icon: "fa-wheelchair"
+  },
+  {
+    name: "Washer/Dryer",
+    icon: nil ## Need me some new icons
+  },
+  {
+    name: "Electricity Included",
+    icon: "fa-bolt"
+  },
+  {
+    name: "Gas Included",
+    icon: nil ## Need me some new icons
+  },
+  {
+    name: "Water Included",
+    icon: "fa-tint"
+  },
+  {
+    name: "Trash Included",
+    icon: "fa-trash"
+  },
+  {
+    name: "Central Air",
+    icon: nil ## Need me some new icons
+  },
+  {
+    name: "Indoor Fireplace",
+    icon: "fa-fire"
+  },
+  {
+    name: "Smoking Allowed",
+    icon: nil ## Need me some new icons
+  },
 ]
 
 amenities.each do |a|
-  Amenity.where(name: a).first_or_create
+  Amenity.create(a)
 end
 
 types = [
@@ -61,6 +98,15 @@ CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each d
   property = Property.find_or_create_by(parcel_number: line["Parcel"]) do |prop|
     prop.address1 = line["Location Address"]
     prop.zipcode = line["Zip"]
+    prop.price = 500 + Random.rand(1499)
+    prop.square_footage = 300 + Random.rand(1000)
+    prop.contact_number = "123-123-1234"
+    prop.contact_email = "user@example.com"
+    prop.description = "This is a beautiful house. It is very pretty. This house has many things you will love"
+    prop.bedrooms = 1 + Random.rand(8)
+    prop.bathrooms = 1 + Random.rand(4)
+    prop.lease_length = 12
+    5.times{ prop.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
   end
   puts property.inspect
   sleep 1
