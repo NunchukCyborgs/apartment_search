@@ -23,6 +23,8 @@
 #
 
 class Property < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :address1, use: :slugged
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks

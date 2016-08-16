@@ -114,6 +114,8 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
       sprockets-es6 (>= 0.9.0)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     geocoder (1.3.7)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -261,6 +263,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   foundation-rails
+  friendly_id
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
@@ -275,3 +278,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2

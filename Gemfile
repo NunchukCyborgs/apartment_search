@@ -33,6 +33,8 @@ gem 'aws-sdk'
 gem 'cocoon'
 gem 'config'
 
+gem 'friendly_id'
+
 gem 'sorcery'
 
 # Use ActiveModel has_secure_password
