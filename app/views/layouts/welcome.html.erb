@@ -37,17 +37,27 @@
             <li><%= link_to "Logout", :logout %></li>
           <% else %>
             <li><%= link_to "Register", new_user_path %></li>
-            <li><%= link_to "Login", :login %></li>
+            <li data-open="LoginModal"><a>Login</a></li>
           <% end %>
         </ul>
       </div>
-</div>
+    </div>
 
-    <div class="row collapse full-height">
+    <% if flash[:login_error] %>
+      <div class="callout alert">
+        <h3>Login Failed</h5>
+        <p>We couldn't log you in with those credentials. Please try again.</p>
+      </div>
+    <% end %>
+
+    <div class="row collapse full-height">        
       <div class="small-12 columns full-height">
         <%= yield %>
       </div>
     </div>
-
+    
+    <div class="reveal small" id="LoginModal" data-reveal>
+      <%= render 'user_sessions/form' %>
+    </div>
   </body>
 </html>
