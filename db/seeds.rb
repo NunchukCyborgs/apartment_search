@@ -95,10 +95,10 @@ puts "Opening CSV"
 CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each do |line|
   puts line.inspect
   puts line["Parcel"]
-  property = Property.find_or_create_by(parcel_number: line["Parcel"]) do |prop|
-    prop.address1 = line["Location Address"]
+  property = Property.find_or_create_by(address1: line["Location Address"]) do |prop|
     prop.zipcode = line["Zip"]
     prop.price = 500 + Random.rand(1499)
+    prop.parcel_number = line["Parcel"]
     prop.square_footage = 300 + Random.rand(1000)
     prop.contact_number = "123-123-1234"
     prop.contact_email = "user@example.com"
