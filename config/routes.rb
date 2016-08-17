@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       post 'claim', to: 'claim_property#create'
     end
   end
+
+  resources :payments, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
