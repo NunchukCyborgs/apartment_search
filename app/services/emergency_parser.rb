@@ -18,8 +18,12 @@ class EmergencyParser
           puts latlong
           property = Property.find_by(latitude: latlong[0], longitude: latlong[1])
           if property
-            #send notification if owner is premium
-            puts hash
+            owner = property.owner
+            if owner && owner.premium?
+              crime = Crime.new(hash[:location], hash[:offense], hash[:info], hash[:time])
+              EmergencyNotifier.notify(owner, property, crime).deliver!
+              puts hash
+            end
           end
           sleep 0.05
         end

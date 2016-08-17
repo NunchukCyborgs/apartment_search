@@ -41,6 +41,7 @@ gem 'capistrano3-delayed-job', '~> 1.0'
 gem 'daemons'
 gem 'capistrano-clockwork'
 gem 'maily'
+gem 'premailer-rails'
 
 gem 'friendly_id'
 

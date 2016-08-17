@@ -76,4 +76,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = {
+    :host => "roomhere.io"
+  }
+  config.action_mailer.asset_host = "http://roomhere.io"
 end

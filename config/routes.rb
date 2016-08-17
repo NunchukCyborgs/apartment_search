@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount Maily::Engine, at: 'maily'
   resources :user_sessions
   resources :users
   resources :scheduled_events

@@ -1,0 +1,23 @@
+<table class="row">
+  <tr>
+    <td class="wrapper">
+      <table class="twelve columns">
+        <tr>
+          <td class="text-pad">
+            <h3 class="welcome-header">An emergency event has occurred at <%= @property.address1 %></h3>
+          </td>
+          <td class="expander"></td>
+        </tr>
+        <tr>
+          <td class="text-pad welcome-copy">
+            <h5>Details:</h5>
+            <p>Offense: <%= @crime.offense %></p>
+            <p>Info: <%= @crime.info %></p>
+            <p>Time: <%= @crime.time.strftime("%l:%M %P") %></p>
+          </td>
+          <td class="expander"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

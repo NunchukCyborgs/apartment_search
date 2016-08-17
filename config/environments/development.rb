@@ -41,6 +41,12 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.action_mailer.default_url_options = {
+    host: "lvh.me", port: 3000
+  }
+
+  config.action_mailer.asset_host = "http://lvh.me:3000"
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
