@@ -37,9 +37,7 @@ gem 'roo'
 gem 'roo-xls'
 gem 'clockwork'
 gem 'delayed_job_active_record'
-gem 'capistrano3-delayed-job', '~> 1.0'
 gem 'daemons'
-gem 'capistrano-clockwork'
 gem 'maily'
 gem 'premailer-rails'
 
@@ -65,6 +63,8 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
+  gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'capistrano-clockwork'
 end
 
 group :development do
