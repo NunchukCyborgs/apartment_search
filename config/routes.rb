@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
+  mount Maily::Engine, at: 'maily'
   resources :user_sessions
   resources :users
+  resources :scheduled_events
 
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout

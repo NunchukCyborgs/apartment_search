@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def property_count
     properties.size
   end
+
+  def premium?
+    stripe_customer_id.present?
+  end
 end

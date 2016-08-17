@@ -1,0 +1,41 @@
+<div class="row head-room">
+  <div class="small-12 small-centered columns ">
+<%= form_for(@scheduled_event) do |f| %>
+  <% if @scheduled_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scheduled_event.errors.count, "error") %> prohibited this scheduled_event from being saved:</h2>
+
+      <ul>
+      <% @scheduled_event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+      <%= f.label :event %><br>
+      <%= f.text_field :event %>
+    </div>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :at %><br>
+      <%= f.text_field :at %>
+    </div>
+    <div class="field">
+      <%= f.label :frequency %><br>
+      <%= f.number_field :frequency %>
+    </div>
+    <div class="field">
+      <%= f.label :tz %><br>
+      <%= f.text_field :tz %>
+    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
+</div>
