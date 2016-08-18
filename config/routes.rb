@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     post "/properties/filtered_results" => "properties#filtered_results"
     get "/properties/facets" => "properties#facets"
     get "/properties/filtered_results" => "properties#filtered_results"
+    get "/properties/:id" => "properties#show"
   end
 
   # Example of regular route:

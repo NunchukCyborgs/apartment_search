@@ -1,6 +1,7 @@
 module Api
   class PropertiesController < ::ApplicationController
     skip_before_action :require_login
+    before_action :set_property, only: [:show]
 
     #  Both of the following endpoints expect a list of facet filters to be sent
     #  This list will look something like:
@@ -48,6 +49,22 @@ module Api
       results = PropertyResults.parsed_results_with_images(params[:facets], params[:page], params[:per_page])
       respond_to do |format|
         format.json { render json: results.to_json }
+      end
+    end
+
+    def show
+      render json: { status: "Not Found" }, status: 404 and return unless @property
+      respond_to do |format|
+        format.json { render 'properties/show' }
+      end
+    end
+
+    private
+
+    def set_property
+      begin
+        @property = Property.friendly.find(params[:id])
+      rescue
       end
     end
   end
