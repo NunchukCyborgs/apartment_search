@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "/properties/facets" => "properties#facets"
     get "/properties/filtered_results" => "properties#filtered_results"
     get "/properties/:id" => "properties#show"
+    patch "/properties/:id" => "properties#update"
   end
 
   # Example of regular route:
