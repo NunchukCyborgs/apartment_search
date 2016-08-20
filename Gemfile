@@ -40,6 +40,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'maily'
 gem 'premailer-rails'
+gem 'honeybadger', '~> 2.0'
 
 gem 'friendly_id'
 
