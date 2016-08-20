@@ -42,6 +42,9 @@ set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile config/
 
 set :assets_roles, [:web, :app]
 
+
+set :clockwork_file, "lib/clock.rb"
+
 namespace :deploy do
 
   #overwrite precompile to only precompile if assets changed
