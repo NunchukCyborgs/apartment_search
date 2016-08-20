@@ -46,6 +46,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.asset_host = "http://lvh.me:3000"
+  config.action_dispatch.perform_deep_munge = false
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

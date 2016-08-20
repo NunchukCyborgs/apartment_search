@@ -81,4 +81,6 @@ Rails.application.configure do
     :host => "roomhere.io"
   }
   config.action_mailer.asset_host = "http://roomhere.io"
+
+  config.action_dispatch.perform_deep_munge = false
 end
