@@ -84,6 +84,9 @@ class Property < ActiveRecord::Base
     owner.nil?
   end
 
+  def image_urls
+  end
+
   private
 
   def set_locations
