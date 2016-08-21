@@ -20,6 +20,8 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  rented_at      :date
+#  parcel_number  :string(255)
+#  slug           :string(255)
 #
 
 class Property < ActiveRecord::Base
