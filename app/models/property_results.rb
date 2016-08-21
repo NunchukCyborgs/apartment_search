@@ -32,8 +32,8 @@ class PropertyResults
 
   def parsed_results_with_images
     parsed_results.map do |result|
-      image = Image.find_by(imageable_id: result[:id], imageable_type: "Property")
-      result[:image_url] = image.try(:url) || "http://placehold.it/600x400"
+      images = Image.where(imageable_id: result[:id], imageable_type: "Property")
+      result[:images] = images_result(images)
       result
     end
   end
@@ -46,6 +46,17 @@ class PropertyResults
 
   def raw_es_results
     @raw_es_results ||= Property.search(query)
+  end
+
+  def image_hash(image)
+    {
+      id: image.id,
+      url: image.url
+    }
+  end
+
+  def images_result(images)
+    images.map { |image| image_hash(image) }
   end
 
   def query
