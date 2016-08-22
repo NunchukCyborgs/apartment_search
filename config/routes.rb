@@ -22,12 +22,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  resources :properties, only: [:show, :update], defaults: { format: :json }
 
   post "/properties/facets" => "properties#facets"
   post "/properties/filtered_results" => "properties#filtered_results"
   get "/properties/facets" => "properties#facets"
   get "/properties/filtered_results" => "properties#filtered_results"
+
+  resources :properties, only: [:show, :update], defaults: { format: :json }
+
   #get "/properties/:id" => "properties#show"
   #patch "/properties/:id" => "properties#update"
 
