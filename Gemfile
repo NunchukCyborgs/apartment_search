@@ -44,8 +44,8 @@ gem 'honeybadger', '~> 2.0'
 
 gem 'friendly_id'
 
-gem 'sorcery'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'devise_token_auth'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
