@@ -13,6 +13,10 @@
 #  imageable_id      :integer
 #  imageable_type    :string(255)
 #
+# Indexes
+#
+#  index_images_on_imageable_type_and_imageable_id  (imageable_type,imageable_id)
+#
 
 require 'test_helper'
 
