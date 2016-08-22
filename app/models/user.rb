@@ -6,7 +6,7 @@
 #  email            :string(255)      not null
 #  created_at       :datetime
 #  updated_at       :datetime
-#
+#  stripe_customer_id :string(255)
 
 class User < ActiveRecord::Base
   # Include default devise modules.
