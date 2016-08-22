@@ -13,6 +13,7 @@
 #
 
 class ScheduledEventsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_scheduled_event, only: [:show, :edit, :update, :destroy]
 
   # GET /scheduled_events
