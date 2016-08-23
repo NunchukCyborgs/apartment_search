@@ -20,15 +20,6 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  rented_at      :date
-#  parcel_number  :string(255)
-#  slug           :string(255)
-#  license_id     :string(255)
-#
-# Indexes
-#
-#  index_properties_on_license_id     (license_id)
-#  index_properties_on_parcel_number  (parcel_number)
-#  index_properties_on_slug           (slug) UNIQUE
 #
 
 class Property < ActiveRecord::Base
@@ -94,6 +85,7 @@ class Property < ActiveRecord::Base
   end
 
   def image_urls
+    images.reduce(&:url)
   end
 
   private
