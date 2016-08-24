@@ -29,7 +29,7 @@ module ApartmentSearch
         resource '*',
           :headers => :any,
           :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-          :methods => [:get, :post, :options, :delete, :put, :patch]
+          :methods => [:get, :post, :delete, :put, :patch]
       end
     end
   end
