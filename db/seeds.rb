@@ -107,7 +107,7 @@ CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each d
     prop.bathrooms = 1 + Random.rand(4)
     prop.lease_length = 12
   end
-  5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
+  # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
 
   puts property.inspect
   sleep 1
