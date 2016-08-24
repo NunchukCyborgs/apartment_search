@@ -5,6 +5,23 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+roles = [
+  {
+    name: "Superuser"
+  },
+  {
+    name: "Landlord"
+  },
+  {
+    name: "Renter"
+  }
+]
+
+roles.each do |r|
+  Role.where(name: r[:name]).first_or_create
+end
+
 
 amenities = [
   {
