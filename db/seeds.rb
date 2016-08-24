@@ -9,43 +9,43 @@
 amenities = [
   {
     name: "Pet Friendly",
-    icon: "fa-paw"
+    icon: "icon-paw"
   },
   {
     name: "Wheelchair Accessible",
-    icon: "fa-wheelchair"
+    icon: "icon-wheelchair-alt"
   },
   {
     name: "Washer/Dryer",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-washer-dryer-2"
   },
   {
     name: "Electricity Included",
-    icon: "fa-bolt"
+    icon: "icon-bolt"
   },
   {
     name: "Gas Included",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-gas"
   },
   {
     name: "Water Included",
-    icon: "fa-tint"
+    icon: "icon-tint"
   },
   {
     name: "Trash Included",
-    icon: "fa-trash"
+    icon: "icon-trash"
   },
   {
     name: "Central Air",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-central-air-alt"
   },
   {
     name: "Indoor Fireplace",
-    icon: "fa-fire"
+    icon: "icon-fire"
   },
   {
     name: "Smoking Allowed",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-smoking-allowed"
   },
 ]
 
