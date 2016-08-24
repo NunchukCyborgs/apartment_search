@@ -48,6 +48,8 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :properties, foreign_key: "owner_id"
+  has_many :permissions
+  has_many :roles, through: :permissions
 
   validates :email, uniqueness: true
 
