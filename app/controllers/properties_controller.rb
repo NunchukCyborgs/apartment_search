@@ -60,7 +60,7 @@ class PropertiesController < ::ApplicationController
 
   def update
     respond_to do |format|
-      if @property.update(property_params)
+      if PropertyUpdateService.new(@property, property_params).process
         format.json { render 'properties/show', status: :ok, location: @property }
       else
         format.json { render json: @property.errors, status: :unprocessable_entity }
@@ -79,6 +79,7 @@ class PropertiesController < ::ApplicationController
 
   def property_params
     images_params = [:id, :_destroy, :name, :file]
-    params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, images_attributes: images_params)
+    amenities_params = [:id, :_destroy]
+    params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, images_attributes: images_params, amenities_attributes: amenities_params)
   end
 end

@@ -5,3 +5,10 @@ json.url property_url(property, format: :json)
 json.images do
   json.array! property.images, partial: "properties/image", as: :image
 end
+
+json.amenities do
+  json.array! Amenity.all do |amenity|
+    json.extract! amenity, :name, :icon, :id
+    json.active property.amenities.include?(amenity)
+  end
+end

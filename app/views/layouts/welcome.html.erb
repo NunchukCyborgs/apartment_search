@@ -29,18 +29,6 @@
       <div class="top-bar-title">
         <%= image_tag "logo_text_only.png" %>
       </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><%= link_to "Home", root_path %></li>
-          <% if current_user %>
-            <li><%= link_to "Edit Profile", edit_user_path(current_user.id) %></li>
-            <li><%= link_to "Logout", :logout %></li>
-          <% else %>
-            <li><%= link_to "Register", new_user_path %></li>
-            <li data-open="LoginModal"><a>Login</a></li>
-          <% end %>
-        </ul>
-      </div>
     </div>
 
     <% if flash[:login_error] %>
@@ -56,8 +44,5 @@
       </div>
     </div>
 
-    <div class="reveal small" id="LoginModal" data-reveal>
-      <%= render 'user_sessions/form' %>
-    </div>
   </body>
 </html>

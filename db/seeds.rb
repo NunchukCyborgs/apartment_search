@@ -26,48 +26,48 @@ end
 amenities = [
   {
     name: "Pet Friendly",
-    icon: "fa-paw"
+    icon: "icon-paw"
   },
   {
     name: "Wheelchair Accessible",
-    icon: "fa-wheelchair"
+    icon: "icon-wheelchair-alt"
   },
   {
     name: "Washer/Dryer",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-washer-dryer-2"
   },
   {
     name: "Electricity Included",
-    icon: "fa-bolt"
+    icon: "icon-bolt"
   },
   {
     name: "Gas Included",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-gas"
   },
   {
     name: "Water Included",
-    icon: "fa-tint"
+    icon: "icon-tint"
   },
   {
     name: "Trash Included",
-    icon: "fa-trash"
+    icon: "icon-trash"
   },
   {
     name: "Central Air",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-central-air-alt"
   },
   {
     name: "Indoor Fireplace",
-    icon: "fa-fire"
+    icon: "icon-fire"
   },
   {
     name: "Smoking Allowed",
-    icon: nil ## Need me some new icons
+    icon: "icon-fa-smoking-allowed"
   },
 ]
 
 amenities.each do |a|
-  Amenity.create(a)
+  Amenity.find_or_create_by(name: a[:name]).update(icon: a[:icon])
 end
 
 types = [
@@ -124,7 +124,7 @@ CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each d
     prop.bathrooms = 1 + Random.rand(4)
     prop.lease_length = 12
   end
-  5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
+  # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
 
   puts property.inspect
   sleep 1
