@@ -23,13 +23,13 @@ module ApartmentSearch
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_after Rails::Rack::Logger, Rack::Cors, :logger => Rails.logger do
       allow do
         origins '*'
         resource '*',
           :headers => :any,
           :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-          :methods => [:get, :post, :options, :delete, :put]
+          :methods => [:get, :post, :options, :delete, :put, :patch]
       end
     end
   end
