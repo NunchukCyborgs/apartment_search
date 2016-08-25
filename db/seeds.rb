@@ -21,7 +21,7 @@ amenities = [
   },
   {
     name: "Electricity Included",
-    icon: "icon-bolt"
+    icon: "icon-electricity_icon"
   },
   {
     name: "Gas Included",
