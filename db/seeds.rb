@@ -5,6 +5,23 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+roles = [
+  {
+    name: "Superuser"
+  },
+  {
+    name: "Landlord"
+  },
+  {
+    name: "Renter"
+  }
+]
+
+roles.each do |r|
+  Role.where(name: r[:name]).first_or_create
+end
+
 
 amenities = [
   {
@@ -50,7 +67,7 @@ amenities = [
 ]
 
 amenities.each do |a|
-  Amenity.create(a)
+  Amenity.find_or_create_by(name: a[:name]).update(icon: a[:icon])
 end
 
 types = [
@@ -107,7 +124,7 @@ CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each d
     prop.bathrooms = 1 + Random.rand(4)
     prop.lease_length = 12
   end
-  5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
+  # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
 
   puts property.inspect
   sleep 1
