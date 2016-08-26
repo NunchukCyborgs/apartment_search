@@ -34,15 +34,15 @@ amenities = [
   },
   {
     name: "Washer/Dryer",
-    icon: "icon-fa-washer-dryer-2"
+    icon: "icon-washer-dryer-2"
   },
   {
     name: "Electricity Included",
-    icon: "icon-electricity_icon"
+    icon: "icon-electricity"
   },
   {
     name: "Gas Included",
-    icon: "icon-fa-gas"
+    icon: "icon-gas"
   },
   {
     name: "Water Included",
@@ -54,7 +54,7 @@ amenities = [
   },
   {
     name: "Central Air",
-    icon: "icon-fa-central-air-alt"
+    icon: "icon-central-air-alt"
   },
   {
     name: "Indoor Fireplace",
@@ -62,7 +62,7 @@ amenities = [
   },
   {
     name: "Smoking Allowed",
-    icon: "icon-fa-smoking-allowed"
+    icon: "icon-smoking-allowed"
   },
 ]
 
