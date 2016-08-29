@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822225304) do
+ActiveRecord::Schema.define(version: 20160824202135) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 20160822225304) do
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
 
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.string   "address1",       limit: 255
     t.string   "address2",       limit: 255
@@ -123,6 +130,12 @@ ActiveRecord::Schema.define(version: 20160822225304) do
 
   add_index "properties_types", ["property_id"], name: "index_properties_types_on_property_id", using: :btree
   add_index "properties_types", ["type_id"], name: "index_properties_types_on_type_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "scheduled_events", force: :cascade do |t|
     t.string   "event",      limit: 255

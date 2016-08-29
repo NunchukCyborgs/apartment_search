@@ -1,5 +1,6 @@
 class PropertiesController < ::ApplicationController
   before_action :authenticate_user!, except: [:facets, :filtered_results, :show]
+  #skip_authorization_check :only => [:facets, :filtered_results, :show]
   before_action :set_property, only: [:show, :update]
 
   #  Both of the following endpoints expect a list of facet filters to be sent
@@ -45,7 +46,7 @@ class PropertiesController < ::ApplicationController
   #   per_page
   # returns: array of properties
   def filtered_results
-    results = PropertyResults.parsed_results_with_images(params[:facets], params[:page], params[:per_page])
+    results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page])
     respond_to do |format|
       format.json { render json: results.to_json }
     end

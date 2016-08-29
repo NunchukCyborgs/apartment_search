@@ -1,5 +1,11 @@
 class PropertyResults
 
+  #returns hash with total results and an array of hashes directly from ES which includes main image url
+  def self.paginated_results(facets, page = 1, per_page = Settings.properties_per_page)
+    resultr = PropertyResults.new(facets, page, per_page)
+    resultr.paginated_results
+  end
+
   #returns array of hashes directly from ES
   def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page)
     resultr = PropertyResults.new(facets, page, per_page)
@@ -26,8 +32,11 @@ class PropertyResults
     @per_page = per_page
   end
 
-  def parsed_results
-    raw_es_results.response["hits"]["hits"].map { |r| r["_source"] }
+  def paginated_results
+    {
+      results: parsed_results_with_images,
+      total_count: raw_es_results.response["hits"]["total"]
+    }
   end
 
   def parsed_results_with_images
@@ -36,6 +45,10 @@ class PropertyResults
       result[:images] = images_result(images)
       result
     end
+  end
+
+  def parsed_results
+    raw_es_results.response["hits"]["hits"].map { |r| r["_source"] }
   end
 
   def returned_records
