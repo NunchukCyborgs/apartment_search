@@ -26,10 +26,12 @@ Rails.application.routes.draw do
     member do
       get 'claim', to: 'claim_property#index', as: :claim
       post 'claim', to: 'claim_property#create'
-      post 'images', format: :html
+
       delete 'images', to: 'properties#delete_image'
     end
   end
+  
+  post '/properties/:id/images', to: 'properties#images', format: :html
   #get "/properties/:id" => "properties#show"
   #patch "/properties/:id" => "properties#update"
 
