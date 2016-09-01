@@ -70,6 +70,7 @@ class PropertiesController < ::ApplicationController
   end
 
   def images
+    puts params
     if ImageCreateService.new(@property, create_property_image_params[:files])
       format.json { render 'properties/show', status: :ok, location: @property }
     else
