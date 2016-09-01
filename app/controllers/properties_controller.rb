@@ -72,18 +72,18 @@ class PropertiesController < ::ApplicationController
   def images
     puts params
     if ImageCreateService.new(@property, create_property_image_params[:files])
-      format.json { render 'properties/show', status: :ok, location: @property }
+      render 'properties/show', status: :ok, location: @property
     else
-      format.json { render json: @property.errors, status: :unprocessable_entity }
+      render json: @property.errors, status: :unprocessable_entity
     end
   end
 
   def delete_image
     image = Image.find(params[:image_id])
     if image.destroy
-      format.json { render 'properties/show', status: :ok, location: @property }
+      render 'properties/show', status: :ok, location: @property
     else
-      format.json { render json: @property.errors, status: :unprocessable_entity }
+      render json: @property.errors, status: :unprocessable_entity
     end
   end
 
