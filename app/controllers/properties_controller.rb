@@ -70,7 +70,7 @@ class PropertiesController < ::ApplicationController
   end
 
   def images
-    puts params
+    puts "<><><><><><><><>#{params.inspect}<><><><><><><><>"
     if ImageCreateService.new(@property, create_property_image_params[:files])
       render 'properties/show', status: :ok, location: @property
     else
