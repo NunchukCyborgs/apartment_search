@@ -90,6 +90,7 @@ class PropertiesController < ::ApplicationController
   private
 
   def set_property
+    puts "<><><><><><><><>#{params.inspect}<><><><><><><><>"
     begin
       @property = Property.friendly.find(params[:id])
     rescue
