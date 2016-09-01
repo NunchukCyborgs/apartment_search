@@ -1,7 +1,7 @@
 class PropertiesController < ::ApplicationController
   before_action :authenticate_user!, except: [:facets, :filtered_results, :show]
   #skip_authorization_check :only => [:facets, :filtered_results, :show]
-  before_action :set_property, only: [:show, :update]
+  before_action :set_property, only: [:show, :update, :image, :delete_image]
 
   #  Both of the following endpoints expect a list of facet filters to be sent
   #  This list will look something like:
@@ -69,6 +69,23 @@ class PropertiesController < ::ApplicationController
     end
   end
 
+  def images
+    if ImageCreateService.new(@property, create_property_image_params[:files])
+      format.json { render 'properties/show', status: :ok, location: @property }
+    else
+      format.json { render json: @property.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def delete_image
+    image = Image.find(params[:image_id])
+    if image.destroy
+      format.json { render 'properties/show', status: :ok, location: @property }
+    else
+      format.json { render json: @property.errors, status: :unprocessable_entity }
+    end
+  end
+
   private
 
   def set_property
@@ -82,5 +99,9 @@ class PropertiesController < ::ApplicationController
     images_params = [:id, :_destroy, :name, :file]
     amenities_params = [:id, :_destroy]
     params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, images_attributes: images_params, amenities_attributes: amenities_params)
+  end
+
+  def create_property_image_params
+    params.require(:property).permit(:files)
   end
 end
