@@ -70,7 +70,7 @@ class PropertiesController < ::ApplicationController
   end
 
   def images
-    puts "<><><><><><><><>#{params.inspect}<><><><><><><><>"
+    Rails.logger.info "<><><><><><><><>#{params.inspect}<><><><><><><><>"
     if ImageCreateService.new(@property, create_property_image_params[:files])
       render 'properties/show', status: :ok, location: @property
     else
@@ -90,7 +90,7 @@ class PropertiesController < ::ApplicationController
   private
 
   def set_property
-    puts "<><><><><><><><>#{params.inspect}<><><><><><><><>"
+    Rails.logger.info "<><><><><><><><>#{params.inspect}<><><><><><><><>"
     begin
       @property = Property.friendly.find(params[:id])
     rescue
