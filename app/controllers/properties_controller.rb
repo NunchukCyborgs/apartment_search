@@ -70,8 +70,7 @@ class PropertiesController < ::ApplicationController
   end
 
   def images
-    Rails.logger.info "<><><><><><><><>#{params.inspect}<><><><><><><><>"
-    if ImageCreateService.new(@property, create_property_image_params[:files])
+    if ImageCreateService.new(@property, create_property_image_params[:files]).process
       render 'properties/show', status: :ok, location: @property
     else
       render json: @property.errors, status: :unprocessable_entity
@@ -90,7 +89,6 @@ class PropertiesController < ::ApplicationController
   private
 
   def set_property
-    Rails.logger.info "<><><><><><><><>#{params.inspect}<><><><><><><><>"
     begin
       @property = Property.friendly.find(params[:id])
     rescue
