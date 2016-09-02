@@ -70,7 +70,7 @@ class PropertiesController < ::ApplicationController
   end
 
   def images
-    if ImageCreateService.new(@property, params[:files]).process
+    if ImageCreateService.new(@property, params[:property][:files]).process
       render 'properties/show', status: :ok, location: @property
     else
       render json: @property.errors, status: :unprocessable_entity
