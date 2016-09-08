@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824202135) do
+ActiveRecord::Schema.define(version: 20160908023218) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 20160824202135) do
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
+  create_table "licenses", force: :cascade do |t|
+    t.string   "value",      limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "claimed_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "licenses", ["user_id"], name: "index_licenses_on_user_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.string   "full_name",  limit: 255
     t.string   "facet_name", limit: 255
@@ -110,13 +120,12 @@ ActiveRecord::Schema.define(version: 20160824202135) do
     t.integer  "bedrooms",       limit: 4
     t.integer  "bathrooms",      limit: 4
     t.integer  "lease_length",   limit: 4
-    t.integer  "owner_id",       limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.date     "rented_at"
     t.string   "parcel_number",  limit: 255
     t.string   "slug",           limit: 255
-    t.string   "license_id",     limit: 255
+    t.integer  "license_id",     limit: 4
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree
@@ -189,4 +198,6 @@ ActiveRecord::Schema.define(version: 20160824202135) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "licenses", "users"
+  add_foreign_key "properties", "licenses"
 end

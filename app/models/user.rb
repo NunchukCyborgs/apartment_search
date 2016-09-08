@@ -47,7 +47,8 @@ class User < ActiveRecord::Base
           :confirmable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :properties, foreign_key: "owner_id"
+  has_one :license
+  has_many :properties, through: :license
   has_many :permissions
   has_many :roles, through: :permissions
 

@@ -16,10 +16,18 @@
 #  bedrooms       :integer
 #  bathrooms      :integer
 #  lease_length   :integer
-#  owner_id       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  rented_at      :date
+#  parcel_number  :string(255)
+#  slug           :string(255)
+#  license_id     :integer
+#
+# Indexes
+#
+#  index_properties_on_license_id     (license_id)
+#  index_properties_on_parcel_number  (parcel_number)
+#  index_properties_on_slug           (slug) UNIQUE
 #
 
 class Property < ActiveRecord::Base
@@ -30,7 +38,7 @@ class Property < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   has_many :images, as: :imageable
-  belongs_to :owner, class_name: "User"
+  belongs_to :license
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
   geocoded_by :full_address
