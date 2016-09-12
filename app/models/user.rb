@@ -50,8 +50,6 @@ class User < ActiveRecord::Base
 
   has_one :license
   has_many :properties, through: :license
-  has_many :permissions
-
   validates :email, uniqueness: true
 
   def property_cost
