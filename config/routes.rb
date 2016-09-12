@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   mount Maily::Engine, at: 'maily'
   resources :user_sessions
+  post '/users/licensing', to: 'licensing#autheniticate', format: :json
   resources :users
   resources :scheduled_events
 
@@ -33,7 +34,6 @@ Rails.application.routes.draw do
 
   post '/properties/:id/images', to: 'properties#images', format: :html
 
-  post '/users/licensing', to: 'licensing#autheniticate', format: :json
   #get "/properties/:id" => "properties#show"
   #patch "/properties/:id" => "properties#update"
 
