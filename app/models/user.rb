@@ -63,4 +63,8 @@ class User < ActiveRecord::Base
   def premium?
     stripe_customer_id.present?
   end
+
+  def process_license(license)
+    license.update(user_id: id)
+  end
 end

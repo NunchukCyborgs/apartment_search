@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   end
 
   post '/properties/:id/images', to: 'properties#images', format: :html
+
+  post '/users/licensing', to: 'licensing#autheniticate', format: :json
   #get "/properties/:id" => "properties#show"
   #patch "/properties/:id" => "properties#update"
 
