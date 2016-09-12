@@ -43,6 +43,7 @@ gem 'premailer-rails'
 gem 'honeybadger', '~> 2.0'
 
 gem 'friendly_id'
+gem "rolify"
 
 gem 'rack-cors', :require => 'rack/cors'
 gem 'devise_token_auth'

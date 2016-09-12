@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908023218) do
+ActiveRecord::Schema.define(version: 20160912144222) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -99,13 +99,6 @@ ActiveRecord::Schema.define(version: 20160908023218) do
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
 
-  create_table "permissions", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "role_id",    limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "properties", force: :cascade do |t|
     t.string   "address1",       limit: 255
     t.string   "address2",       limit: 255
@@ -141,10 +134,15 @@ ActiveRecord::Schema.define(version: 20160908023218) do
   add_index "properties_types", ["type_id"], name: "index_properties_types_on_type_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",          limit: 255
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "scheduled_events", force: :cascade do |t|
     t.string   "event",      limit: 255
@@ -197,6 +195,13 @@ ActiveRecord::Schema.define(version: 20160908023218) do
   add_index "users", ["stripe_customer_id"], name: "index_users_on_stripe_customer_id", using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "role_id", limit: 4
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "licenses", "users"
   add_foreign_key "properties", "licenses"

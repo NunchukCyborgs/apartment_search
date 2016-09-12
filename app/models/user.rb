@@ -41,6 +41,7 @@
 #
 
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -50,7 +51,6 @@ class User < ActiveRecord::Base
   has_one :license
   has_many :properties, through: :license
   has_many :permissions
-  has_many :roles, through: :permissions
 
   validates :email, uniqueness: true
 
