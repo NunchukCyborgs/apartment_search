@@ -17,4 +17,8 @@
 class License < ActiveRecord::Base
   belongs_to :user
   has_many :properties
+
+  def claimed?
+    claimed_at.present?
+  end
 end
