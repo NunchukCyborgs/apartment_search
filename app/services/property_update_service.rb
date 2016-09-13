@@ -7,7 +7,7 @@ class PropertyUpdateService
 
   def process
     amenities = @params[:amenities_attributes]
-    @property.update(@params.except(:amenities_attributes))
+    @property.update(@params.except(*[:amenities_attributes, :types_attributes]))
     # super ugly but functional - tries to build expected behavior
     if amenities.present?
       amenities.each do |amenity|
@@ -19,6 +19,20 @@ class PropertyUpdateService
         end
       end
     end
+
+    # please god save this method for it has sinned
+    types = @params[:types_attributes]
+    if types.present?
+      types.each do |type|
+        t = Type.find(type[:id])
+        unless type[:destroy].present?
+          @property.types << t unless @property.types.include?(t)
+        else
+          @property.types.delete(t) if @property.types.include?(t)
+        end
+      end
+    end
+
     @property.save
   end
 end
