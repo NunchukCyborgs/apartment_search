@@ -15,3 +15,10 @@ json.amenities do
     json.active property.amenities.include?(amenity)
   end
 end
+
+json.types do
+  json.array! Type.all do |type|
+    json.extract! type, :name, :id
+    json.active property.type.include?(type)
+  end
+end
