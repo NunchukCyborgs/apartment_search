@@ -19,6 +19,6 @@ end
 json.types do
   json.array! Type.all do |type|
     json.extract! type, :name, :id
-    json.active property.type.include?(type)
+    json.active property.types.include?(type)
   end
 end
