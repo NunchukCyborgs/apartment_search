@@ -25,7 +25,7 @@ class PropertyUpdateService
     if types.present?
       types.each do |type|
         t = Type.find(type[:id])
-        unless type[:destroy].present?
+        unless type[:_destroy].present?
           @property.types << t unless @property.types.include?(t)
         else
           @property.types.delete(t) if @property.types.include?(t)
