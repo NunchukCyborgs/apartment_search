@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount Maily::Engine, at: 'maily'
   resources :user_sessions
   post '/users/licensing', to: 'licensing#autheniticate', format: :json
+  post '/users/properties', to: 'properties#user', format: :json
   resources :users
   resources :scheduled_events
 

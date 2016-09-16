@@ -77,6 +77,15 @@ class PropertiesController < ::ApplicationController
     end
   end
 
+  def user
+    if current_user
+      @properties = current_user.properties
+      render 'properties/index', status: :ok
+    else
+      render json: { result: "failed" }, status: 404
+    end
+  end
+
   def delete_image
     image = Image.find(params[:image_id])
     if image.destroy
