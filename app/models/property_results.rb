@@ -42,6 +42,7 @@ class PropertyResults
   def parsed_results_with_images
     parsed_results.map do |result|
       images = Image.where(imageable_id: result[:id], imageable_type: "Property")
+      images = [FakeImage.new(nil, "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{result[:latitude]},#{result[:longitude]}&key=#{ENV["STREETVIEW_API_KEY"]}")] if images.empty?
       result[:images] = images_result(images)
       result
     end
@@ -91,6 +92,15 @@ class PropertyResults
 
   def calculate_from
     (((page - 1) * per_page) + 1) rescue 0
+  end
+
+  class FakeImage
+    attr_accessor :id, :url
+
+    def initialize(id, url)
+      @id = id
+      @url = url
+    end
   end
 
 end
