@@ -5,8 +5,14 @@ if current_user
   json.can_edit (current_user.has_role?(:superuser) || current_user.properties.include?(property))
 end
 json.url property_url(property, format: :json)
-json.images do
-  json.array! property.images, partial: "properties/image", as: :image
+unless property.images.present?
+  json.images do
+    json.array! [{id: nil, url: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{property.latitude},#{property.longitude}&key=#{ENV["STREETVIEW_API_KEY"]}"}], partial: "properties/image", as: :image 
+  end
+else
+  json.images do
+    json.array! property.images, partial: "properties/image", as: :image
+  end
 end
 
 json.amenities do
