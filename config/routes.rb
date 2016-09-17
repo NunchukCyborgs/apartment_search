@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :user_sessions
   post '/users/licensing', to: 'licensing#autheniticate', format: :json
   post '/users/properties', to: 'properties#user', format: :json
-  get '/me', to: 'user#me', format: :json
+  get '/me', to: 'users#me', format: :json
   resources :users
   resources :scheduled_events
 
