@@ -1,3 +1,3 @@
 json.extract! contact, :email, :phone if contact
-json.owner_name owner.name if owner
-json.landlord_name owner.landlord_name if owner
+json.owner_name license.name if license
+json.landlord_name license.landlord_name if license

@@ -31,5 +31,5 @@ json.types do
 end
 
 json.owner do
-  json.partial! "properties/contact", contact: property.owner_primary_contact, owner: property.owner
+  json.partial! "properties/contact", contact: property.owner_primary_contact, license: property.license
 end
