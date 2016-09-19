@@ -29,3 +29,7 @@ json.types do
     json.active property.types.include?(type)
   end
 end
+
+json.owner do
+  json.partial! "properties/contact", contact: property.owner_primary_contact, owner: property.owner
+end

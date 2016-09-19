@@ -41,6 +41,8 @@ class Property < ActiveRecord::Base
   belongs_to :license
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
+  delegate :primary_contact, to: :owner, prefix: true, allow_nil: true
+
   geocoded_by :full_address
 
   after_validation :geocode, if: ->(obj) do
@@ -50,6 +52,10 @@ class Property < ActiveRecord::Base
   end
 
   after_save :set_locations
+
+  def owner
+    license.user if license && license.user
+  end
 
   validates :address1, :zipcode, presence: true
   #for contact_number contact_email, maybe we default back to these properties

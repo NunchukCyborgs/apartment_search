@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     properties.size * Settings.cost_per_property
   end
 
+  def primary_contact
+    contacts.first unless contacts.empty?
+  end
+
   def property_count
     properties.size
   end
