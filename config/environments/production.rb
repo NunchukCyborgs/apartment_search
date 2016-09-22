@@ -70,7 +70,7 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     :storage => :s3,
-    :bucket => 'hackathon-s3-dev'
+    :bucket => 'hackathon-s3-production'
   }
 
   # Send deprecation notices to registered listeners.
