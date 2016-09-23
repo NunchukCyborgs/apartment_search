@@ -46,10 +46,19 @@ class PropertiesController < ::ApplicationController
   #   per_page
   # returns: array of properties
   def filtered_results
+    Rails.logger.info(Time.now.to_f)
+    start_time = Time.now.to_f
     results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page])
+    end_time = Time.now.to_f
+    total_time = (end_time - start_time) * 1000.0
+    Rails.logger.info("Total time spent in property results model: #{total_time}")
+    Rails.logger.info(Time.now.to_f)
     respond_to do |format|
+      Rails.logger.info(Time.now.to_f)
       format.json { render json: results.to_json }
+      Rails.logger.info(Time.now.to_f)
     end
+    Rails.logger.info(Time.now.to_f)
   end
 
   def show

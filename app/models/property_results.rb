@@ -40,18 +40,12 @@ class PropertyResults
   end
 
   def parsed_results_with_images
-    start_time = Time.now.to_f
-    Rails.logger.info("Calling elasticsearch...")
-    fuckyou_parsed_results = parsed_results.map do |result|
+    parsed_results.map do |result|
       images = Image.where(imageable_id: result[:id], imageable_type: "Property")
       images = [FakeImage.new(nil, "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{result[:latitude]},#{result[:longitude]}&key=#{ENV["STREETVIEW_API_KEY"]}")] if images.empty?
       result[:images] = images_result(images)
       result
     end
-    end_time = Time.now.to_f
-    total_time = (end_time - start_time) * 1000.0
-    Rails.logger.info("Finished calling elasticsearch in #{total_time}")
-    fuckyou_parsed_results
   end
 
   def parsed_results
