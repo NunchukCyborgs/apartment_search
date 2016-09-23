@@ -1,5 +1,5 @@
 json.properties do
-  json.array! @user.properties, partial: 'properties/property', as: :property
+  json.array! @user.properties.includes(:images, :amenities), partial: 'properties/property', as: :property
 end
 
 json.extract! @user, :email
