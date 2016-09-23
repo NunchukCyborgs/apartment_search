@@ -41,6 +41,8 @@ class Property < ActiveRecord::Base
   belongs_to :license
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
+  delegate :primary_contact, to: :license, prefix: true, allow_nil: true
+
   geocoded_by :full_address
 
   after_validation :geocode, if: ->(obj) do

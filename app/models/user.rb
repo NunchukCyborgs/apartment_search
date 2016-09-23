@@ -53,8 +53,14 @@ class User < ActiveRecord::Base
   has_many :contacts
   validates :email, uniqueness: true
 
+  delegate :value, to: :license, prefix: true, allow_nil: true
+
   def property_cost
     properties.size * Settings.cost_per_property
+  end
+
+  def primary_contact
+    contacts.first unless contacts.empty?
   end
 
   def property_count
