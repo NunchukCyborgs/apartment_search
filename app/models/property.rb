@@ -52,7 +52,7 @@ class Property < ActiveRecord::Base
     (obj.zipcode.present? && obj.zipcode_changed?)
   end
 
-  after_save :set_locations
+  after_create :set_locations
 
   validates :address1, :zipcode, presence: true
   #for contact_number contact_email, maybe we default back to these properties

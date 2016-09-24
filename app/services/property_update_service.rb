@@ -10,8 +10,10 @@ class PropertyUpdateService
     @property.update(@params.except(*[:amenities_attributes, :types_attributes]))
     # super ugly but functional - tries to build expected behavior
     if amenities.present?
+      ids = amenities.collect { |val| val[:id] }
+      amenity_records = Amenity.where(id: ids)
       amenities.each do |amenity|
-        a = Amenity.find(amenity[:id])
+        a = amenity_records.select { |val| val.id == amenity[:id] }
         unless amenity[:_destroy].present?
           @property.amenities << a unless @property.amenities.include?(a)
         else
@@ -23,8 +25,10 @@ class PropertyUpdateService
     # please god save this method for it has sinned
     types = @params[:types_attributes]
     if types.present?
+      ids = types.collect { |val| val[:id] }
+      type_records = Type.where(id: ids)
       types.each do |type|
-        t = Type.find(type[:id])
+        t = type_records.select { |val| val.id type[:id] }
         unless type[:_destroy].present?
           @property.types << t unless @property.types.include?(t)
         else
