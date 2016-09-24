@@ -1,6 +1,6 @@
 json.extract! property, :id, :address1, :address2, :zipcode, :price,
 :square_footage, :contact_number, :contact_email, :latitude, :longitude,
-:description, :rented_at, :bedrooms, :bathrooms, :lease_length, :created_at, :updated_at, :slug
+:description, :rented_at, :bedrooms, :bathrooms, :lease_length, :created_at, :updated_at, :slug, :available_at
 if current_user
   json.can_edit (current_user.has_role?(:superuser) || current_user.properties.include?(property))
 end
