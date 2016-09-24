@@ -28,7 +28,7 @@ class PropertyUpdateService
       ids = types.collect { |val| val[:id] }
       type_records = Type.where(id: ids)
       types.each do |type|
-        t = type_records.select { |val| val.id type[:id] }
+        t = type_records.select { |val| val.id == type[:id] }
         unless type[:_destroy].present?
           @property.types << t unless @property.types.include?(t)
         else
