@@ -117,7 +117,7 @@ class PropertiesController < ::ApplicationController
     images_params = [:id, :_destroy, :name, :file]
     amenities_params = [:id, :_destroy]
     types_params = [:id, :_destroy]
-    params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, images_attributes: images_params, amenities_attributes: amenities_params, types_attributes: types_params)
+    params.require(:property).permit(:address1, :address2, :zipcode, :price, :square_footage, :contact_number, :contact_email, :description, :rented_at, :bedrooms, :bathrooms, :lease_length, :available_at, images_attributes: images_params, amenities_attributes: amenities_params, types_attributes: types_params)
   end
 
   def create_property_image_params

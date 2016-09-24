@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919162120) do
+ActiveRecord::Schema.define(version: 20160924173627) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 20160919162120) do
     t.string   "parcel_number",  limit: 255
     t.string   "slug",           limit: 255
     t.integer  "license_id",     limit: 4
+    t.datetime "available_at"
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree

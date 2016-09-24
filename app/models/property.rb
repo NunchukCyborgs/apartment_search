@@ -22,6 +22,7 @@
 #  parcel_number  :string(255)
 #  slug           :string(255)
 #  license_id     :integer
+#  available_at   :datetime
 #
 # Indexes
 #
