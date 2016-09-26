@@ -23,6 +23,8 @@
 #  slug           :string(255)
 #  license_id     :integer
 #  available_at   :datetime
+#  city           :string(255)
+#  state          :string(255)
 #
 # Indexes
 #
@@ -43,14 +45,6 @@ class Property < ActiveRecord::Base
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
   delegate :primary_contact, to: :license, prefix: true, allow_nil: true
-
-  geocoded_by :full_address
-
-  after_validation :geocode, if: ->(obj) do
-    (obj.address1.present? && obj.address1_changed?) ||
-    (obj.address2.present? && obj.address2_changed?) ||
-    (obj.zipcode.present? && obj.zipcode_changed?)
-  end
 
   after_create :set_locations
 

@@ -51,6 +51,7 @@ test:
 production:
   <<: *default
   socket: /var/run/mysqld/mysqld.sock
-  database: apartment_search_production
-  username: apartment_search
+  host: roomhere-production.cc4xw460ibfj.us-west-2.rds.amazonaws.com
+  database: roomhere_production
+  username: roomhere_db
   password: <%= ENV['APARTMENT_SEARCH_DATABASE_PASSWORD'] %>
