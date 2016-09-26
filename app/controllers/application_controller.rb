@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
 
   skip_before_filter :verify_authenticity_token
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
+  private
+
+  def render_404
+    render json: {}, status: 404
+  end
+
 end
