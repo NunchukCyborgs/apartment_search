@@ -23,6 +23,7 @@ namespace :rentals do
         license.name = line["Owner"]
         license.landlord_name = line["Landlord"]
       end
+      property.save
       # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
 
       puts property.inspect
