@@ -9,10 +9,10 @@ namespace :rentals do
     require 'indirizzo'
     puts "Opening CSV"
     CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).each do |line|
-      address = Indirizzo::Address.new("#{line["Label_Address"]} #{line["City_State_Zip"]}")
+      address = Indirizzo::Address.new(line["City_State_Zip"])
       property = Property.find_or_create_by(address1: line["Label_Address"]) do |prop|
         prop.zipcode = address.zip
-        prop.city = address.city
+        prop.city = address.city.first
         prop.state = address.state
         prop.latitude = line["Latitude"]
         prop.longitude = line["Longitude"]
