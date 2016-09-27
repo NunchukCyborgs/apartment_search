@@ -13,8 +13,8 @@ class PropertyFacet
 
   def get_new_facet_values
     {
-      min_price: aggregations["min_price"]["value"] || 0,
-      max_price: aggregations["max_price"]["value"] || 0,
+      min_price: aggregations["min_price"]["value"].present? ? aggregations["min_price"]["value"] : 0,
+      max_price: aggregations["max_price"]["value"].present? ? aggregations["max_price"]["value"] : 0,
       min_lease_length: aggregations["min_lease_length"]["value"],
       bedrooms: aggregations["bedrooms"]["buckets"].map { |b| b["key"] },
       bathrooms: aggregations["bathrooms"]["buckets"].map { |b| b["key"] },
