@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Indirizzo (0.1.7)
     actionmailer (4.2.7)
       actionpack (= 4.2.7)
       actionview (= 4.2.7)
@@ -296,6 +297,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Indirizzo
   annotate
   aws-sdk
   byebug
@@ -342,4 +344,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.12.5

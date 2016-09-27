@@ -22,6 +22,9 @@
 #  parcel_number  :string(255)
 #  slug           :string(255)
 #  license_id     :integer
+#  available_at   :datetime
+#  city           :string(255)
+#  state          :string(255)
 #
 # Indexes
 #
@@ -43,15 +46,8 @@ class Property < ActiveRecord::Base
 
   delegate :primary_contact, to: :license, prefix: true, allow_nil: true
 
+  after_create :set_locations
   geocoded_by :full_address
-
-  after_validation :geocode, if: ->(obj) do
-    (obj.address1.present? && obj.address1_changed?) ||
-    (obj.address2.present? && obj.address2_changed?) ||
-    (obj.zipcode.present? && obj.zipcode_changed?)
-  end
-
-  after_save :set_locations
 
   validates :address1, :zipcode, presence: true
   #for contact_number contact_email, maybe we default back to these properties
