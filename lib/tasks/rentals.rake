@@ -6,10 +6,10 @@ namespace :rentals do
 
   task import: :environment do
     require 'csv'
-    require 'Indirizzo'
+    require 'indirizzo'
     puts "Opening CSV"
     CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each do |line|
-      address = Inderizzo::Address.new("#{line["Label_Address"]} #{line["City_State_Zip"]}")
+      address = Indirizzo::Address.new("#{line["Label_Address"]} #{line["City_State_Zip"]}")
       property = Property.find_or_create_by(address1: line["Label_Address"]) do |prop|
         prop.zipcode = address.zip
         prop.city = address.city
@@ -19,7 +19,7 @@ namespace :rentals do
         prop.lease_length = 12
       end
 
-      property.license = License.find_of_create_by(value: line["License"]) do |license|
+      property.license = License.find_or_create_by(value: line["License"]) do |license|
         license.name = line["Owner"]
         license.landlord_name = line["Landlord"]
       end
