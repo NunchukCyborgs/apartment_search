@@ -106,26 +106,3 @@ locations = [
 locations.each do |l|
   Location.where(l).first_or_create
 end
-
-require 'csv'
-puts "Opening CSV"
-CSV.read("#{Rails.root}/db/property-seeds.csv", headers: true).first(100).each do |line|
-  puts line.inspect
-  puts line["Parcel"]
-  property = Property.find_or_create_by(address1: line["Location Address"]) do |prop|
-    prop.zipcode = line["Zip"]
-    prop.price = 500 + Random.rand(1499)
-    prop.parcel_number = line["Parcel"]
-    prop.square_footage = 300 + Random.rand(1000)
-    prop.contact_number = "123-123-1234"
-    prop.contact_email = "user@example.com"
-    prop.description = "This is a beautiful house. It is very pretty. This house has many things you will love"
-    prop.bedrooms = 1 + Random.rand(8)
-    prop.bathrooms = 1 + Random.rand(4)
-    prop.lease_length = 12
-  end
-  # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
-
-  puts property.inspect
-  sleep 1
-end
