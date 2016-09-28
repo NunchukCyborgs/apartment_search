@@ -54,9 +54,9 @@ class PropertiesController < ::ApplicationController
 
   def index
     render_404 and return unless current_user.has_role? :superuser
-    per_page = params[:per_page] || 100
-    page = params[:page] || 1
-    @properties = Property.limit(per_page).offset((page - 1) * per_page).includes(:images, :amenities)
+    per_page = params[:per_page].to_i || 100
+    page = params[:page].to_i || 1
+    @properties = Property.limit(per_page).offset((page - 1) * per_page).includes(:images, :amenities, reviews: :user)
   end
 
   def show
