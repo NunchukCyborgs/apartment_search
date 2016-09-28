@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   get "/properties/facets" => "properties#facets"
   get "/properties/filtered_results" => "properties#filtered_results"
 
-  resources :properties, only: [:show, :update], defaults: { format: :json } do
+  resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
     member do
       get 'claim', to: 'claim_property#index', as: :claim
       post 'claim', to: 'claim_property#create'
