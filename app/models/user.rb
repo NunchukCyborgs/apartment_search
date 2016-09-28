@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
 
   has_one :license
   has_many :properties, through: :license
+  has_many :reviews
+  has_many :customer_reviews, through: :properties, source: :review
   has_many :contacts
   validates :email, uniqueness: true
 
