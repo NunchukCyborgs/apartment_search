@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user, params)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -38,7 +38,7 @@ class Ability
     can [:me], User
     can [:facets, :filtered_results, :show, :user], Property
     can [:show, :create, :update], Contact
-    can [:authenticate], Licensing
-    can [:create], Payment
+    can [:authenticate], :licensing
+    can [:create], :payment
   end
 end

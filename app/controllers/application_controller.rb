@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from CanCan::AccessDenied, with: :render_403
 
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params)
+  end
 
   private
 
