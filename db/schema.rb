@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928185618) do
+ActiveRecord::Schema.define(version: 20160928224112) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 20160928185618) do
     t.datetime "file_updated_at"
     t.integer  "imageable_id",      limit: 4
     t.string   "imageable_type",    limit: 255
+    t.string   "height",            limit: 255
+    t.string   "width",             limit: 255
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree

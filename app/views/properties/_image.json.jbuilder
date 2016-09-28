@@ -1,1 +1,1 @@
-json.extract! image, :id, :url
+json.extract! image, :id, :url, :height, :width

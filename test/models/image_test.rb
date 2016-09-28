@@ -12,6 +12,8 @@
 #  file_updated_at   :datetime
 #  imageable_id      :integer
 #  imageable_type    :string(255)
+#  height            :string(255)
+#  width             :string(255)
 #
 # Indexes
 #
