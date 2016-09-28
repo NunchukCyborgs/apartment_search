@@ -33,8 +33,6 @@ class PropertyResults
   end
 
   def paginated_results
-    Rails.logger.info("Floooooooooooooooom::::")
-    Rails.logger.info(raw_es_results.response.inspect)
     {
       results: parsed_results_with_images,
       total_count: raw_es_results.response["hits"]["total"]

@@ -78,4 +78,23 @@ class User < ActiveRecord::Base
   def has_license?
     license.present?
   end
+
+  def superuser?
+    return true if has_role?(:superuser)
+    return false
+  end
+
+  def can_manage_property?(property_id)
+    property = Property.find_by_id(property_id)
+    return false unless property
+    return true if superuser?
+    return true if current_user.properties.include?(property)
+    return false
+  end
+
+  def can_manage_user?(user_id)
+    return true if superuser?
+    return true if user_id == id
+    return false
+  end
 end

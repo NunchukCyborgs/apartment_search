@@ -6,9 +6,17 @@ class ApplicationController < ActionController::Base
 
   skip_before_filter :verify_authenticity_token
 
+  check_authorization
+
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from CanCan::AccessDenied, with: :render_403
+
 
   private
+
+  def render_403
+    render json: {}, status: 403
+  end
 
   def render_404
     render json: {}, status: 404
