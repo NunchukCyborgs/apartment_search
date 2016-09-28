@@ -12,6 +12,8 @@
 #  file_updated_at   :datetime
 #  imageable_id      :integer
 #  imageable_type    :string(255)
+#  height            :string(255)
+#  width             :string(255)
 #
 # Indexes
 #
@@ -20,9 +22,19 @@
 
 class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
+  before_create :extract_dimensions
 
   has_attached_file :file, default_url: "http://placehold.it/600x400"
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
   delegate :url, to: :file, prefix: false
+
+  def extract_dimensions
+    tempfile = file.queued_for_write[:original]
+    unless tempfile.nil?
+      geometry = Paperclip::Geometry.from_file(tempfile)
+      self.height = geometry.height.to_i
+      self.width = geometry.width.to_i
+    end
+  end
 end

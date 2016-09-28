@@ -70,6 +70,7 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     :storage => :s3,
+    :s3_protocol => :https,
     :bucket => 'hackaton-s3-production'
   }
 

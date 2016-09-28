@@ -41,6 +41,7 @@ class Property < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   has_many :images, as: :imageable
+  has_many :reviews
   belongs_to :license
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 

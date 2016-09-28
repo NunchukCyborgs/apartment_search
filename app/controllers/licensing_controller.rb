@@ -6,6 +6,7 @@ class LicensingController < ApplicationController
     status_404 and return if license.nil? || license.claimed?
     status_unprocessable and return if current_user.has_license?
     current_user.process_license license
+    render json: { license_id: license.id }, status: ok
   end
 
   private

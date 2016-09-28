@@ -16,6 +16,12 @@ else
   end
 end
 
+json.reviews do
+  json.array! property.reviews.includes(:user) do |review|
+    json.partial! 'reviews/review', review: review
+  end
+end
+
 json.amenities do
   json.array! Amenity.all do |amenity|
     json.extract! amenity, :name, :icon, :id
