@@ -44,7 +44,7 @@ class PropertyResults
   def parsed_results_with_images
     parsed_results.map do |result|
       images = Image.where(imageable_id: result[:id], imageable_type: "Property")
-      images = [FakeImage.new(nil, "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{result[:latitude]},#{result[:longitude]}&key=#{ENV["STREETVIEW_API_KEY"]}")] if images.empty?
+      images = [FakeImage.new(nil, "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{result[:latitude]},#{result[:longitude]}&key=#{ENV["STREETVIEW_API_KEY"]}", 400, 600)] if images.empty?
       result[:images] = images_result(images)
       result
     end
@@ -67,7 +67,9 @@ class PropertyResults
   def image_hash(image)
     {
       id: image.id,
-      url: image.url
+      url: image.url,
+      height: image.height,
+      width: image.width
     }
   end
 
@@ -97,11 +99,13 @@ class PropertyResults
   end
 
   class FakeImage
-    attr_accessor :id, :url
+    attr_accessor :id, :url, :height, :width
 
-    def initialize(id, url)
+    def initialize(id, url, height, width)
       @id = id
       @url = url
+      @height = height
+      @width = width
     end
   end
 
