@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def can_manage_contact?(contact_id)
-    contact = Contact.find(contact_id)
+    contact = Contact.find_by_id(contact_id)
     contact && contact.user_id == id
   end
 
