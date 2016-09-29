@@ -59,6 +59,7 @@ class PropertiesController < ::ApplicationController
     per_page = params[:per_page].to_i || 100
     page = params[:page].to_i || 1
     @properties = Property.limit(per_page).offset((page - 1) * per_page).includes(:images, :amenities, reviews: :user)
+    @properties = @properties.like_address(params[:q]) if params[:q].present?
   end
 
   def show
