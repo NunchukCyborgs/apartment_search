@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
+  authorize_resource
 
   def create
     if PaymentService.new(current_user, params).subscribe!

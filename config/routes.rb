@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   post '/users/properties', to: 'properties#user', format: :json
   get '/me', to: 'users#me', format: :json
   resources :users
-  resources :scheduled_events
 
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
@@ -18,9 +17,6 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  root 'welcome#index'
-
 
   post "/properties/facets" => "properties#facets"
   post "/properties/filtered_results" => "properties#filtered_results"
@@ -29,9 +25,6 @@ Rails.application.routes.draw do
 
   resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
     member do
-      get 'claim', to: 'claim_property#index', as: :claim
-      post 'claim', to: 'claim_property#create'
-
       delete 'images/:image_id', to: 'properties#delete_image'
     end
   end

@@ -1,7 +1,9 @@
 class PropertiesController < ::ApplicationController
   before_action :authenticate_user!, except: [:facets, :filtered_results, :show]
   #skip_authorization_check :only => [:facets, :filtered_results, :show]
+  authorize_resource
   before_action :set_property, only: [:show, :update, :images, :delete_image]
+
 
   #  Both of the following endpoints expect a list of facet filters to be sent
   #  This list will look something like:

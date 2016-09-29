@@ -1,4 +1,5 @@
 class LicensingController < ApplicationController
+  authorize_resource
 
   def authenticate
     status_404 and return unless params[:license_id]

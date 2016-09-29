@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:create]
   before_action :set_user, only: [:update, :destroy]
+  authorize_resource
 
   def me
     @user = current_user

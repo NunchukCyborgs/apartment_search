@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   skip_before_filter :verify_authenticity_token
 
-  check_authorization
+  check_authorization :unless => :devise_controller?
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from CanCan::AccessDenied, with: :render_403
