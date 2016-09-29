@@ -17,10 +17,10 @@ class ContactsController < ApplicationController
   end
 
   def update
-    if @contact.user == current_user && @contact.update(contact_params)
+    if @contact.update(contact_params)
       render 'contacts/show', status: :ok
     else
-      render json: { result: "failed" }, status: 404
+      render json: { result: "failed" }, status: 400
     end
   end
 

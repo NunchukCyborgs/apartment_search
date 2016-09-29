@@ -94,6 +94,11 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def can_manage_contact?(contact_id)
+    contact = Contact.find(contact_id)
+    contact && contact.user_id == id
+  end
+
   def can_manage_user?(user_id)
     return true if superuser?
     return true if user_id == id
