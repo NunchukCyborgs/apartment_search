@@ -8,7 +8,7 @@ json.url property_url(property, format: :json)
 
 if property.images.empty?
   json.images do
-    json.array! [{id: nil, url: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{property.latitude},#{property.longitude}&key=#{ENV["STREETVIEW_API_KEY"]}", height: 400, width: 600 }], partial: "properties/image", as: :image
+    json.array! [{id: nil, url: "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{property.latitude},#{property.longitude}&key=#{ENV["STREETVIEW_API_KEY"]}", height: "400", width: "600" }], partial: "properties/image", as: :image
   end
 else
   json.images do
