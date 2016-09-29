@@ -28,8 +28,9 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    
-    can [:update, :images, :delete_image, :index], Property if user && user.can_manage_property?(params[:id])
+
+    can [:update, :images, :delete_image], Property if user && user.can_manage_property?(params[:id])
+    can [:index], Property if user && user.superuser?
     can [:index, :show], User if user && user.superuser?
     can [:update], Contact if user && user.can_manage_contact?(params[:id])
     can [:update, :destroy], User if user && user.can_manage_user?(params[:id])
