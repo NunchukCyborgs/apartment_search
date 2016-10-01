@@ -45,8 +45,6 @@ set :assets_roles, [:web, :app]
 
 set :clockwork_file, "lib/clock.rb"
 
-set :honeybadger_env, "production"
-
 namespace :deploy do
 
   #overwrite precompile to only precompile if assets changed
