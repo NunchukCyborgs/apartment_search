@@ -1,2 +1,3 @@
 ---
 api_key: '1a0f4ba9'
+development_environments: ['staging', 'development', 'test']
