@@ -46,11 +46,11 @@ class PropertyResults
       result[:images] = images_result(images)
       result
     end
-    Rails.logger.info "<><><><><><><>#{results.inspect}<><><><><><><><>"
     results
   end
 
   def parsed_results
+    Rails.logger.info "<><><><><><><><><><>#{raw_es_results}<><><><><><><><><><>"
     raw_es_results.response["hits"]["hits"].map { |r| r["_source"] }
   end
 
