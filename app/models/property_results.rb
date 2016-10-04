@@ -95,6 +95,7 @@ class PropertyResults
   end
 
   def calculate_from
+    return 0 if page == 1
     (((page - 1) * per_page) + 1) rescue 0
   end
 
