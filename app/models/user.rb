@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   end
 
   def can_manage_property?(property_id)
-    property = Property.find_by_id(property_id)
+    property = Property.friendly.find(property_id) rescue nil
     return false unless property
     return true if superuser?
     return true if current_user.properties.include?(property)
@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
   end
 
   def can_manage_contact?(contact_id)
-    contact = Contact.find_by_id(contact_id)
+    contact = Contact.friendly.find(contact_id) rescue nil
     contact && contact.user_id == id
   end
 
