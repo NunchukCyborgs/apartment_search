@@ -50,7 +50,7 @@ class PropertyResults
   end
 
   def parsed_results
-    Rails.logger.info "<><><><><><><><><><>#{raw_es_results}<><><><><><><><><><>"
+    Rails.logger.info "<><><><><><><><><><>#{raw_es_results.response.inspect}<><><><><><><><><><>"
     raw_es_results.response["hits"]["hits"].map { |r| r["_source"] }
   end
 
