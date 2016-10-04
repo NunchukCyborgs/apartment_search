@@ -46,7 +46,7 @@ class PropertyResults
       result[:images] = images_result(images)
       result
     end
-    logger.info "<><><><><><><>#{results.inspect}<><><><><><><><>"
+    Rails.logger.info "<><><><><><><>#{results.inspect}<><><><><><><><>"
     results
   end
 
