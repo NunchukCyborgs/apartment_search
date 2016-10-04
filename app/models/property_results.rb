@@ -40,12 +40,14 @@ class PropertyResults
   end
 
   def parsed_results_with_images
-    parsed_results.map do |result|
+    results = parsed_results.map do |result|
       images = Image.where(imageable_id: result[:id], imageable_type: "Property")
       images = [FakeImage.new(nil, "https://maps.googleapis.com/maps/api/streetview?size=600x400&location=#{result[:latitude]},#{result[:longitude]}&key=#{ENV["STREETVIEW_API_KEY"]}", "400", "600")] if images.empty?
       result[:images] = images_result(images)
       result
     end
+    logger.info "<><><><><><><>#{results.inspect}<><><><><><><><>"
+    results
   end
 
   def parsed_results
