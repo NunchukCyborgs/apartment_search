@@ -14,7 +14,7 @@
 #  longitude      :float(24)
 #  description    :text(65535)
 #  bedrooms       :integer
-#  bathrooms      :integer
+#  bathrooms      :float(24)
 #  lease_length   :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

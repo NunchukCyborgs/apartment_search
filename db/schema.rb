@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928224112) do
+ActiveRecord::Schema.define(version: 20161005212332) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20160928224112) do
     t.float    "longitude",      limit: 24
     t.text     "description",    limit: 65535
     t.integer  "bedrooms",       limit: 4
-    t.integer  "bathrooms",      limit: 4
+    t.float    "bathrooms",      limit: 24
     t.integer  "lease_length",   limit: 4
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
