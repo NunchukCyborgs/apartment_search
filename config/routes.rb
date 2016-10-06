@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/users/licensing', to: 'licensing#authenticate', format: :json
   post '/users/properties', to: 'properties#user', format: :json
   get '/licenses/:license_id', to: 'licensing#show', format: :json
+  post 'licenses/:license_id/contacts', to: 'contacts#create_with_license', format: :json
   get '/me', to: 'users#me', format: :json
   resources :users
 
