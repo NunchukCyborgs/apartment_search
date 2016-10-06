@@ -1,6 +1,12 @@
 class LicensingController < ApplicationController
   authorize_resource
 
+  def show
+    status_404 and return unless current_user.has_role? :superuser
+    @license = License.find_by(value: params[:license_id])
+    status_404 and return unless @license
+  end
+
   def authenticate
     status_404 and return unless params[:license_id]
     license = License.find_by(value: params[:license_id])
