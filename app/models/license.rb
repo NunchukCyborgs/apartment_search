@@ -20,8 +20,6 @@ class License < ActiveRecord::Base
   belongs_to :user
   has_many :properties
 
-  scope :like_id, ->(license_value) { where("value LIKE ?", "%#{license_value}%")
-
   def claimed?
     claimed_at.present?
   end
