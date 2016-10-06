@@ -21,7 +21,7 @@ class ContactsController < ApplicationController
     render json: { result: "failed" }, status: 404 and return unless current_user.has_role? :superuser
     @license = License.find_by(value: params[:license_id])
     @license.contacts << Contact.create(contact_params)
-    render 'licenses/show', status: :ok
+    render 'licensing/show', status: :ok
   end
 
   def update
