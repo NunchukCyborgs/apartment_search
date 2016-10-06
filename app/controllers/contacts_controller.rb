@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :update]
-  authorize_resource
+  authorize_resource except: [:create_with_license]
   skip_authorization_check only: [:create_with_license]
 
   def show
