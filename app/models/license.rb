@@ -19,12 +19,13 @@
 class License < ActiveRecord::Base
   belongs_to :user
   has_many :properties
+  has_many :contacts, as: :contactable
 
   def claimed?
     claimed_at.present?
   end
 
   def primary_contact
-    user.primary_contact if user
+    contacts.first || Contact.new
   end
 end

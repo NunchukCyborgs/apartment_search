@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005212332) do
+ActiveRecord::Schema.define(version: 20161006185520) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -29,16 +29,16 @@ ActiveRecord::Schema.define(version: 20161005212332) do
   add_index "amenities_properties", ["property_id"], name: "index_amenities_properties_on_property_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "phone",      limit: 255
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "email",            limit: 255
+    t.string   "phone",            limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "contactable_id",   limit: 4
+    t.string   "contactable_type", limit: 255
   end
 
   add_index "contacts", ["email"], name: "index_contacts_on_email", using: :btree
   add_index "contacts", ["phone"], name: "index_contacts_on_phone", using: :btree
-  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   limit: 4,     default: 0, null: false
@@ -232,7 +232,6 @@ ActiveRecord::Schema.define(version: 20161005212332) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  add_foreign_key "contacts", "users"
   add_foreign_key "licenses", "users"
   add_foreign_key "properties", "licenses"
 end
