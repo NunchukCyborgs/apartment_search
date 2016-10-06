@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :update]
-  authorize_resource, except: [:create_with_license]
+  authorize_resource except: [:create_with_license]
 
   def show
     render json: { result: "failed" }, status: 404 and return unless @contact.user == current_user
