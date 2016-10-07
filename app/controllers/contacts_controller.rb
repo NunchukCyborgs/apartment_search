@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    @contact.user = current_user
+    @contact.contactable = current_user
     if @contact.save
       render 'contacts/show', status: :ok
     else
