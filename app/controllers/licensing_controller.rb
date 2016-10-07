@@ -8,7 +8,7 @@ class LicensingController < ApplicationController
   end
 
   def authenticate
-    status_404 and return unless params[:license_id] && current_user.can? :authenticate, License
+    status_404 and return unless params[:license_id] && current_user.can?(:authenticate, License)
     license = License.find_by(value: params[:license_id])
     status_404 and return if license.nil? || license.claimed?
     status_unprocessable and return if current_user.has_license?
