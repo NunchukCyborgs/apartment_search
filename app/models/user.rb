@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
 
   def can_manage_contact?(contact_id)
     contact = Contact.friendly.find(contact_id) rescue nil
-    contact && contact.user_id == id
+    contact && contact.contactable == self
   end
 
   def can_manage_user?(user_id)

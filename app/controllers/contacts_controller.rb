@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   skip_authorization_check only: [:create_with_license]
 
   def show
-    render json: { result: "failed" }, status: 404 and return unless @contact.user == current_user
+    render json: { result: "failed" }, status: 404 and return unless @contact.contactable == current_user
   end
 
   def create
