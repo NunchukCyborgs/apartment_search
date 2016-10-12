@@ -24,7 +24,7 @@ end
 
 json.amenities do
   json.array! Amenity.all do |amenity|
-    json.extract! amenity, :name, :icon, :id
+    json.extract! amenity, :name, :id
     json.active property.amenities.include?(amenity)
   end
 end
