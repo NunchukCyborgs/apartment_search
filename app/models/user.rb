@@ -29,6 +29,7 @@
 #  nickname               :string(255)
 #  image                  :string(255)
 #  tokens                 :text(65535)
+#  verified_at            :datetime
 #
 # Indexes
 #

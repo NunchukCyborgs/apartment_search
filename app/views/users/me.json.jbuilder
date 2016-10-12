@@ -2,7 +2,7 @@ json.properties do
   json.array! @user.properties.includes(:images, :amenities), partial: 'properties/property', as: :property
 end
 
-json.extract! @user, :email
+json.extract! @user, :email, :verified_at
 
 json.license_id @user.license_value
 
