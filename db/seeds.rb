@@ -24,46 +24,18 @@ end
 
 
 amenities = [
-  {
-    name: "Pet Friendly",
-    icon: "icon-paw"
-  },
-  {
-    name: "Wheelchair Accessible",
-    icon: "icon-wheelchair-alt"
-  },
-  {
-    name: "Washer/Dryer",
-    icon: "icon-washer-dryer-2"
-  },
-  {
-    name: "Electricity Included",
-    icon: "icon-electricity"
-  },
-  {
-    name: "Gas Included",
-    icon: "icon-gas"
-  },
-  {
-    name: "Water Included",
-    icon: "icon-tint"
-  },
-  {
-    name: "Trash Included",
-    icon: "icon-trash"
-  },
-  {
-    name: "Central Air",
-    icon: "icon-central-air-alt"
-  },
-  {
-    name: "Indoor Fireplace",
-    icon: "icon-fire"
-  },
-  {
-    name: "Smoking Allowed",
-    icon: "icon-smoking-allowed"
-  },
+  { name: "Pet Friendly" },
+  { name: "Wheelchair Accessible" },
+  { name: "Washer/Dryer" },
+  { name: "Electricity Included" },
+  { name: "Gas Included" },
+  { name: "Water Included" },
+  { name: "Trash Included" },
+  { name: "Central Air" },
+  { name: "Indoor Fireplace" },
+  { name: "Smoking Allowed" },
+  { name: "Garage" },
+  { name: "Lawn Care" },
 ]
 
 amenities.each do |a|
