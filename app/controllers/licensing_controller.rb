@@ -1,5 +1,5 @@
 class LicensingController < ApplicationController
-  skip_authorization_check only: [:show]
+  skip_authorization_check only: [:show, :authenticate]
 
   def show
     status_404 and return unless current_user.has_role? :superuser
