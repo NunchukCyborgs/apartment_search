@@ -17,7 +17,8 @@
 #
 
 class License < ActiveRecord::Base
-  belongs_to :user
+  has_many :license_instances
+  has_many :users, through: :license_instancess
   has_many :properties
   has_many :contacts, as: :contactable
 

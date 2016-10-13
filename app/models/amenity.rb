@@ -15,4 +15,12 @@ class Amenity < ActiveRecord::Base
   validates :name, presence: true
 
   has_and_belongs_to_many :properties
+
+  def self.pets
+    find_or_create_by(name: "Pet Friendly")
+  end
+
+  def self.garage
+    find_or_create_by(name: "Garage")
+  end
 end

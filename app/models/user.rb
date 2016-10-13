@@ -49,14 +49,13 @@ class User < ActiveRecord::Base
           :confirmable
   include DeviseTokenAuth::Concerns::User
 
-  has_one :license
+  has_many :license_instances
+  has_many :licenses, through: :license_instances
   has_many :properties, through: :license
   has_many :reviews
   has_many :customer_reviews, through: :properties, source: :review
   has_many :contacts, as: :contactable
   validates :email, uniqueness: true
-
-  delegate :value, to: :license, prefix: true, allow_nil: true
 
   def property_cost
     properties.size * Settings.cost_per_property
