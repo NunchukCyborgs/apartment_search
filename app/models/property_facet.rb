@@ -18,7 +18,7 @@ class PropertyFacet
       min_lease_length: aggregations["min_lease_length"]["value"],
       bedrooms: aggregations["bedrooms"]["buckets"].map { |b| b["key"] },
       bathrooms: aggregations["bathrooms"]["buckets"].map { |b| b["key"] },
-      amenities: aggregations["amenities"]["buckets"].map { |b| b["key"] },
+      amenities: aggregations["amenities"]["buckets"].map { |b| { name: b["key"] } },
       locations: aggregations["locations"]["buckets"].map { |b| b["key"] },
       types: Type.all.map { |b| b.name }, # hack to have all types displayed all the time for now
       total_count: aggregations["total_count"]["value"],
