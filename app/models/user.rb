@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
 
   has_many :license_instances
   has_many :licenses, through: :license_instances
-  has_many :properties, through: :license
+  has_many :properties, through: :licenses
   has_many :reviews
   has_many :customer_reviews, through: :properties, source: :review
   has_many :contacts, as: :contactable
