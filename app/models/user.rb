@@ -92,10 +92,12 @@ class User < ActiveRecord::Base
   end
 
   def can_manage_property?(property_id)
-    property = Property.friendly.find(property_id) rescue nil
+    property = Property.friendly.find(property_id).include(:license) rescue nil
+    license = property.license
+    license_instance = license_instances.find_by(license_id: license.id)
     return false unless property
     return true if superuser?
-    return true if properties.include?(property)
+    return true if properties.include?(property) && license_instance.verified_at
     return false
   end
 
