@@ -37,6 +37,10 @@ set :keep_releases, 3
 
 set :delayed_job_workers, 4
 
+after 'deploy:published', 'delayed_job:restart' do
+    invoke 'delayed_job:restart'
+end
+
 # precompile assets - locations that we will look for changed assets to determine whether to precompile
 set :assets_dependencies, %w(app/assets lib/assets vendor/assets Gemfile config/routes.rb)
 
