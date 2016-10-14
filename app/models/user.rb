@@ -57,6 +57,8 @@ class User < ActiveRecord::Base
   has_many :contacts, as: :contactable
   validates :email, uniqueness: true
 
+  after_create :notify_creation
+
   def property_cost
     properties.size * Settings.cost_per_property
   end
@@ -75,7 +77,9 @@ class User < ActiveRecord::Base
 
   def process_license(license)
     return false if licenses.include?(license)
-    LicenseInstance.create(user_id: id, license_id: license.id)
+    i = LicenseInstance.create(user_id: id, license_id: license.id)
+    Delayed::Job.enqueue UserLicensedNotificationJob.new(id, license.id)
+    i
   end
 
   def has_license?
@@ -104,5 +108,10 @@ class User < ActiveRecord::Base
     return true if superuser?
     return true if user_id == id
     return false
+  end
+
+  private
+  def notify_creation
+    Delayed::Job.enqueue UserCreatedNotificationJob.new(id)
   end
 end
