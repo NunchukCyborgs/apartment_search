@@ -74,8 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def process_license(license)
-    licences << license
-    save
+    LicenseInstance.create(user_id: id, license_id: license.id)
   end
 
   def has_license?
