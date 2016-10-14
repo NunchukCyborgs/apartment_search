@@ -74,7 +74,8 @@ class User < ActiveRecord::Base
   end
 
   def process_license(license)
-    LicenseInstance.create(user_id: id, license_id: license.id) unless licenses.include?(license)
+    return false if licenses.include?(license)
+    LicenseInstance.create(user_id: id, license_id: license.id)
   end
 
   def has_license?

@@ -11,8 +11,11 @@ class LicensingController < ApplicationController
     status_404 and return unless params[:license_id]
     license = License.find_by(value: params[:license_id])
     status_404 and return if license.nil?
-    current_user.process_license license
-    render json: { license_id: license.id }, status: :ok
+    if current_user.process_license(license)
+      render json: { license_id: license.value }, status: :ok
+    else
+      render json: { errors: "You already have that license" }, status: :unprocessable_entity
+    end
   end
 
   private
