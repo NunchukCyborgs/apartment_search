@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
     property = Property.friendly.find(property_id) rescue nil
     return false unless property
     return true if superuser?
-    return true if current_user.properties.include?(property)
+    return true if properties.include?(property)
     return false
   end
 
