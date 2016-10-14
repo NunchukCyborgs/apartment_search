@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013205824) do
+ActiveRecord::Schema.define(version: 20161014204729) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -85,14 +85,16 @@ ActiveRecord::Schema.define(version: 20161013205824) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "license_instances", force: :cascade do |t|
-    t.integer  "license_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "license_id",  limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.datetime "verified_at"
   end
 
   add_index "license_instances", ["license_id"], name: "index_license_instances_on_license_id", using: :btree
   add_index "license_instances", ["user_id"], name: "index_license_instances_on_user_id", using: :btree
+  add_index "license_instances", ["verified_at"], name: "index_license_instances_on_verified_at", using: :btree
 
   create_table "licenses", force: :cascade do |t|
     t.string   "value",         limit: 255

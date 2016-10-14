@@ -110,6 +110,10 @@ class User < ActiveRecord::Base
     return false
   end
 
+  def is_verified
+    license_instances.where(verified_at: nil).size == 0
+  end
+
   private
   def notify_creation
     Delayed::Job.enqueue UserCreatedNotificationJob.new(id)
