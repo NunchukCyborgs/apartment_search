@@ -74,7 +74,8 @@ class User < ActiveRecord::Base
   end
 
   def process_license(license)
-    license.update(user_id: id)
+    licences << license
+    save
   end
 
   def has_license?
