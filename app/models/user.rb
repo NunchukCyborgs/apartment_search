@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   end
 
   def can_manage_property?(property_id)
-    property = Property.friendly.find(property_id).include(:license) rescue nil
+    property = Property.friendly.find(property_id).includes(:license) rescue nil
     license = property.license
     license_instance = license_instances.find_by(license_id: license.id)
     return false unless property
