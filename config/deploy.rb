@@ -35,8 +35,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :delayed_job_workers, 4
-
 after 'deploy:published', 'delayed_job:restart' do
     invoke 'delayed_job:restart'
 end

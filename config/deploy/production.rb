@@ -21,7 +21,7 @@ role :app, %w{ubuntu@ec2-52-36-121-113.us-west-2.compute.amazonaws.com}
 role :web, %w{ubuntu@ec2-52-36-121-113.us-west-2.compute.amazonaws.com}
 role :db, %w{ubuntu@ec2-52-36-121-113.us-west-2.compute.amazonaws.com}
 
-
+set :delayed_job_workers, 4
 
 # Configuration
 # =============
