@@ -1,1 +1,1 @@
-json.extract! license, :value
+json.extract! license, :value, :id

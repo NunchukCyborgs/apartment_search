@@ -4,7 +4,7 @@ end
 
 json.extract! @user, :email, :verified_at
 
-json.license_ids do
+json.licenses do
   json.array! @user.licenses, partial: 'users/license', as: :license
 end
 

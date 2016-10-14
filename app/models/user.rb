@@ -74,11 +74,11 @@ class User < ActiveRecord::Base
   end
 
   def process_license(license)
-    LicenseInstance.create(user_id: id, license_id: license.id)
+    LicenseInstance.create(user_id: id, license_id: license.id) unless licenses.include?(license)
   end
 
   def has_license?
-    license.present?
+    licenses.size > 0
   end
 
   def superuser?
