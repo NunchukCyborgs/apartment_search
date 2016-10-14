@@ -12,7 +12,7 @@ class LicensingController < ApplicationController
     license = License.find_by(value: params[:license_id])
     status_404 and return if license.nil?
     current_user.process_license license
-    render json: { license_id: license.id }, status: ok
+    render json: { license_id: license.id }, status: :ok
   end
 
   private
