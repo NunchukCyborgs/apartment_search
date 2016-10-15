@@ -97,11 +97,11 @@ class User < ActiveRecord::Base
     license = property.license
     license_instance = license_instances.find_by(license_id: license.id)
     return true if superuser?
-    return true if owns_property(property.id) && license_instance.verified_at
+    return true if owns_property?(property.id) && license_instance.verified_at
     return false
   end
 
-  def owns_property(property_id)
+  def owns_property?(property_id)
     properties.find(property_id) rescue nil
   end
 
