@@ -47,7 +47,7 @@ class Property < ActiveRecord::Base
 
   delegate :primary_contact, to: :license, prefix: true, allow_nil: true
 
-  scope :like_address, ->(address_string) { where("address1 LIKE ?", "%#{address_string}%")
+  scope :like_address, ->(address_string) { where("address1 LIKE ?", "%#{address_string}%") }
 
   after_create :set_locations
   geocoded_by :full_address
