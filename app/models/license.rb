@@ -23,7 +23,7 @@ class License < ActiveRecord::Base
   has_many :contacts, as: :contactable
 
   def claimed?
-    claimed_at.present?
+    license_instances.verified.size > 0
   end
 
   def primary_contact

@@ -3,6 +3,8 @@ json.extract! property, :id, :address1, :address2, :zipcode, :price,
 :description, :rented_at, :bedrooms, :bathrooms, :lease_length, :created_at, :updated_at, :slug, :available_at
 if current_user
   json.can_edit (current_user.can_manage_property?(property.id))
+  json.is_owner current_user.owns_property?(property.id)
+  json.is_claimed property.claimed?
 end
 json.url property_url(property, format: :json)
 

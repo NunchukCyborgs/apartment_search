@@ -19,4 +19,6 @@
 class LicenseInstance < ActiveRecord::Base
   belongs_to :license
   belongs_to :user
+
+  scope :verified, -> { where.not(verified_at: nil) }
 end
