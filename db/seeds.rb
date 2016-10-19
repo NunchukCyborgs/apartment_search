@@ -39,7 +39,7 @@ amenities = [
 ]
 
 amenities.each do |a|
-  Amenity.find_or_create_by(name: a[:name]).update(icon: a[:icon])
+  Amenity.find_or_create_by(name: a[:name])
 end
 
 types = [
