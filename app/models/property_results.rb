@@ -83,7 +83,7 @@ class PropertyResults
       query: {
         match: {
           _all: @search_query
-        }
+        },
         filtered: {
           query: { match_all: {} },
           filter: {
