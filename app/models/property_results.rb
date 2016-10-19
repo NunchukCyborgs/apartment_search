@@ -1,35 +1,36 @@
 class PropertyResults
 
   #returns hash with total results and an array of hashes directly from ES which includes main image url
-  def self.paginated_results(facets, page = 1, per_page = Settings.properties_per_page)
-    resultr = PropertyResults.new(facets, page, per_page)
+  def self.paginated_results(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, search_query)
     resultr.paginated_results
   end
 
   #returns array of hashes directly from ES
-  def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page)
-    resultr = PropertyResults.new(facets, page, per_page)
+  def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, search_query)
     resultr.parsed_results
   end
 
   #returns array of hashes directly from ES which includes main image url
-  def self.parsed_results_with_images(facets, page = 1, per_page = Settings.properties_per_page)
-    resultr = PropertyResults.new(facets, page, per_page)
+  def self.parsed_results_with_images(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, search_query)
     resultr.parsed_results_with_images
   end
 
   #returns an array of the ActiveRecord objects that match the facets
-  def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page)
-    resultr = PropertyResults.new(facets, page, per_page)
+  def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, search_query)
     resultr.returned_records
   end
 
   attr_accessor :filter_array, :page, :per_page
 
-  def initialize(facets, page = 1, per_page = Settings.properties_per_page)
+  def initialize(facets, page = 1, per_page = Settings.properties_per_page, search_query)
     @filter_array = PropertyFilter.filter_array(facets)
     @page = page
     @per_page = per_page
+    @search_query = search_query
   end
 
   def paginated_results
@@ -80,6 +81,9 @@ class PropertyResults
       size: per_page,
       from: calculate_from,
       query: {
+        match: {
+          _all: @search_query
+        }
         filtered: {
           query: { match_all: {} },
           filter: {
