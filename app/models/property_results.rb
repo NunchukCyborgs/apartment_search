@@ -26,7 +26,7 @@ class PropertyResults
 
   attr_accessor :filter_array, :page, :per_page
 
-  def initialize(facets, page = 1, per_page = Settings.properties_per_page, search_query)
+  def initialize(facets, page = 1, per_page = Settings.properties_per_page, search_query="")
     @filter_array = PropertyFilter.filter_array(facets)
     @page = page
     @per_page = per_page
@@ -77,13 +77,10 @@ class PropertyResults
   end
 
   def query
-    {
+    q = {
       size: per_page,
       from: calculate_from,
       query: {
-        match: {
-          _all: @search_query
-        },
         filtered: {
           query: { match_all: {} },
           filter: {
@@ -94,6 +91,8 @@ class PropertyResults
         }
       }
     }
+    q[:query][:match] = { _all: @search_query } if @search_query.present?
+    q
   end
 
   def calculate_from
