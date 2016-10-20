@@ -91,7 +91,7 @@ class PropertyResults
         }
       }
     }
-    q[:query][:filtered][:query] = { multi_match: { query: @search_query, fields: [ "address1", "address2", "city", "state", "zipcode" ] } } if @search_query.present?
+    q[:query][:filtered][:query] = { query_string: { query: @search_query, fields: [ "address1^3", "address2", "city", "state", "zipcode" ] } } if @search_query.present?
     q
   end
 
