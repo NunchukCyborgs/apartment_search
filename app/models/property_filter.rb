@@ -16,7 +16,7 @@ class PropertyFilter
     @min_bedrooms = @facets[:min_bedrooms].to_i unless @facets[:min_bedrooms].blank?
     @min_bathrooms = @facets[:min_bathrooms].to_i unless @facets[:min_bathrooms].blank?
     @max_lease_length = @facets[:max_lease_length].to_i unless @facets[:max_lease_length].blank?
-    @amenities = @facets.fetch(:amenities, []).map(&:to_s)
+    @amenities = @facets.fetch(:amenities, []).map { |amenity| amenity[:name].to_s }
     @types = @facets.fetch(:types, []).map(&:to_s)
     @locations = @facets.fetch(:locations, []).map(&:to_s)
   end
