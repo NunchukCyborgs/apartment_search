@@ -22,7 +22,6 @@ roles.each do |r|
   Role.where(name: r[:name]).first_or_create
 end
 
-
 amenities = [
   { name: "Pet Friendly" },
   { name: "Wheelchair Accessible" },
