@@ -52,6 +52,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'cancan'
 gem 'slack-notifier'
+gem 'sitemap_generator'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
