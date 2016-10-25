@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014204729) do
+ActiveRecord::Schema.define(version: 20161025160423) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -164,13 +164,18 @@ ActiveRecord::Schema.define(version: 20161014204729) do
   add_index "properties_types", ["type_id"], name: "index_properties_types_on_type_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.integer  "property_id", limit: 4
-    t.text     "body",        limit: 65535
-    t.text     "title",       limit: 65535
-    t.float    "rating",      limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_id",           limit: 4
+    t.integer  "property_id",       limit: 4
+    t.text     "body",              limit: 65535
+    t.text     "title",             limit: 65535
+    t.float    "property_rating",   limit: 24
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.float    "landlord_rating",   limit: 24
+    t.text     "landlord_comments", limit: 65535
+    t.integer  "duration",          limit: 4
+    t.datetime "anonymous_at"
+    t.datetime "current_tenant_at"
   end
 
   create_table "roles", force: :cascade do |t|
