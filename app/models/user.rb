@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
 
   def can_control_review?(review_id)
     return false unless review_id
-    reviews.find(review_id)
+    reviews.find(review_id) rescue nil
   end
 
   def display_nickname
