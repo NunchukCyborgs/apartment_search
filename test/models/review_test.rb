@@ -15,6 +15,7 @@
 #  duration          :integer
 #  anonymous_at      :datetime
 #  current_tenant_at :datetime
+#  approved_at       :datetime
 #
 
 require 'test_helper'

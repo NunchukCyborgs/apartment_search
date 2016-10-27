@@ -119,6 +119,14 @@ class User < ActiveRecord::Base
     license_instances.where(verified_at: nil).size == 0
   end
 
+  def display_nickname
+    nickname || first_name
+  end
+
+  def first_name
+    name.nil? ? "" : name.split.first
+  end
+
   private
   def notify_creation
     Delayed::Job.enqueue UserCreatedNotificationJob.new(id)
