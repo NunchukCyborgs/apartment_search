@@ -119,6 +119,11 @@ class User < ActiveRecord::Base
     license_instances.where(verified_at: nil).size == 0
   end
 
+  def can_control_review?(params[:id])
+    return false unless params[:id]
+    reviews.find(params[:id])
+  end
+
   def display_nickname
     nickname || first_name
   end
