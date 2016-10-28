@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028203028) do
+ActiveRecord::Schema.define(version: 20161028213707) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20161028203028) do
     t.string   "city",                    limit: 255
     t.string   "state",                   limit: 255
     t.float    "average_property_rating", limit: 24
-    t.float    "combined_rating",         limit: 24
+    t.float    "average_combined_rating", limit: 24
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree

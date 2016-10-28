@@ -69,7 +69,7 @@ class Review < ActiveRecord::Base
     weighted_property_rating = property_weight * property.average_property_rating
     weighted_landlord_rating = landlord_weight * license.average_landlord_rating
     combined_avg = (weighted_property_rating + weighted_landlord_rating) / 2
-    property.update_attributes!(combined_rating: combined_avg)
+    property.update_attributes!(average_combined_rating: combined_avg)
   end
 
   def license
