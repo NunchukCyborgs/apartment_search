@@ -15,13 +15,14 @@
 #  duration          :integer
 #  anonymous_at      :datetime
 #  current_tenant_at :datetime
+#  approved_at       :datetime
 #
 
 class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :property
 
-  delegate :email, :nickname, to: :user, prefix: true, allow_nil: true
+  delegate :email, :nickname, :display_nickname, to: :user, prefix: true, allow_nil: true
 
   after_save :update_averages
 

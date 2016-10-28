@@ -37,6 +37,8 @@ class Ability
 
     #whitelist unauthorized endpoints
     can [:me], User
+    can [:update, :delete], Review if user && user.can_control_review?(params[:id])
+    can [:create, :read], Review
     can [:facets, :filtered_results, :show, :user], Property
     can [:show, :create, :update], Contact
     can [:authenticate], :license
