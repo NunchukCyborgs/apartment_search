@@ -77,12 +77,17 @@ class Property < ActiveRecord::Base
   #this is necessary to define assocations that get sent to elasticsearch
   def as_indexed_json(options={})
     self.as_json(
+      methods: :landlord_rating,
       include: {
         amenities: { only: :name },
         types: { only: :name },
         locations: { }
       }
     )
+  end
+
+  def landlord_rating
+    license.try(:average_landlord_rating)
   end
 
   def main_image

@@ -84,3 +84,5 @@
             :raw:
               :type: string
               :index: not_analyzed
+    :average_combined_rating:
+      :type: float

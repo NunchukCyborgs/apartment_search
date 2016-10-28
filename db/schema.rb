@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025160423) do
+ActiveRecord::Schema.define(version: 20161027074643) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -97,13 +97,14 @@ ActiveRecord::Schema.define(version: 20161025160423) do
   add_index "license_instances", ["verified_at"], name: "index_license_instances_on_verified_at", using: :btree
 
   create_table "licenses", force: :cascade do |t|
-    t.string   "value",         limit: 255
-    t.integer  "user_id",       limit: 4
+    t.string   "value",                   limit: 255
+    t.integer  "user_id",                 limit: 4
     t.datetime "claimed_at"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "name",          limit: 255
-    t.string   "landlord_name", limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name",                    limit: 255
+    t.string   "landlord_name",           limit: 255
+    t.float    "average_landlord_rating", limit: 24
   end
 
   add_index "licenses", ["user_id"], name: "index_licenses_on_user_id", using: :btree
@@ -127,28 +128,30 @@ ActiveRecord::Schema.define(version: 20161025160423) do
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
-    t.string   "address1",       limit: 255
-    t.string   "address2",       limit: 255
-    t.string   "zipcode",        limit: 255
-    t.integer  "price",          limit: 4
-    t.integer  "square_footage", limit: 4
-    t.string   "contact_number", limit: 255
-    t.string   "contact_email",  limit: 255
-    t.float    "latitude",       limit: 24
-    t.float    "longitude",      limit: 24
-    t.text     "description",    limit: 65535
-    t.integer  "bedrooms",       limit: 4
-    t.float    "bathrooms",      limit: 24
-    t.integer  "lease_length",   limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "address1",                limit: 255
+    t.string   "address2",                limit: 255
+    t.string   "zipcode",                 limit: 255
+    t.integer  "price",                   limit: 4
+    t.integer  "square_footage",          limit: 4
+    t.string   "contact_number",          limit: 255
+    t.string   "contact_email",           limit: 255
+    t.float    "latitude",                limit: 24
+    t.float    "longitude",               limit: 24
+    t.text     "description",             limit: 65535
+    t.integer  "bedrooms",                limit: 4
+    t.float    "bathrooms",               limit: 24
+    t.integer  "lease_length",            limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.date     "rented_at"
-    t.string   "parcel_number",  limit: 255
-    t.string   "slug",           limit: 255
-    t.integer  "license_id",     limit: 4
+    t.string   "parcel_number",           limit: 255
+    t.string   "slug",                    limit: 255
+    t.integer  "license_id",              limit: 4
     t.datetime "available_at"
-    t.string   "city",           limit: 255
-    t.string   "state",          limit: 255
+    t.string   "city",                    limit: 255
+    t.string   "state",                   limit: 255
+    t.float    "average_property_rating", limit: 24
+    t.float    "average_landlord_rating", limit: 24
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree
