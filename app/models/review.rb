@@ -53,8 +53,7 @@ class Review < ActiveRecord::Base
   end
 
   def update_landlord_rating
-    license = property.license
-    ratings = license.properties.map(&:reviews).map(&:landlord_rating)
+    ratings = license.properties.map(&:reviews).flatten.map(&:landlord_rating)
     avg = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
     license.update_attributes!(average_landlord_rating: avg)
   end
@@ -64,10 +63,16 @@ class Review < ActiveRecord::Base
     property.update_attributes!(average_property_rating: avg)
   end
 
+  # used for sorting results, combined weighted averages for property/landlord
   def update_combined_rating
-    property_weight = 1
-    landlord_weight = 1
-    combined_avg = ((property_weight * average_property_rating) + (landlord_weight * license.average_landlord_rating)) / 2
+    property_weight, landlord_weight = 1, 1
+    weighted_property_rating = property_weight * property.average_property_rating
+    weighted_landlord_rating = landlord_weight * license.average_landlord_rating
+    combined_avg = (weighted_property_rating + weighted_landlord_rating) / 2
     property.update_attributes!(combined_rating: combined_avg)
+  end
+
+  def license
+    property.license
   end
 end

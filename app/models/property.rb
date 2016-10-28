@@ -2,29 +2,31 @@
 #
 # Table name: properties
 #
-#  id             :integer          not null, primary key
-#  address1       :string(255)
-#  address2       :string(255)
-#  zipcode        :string(255)
-#  price          :integer
-#  square_footage :integer
-#  contact_number :string(255)
-#  contact_email  :string(255)
-#  latitude       :float(24)
-#  longitude      :float(24)
-#  description    :text(65535)
-#  bedrooms       :integer
-#  bathrooms      :float(24)
-#  lease_length   :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  rented_at      :date
-#  parcel_number  :string(255)
-#  slug           :string(255)
-#  license_id     :integer
-#  available_at   :datetime
-#  city           :string(255)
-#  state          :string(255)
+#  id                      :integer          not null, primary key
+#  address1                :string(255)
+#  address2                :string(255)
+#  zipcode                 :string(255)
+#  price                   :integer
+#  square_footage          :integer
+#  contact_number          :string(255)
+#  contact_email           :string(255)
+#  latitude                :float(24)
+#  longitude               :float(24)
+#  description             :text(65535)
+#  bedrooms                :integer
+#  bathrooms               :float(24)
+#  lease_length            :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  rented_at               :date
+#  parcel_number           :string(255)
+#  slug                    :string(255)
+#  license_id              :integer
+#  available_at            :datetime
+#  city                    :string(255)
+#  state                   :string(255)
+#  average_property_rating :float(24)
+#  combined_rating         :float(24)
 #
 # Indexes
 #
