@@ -80,6 +80,9 @@ class PropertyResults
     q = {
       size: per_page,
       from: calculate_from,
+      sort: [
+        { average_combined_rating: { order: "desc" } }
+      ],
       query: {
         filtered: {
           query: { match_all: {} },
