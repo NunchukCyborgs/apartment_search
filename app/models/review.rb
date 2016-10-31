@@ -22,6 +22,12 @@ class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :property
 
+  validates :body, presence: true
+  validates :title, presence: true
+  validates :property_rating, presence: true
+  validates :property_id, presence: true
+  validates :duration, presence: true
+
   delegate :email, :nickname, :display_nickname, to: :user, prefix: true, allow_nil: true
 
   def anonymous?
@@ -42,5 +48,14 @@ class Review < ActiveRecord::Base
 
   def owned?(current_user)
     user_id == current_user.id
+  end
+
+  ### Concessions for a JS front end...
+  def is_current_tenant=(current)
+    self.current_tenant = current
+  end
+
+  def is_anonymous=(anon)
+    self.anonymous = anon
   end
 end

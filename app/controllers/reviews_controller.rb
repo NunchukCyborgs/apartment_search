@@ -65,6 +65,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:property_id, :body, :title, :property_rating, :created_at, :updated_at, :landlord_rating, :landlord_comments, :duration, :anonymous, :current_tenant)
+      params.require(:review).permit(:property_id, :body, :title, :property_rating, :created_at, :updated_at, :landlord_rating, :landlord_comments, :duration, :is_anonymous, :is_current_tenant)
     end
 end
