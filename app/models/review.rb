@@ -38,6 +38,14 @@ class Review < ActiveRecord::Base
     anonymous_at.present?
   end
 
+  def approve!
+    update(approved_at: DateTime.now)
+  end
+
+  def revoke_approval!
+    update(approved_at: nil)
+  end
+
   def current_tenant?
     current_tenant_at.present?
   end
