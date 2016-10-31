@@ -19,7 +19,7 @@ else
 end
 
 json.reviews do
-  json.array! property.reviews.includes(:user) do |review|
+  json.array! property.reviews.validated.includes(:user) do |review|
     json.partial! 'reviews/review', review: review
   end
 end

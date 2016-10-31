@@ -21,6 +21,7 @@ class License < ActiveRecord::Base
   has_many :license_instances
   has_many :users, through: :license_instancess
   has_many :properties
+  has_many :reviews, through: :properties
   has_many :contacts, as: :contactable
 
   def claimed?

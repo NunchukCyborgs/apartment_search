@@ -30,6 +30,8 @@ class Review < ActiveRecord::Base
 
   delegate :email, :nickname, :display_nickname, to: :user, prefix: true, allow_nil: true
 
+  scope :validated, -> { where.not(approved_at: nil) }
+
   after_save :update_averages
 
   def anonymous?
@@ -53,33 +55,7 @@ class Review < ActiveRecord::Base
   end
 
   def update_averages
-    update_landlord_rating
-    update_property_rating
-    update_combined_rating
-  end
-
-  def update_landlord_rating
-    ratings = license.properties.map(&:reviews).flatten.map(&:landlord_rating)
-    avg = ratings.inject(0.0) { |sum, el| sum + el } / ratings.size
-    license.update_attributes!(average_landlord_rating: avg)
-  end
-
-  def update_property_rating
-    avg = property.reviews.average(:property_rating)
-    property.update_attributes!(average_property_rating: avg)
-  end
-
-  # used for sorting results, combined weighted averages for property/landlord
-  def update_combined_rating
-    property_weight, landlord_weight = 1, 1
-    weighted_property_rating = property_weight * property.average_property_rating
-    weighted_landlord_rating = landlord_weight * license.average_landlord_rating
-    combined_avg = (weighted_property_rating + weighted_landlord_rating) / 2
-    property.update_attributes!(average_combined_rating: combined_avg)
-  end
-
-  def license
-    property.license
+    Delayed::Job.enqueue RatingUpdateJob.new(property_id)
   end
 
   ### Concessions for a JS front end...
