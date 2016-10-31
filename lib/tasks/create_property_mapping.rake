@@ -3,7 +3,7 @@ namespace :mappings do
   desc "Create mapping for properties"
   task :create_property_mapping do
     #initiate ES client
-    client = Elasticsearch::Model.client
+    client = Elasticsearch::Client.new host: 'search-es-prod-pxdox4tjiyhrua46eogkc7lvra.us-west-2.es.amazonaws.com:80'
     client.transport.reload_connections!
 
     body = {
