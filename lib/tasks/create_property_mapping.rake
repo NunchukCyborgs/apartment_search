@@ -3,7 +3,7 @@ namespace :mappings do
   desc "Create mapping for properties"
   task :create_property_mapping do
     #initiate ES client
-    client = Elasticsearch::Client.new log: true
+    client = Elasticsearch::Model.client
     client.transport.reload_connections!
 
     body = {
