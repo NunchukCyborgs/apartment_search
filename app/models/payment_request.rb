@@ -25,6 +25,8 @@ class PaymentRequest < ActiveRecord::Base
 
   has_one :contact, as: :contactable
 
+  validates :property_id, presence: true
+
   accepts_nested_attributes_for :contact, reject_if: :all_blank, allow_destroy: true
 
   delegate :address1, :address2, to: :property, allow_nil: true, prefix: true

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :payments, only: [:create] do
     collection do
-      post 'request'
+      post 'request', to: 'payments#request_payment'
     end
   end
   resources :contacts, only: [:create, :update, :show], format: :json
