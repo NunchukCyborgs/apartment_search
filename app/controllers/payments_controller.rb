@@ -2,10 +2,12 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if PaymentService.new(current_user, params).subscribe!
-      redirect_to :back
+    payment_request = PaymentRequest.find(params[:payment_request_id])
+    @payment = PaymentService.new(current_user, payment_request, params[:stripeToken]).create!
+    unless @payment.errors
+      render json: { }, status: :ok
     else
-      redirect_to :back, alert: "There was a problem with your subscription. Please try again."
+      render json: { errors:  }, alert: "There was a problem with your subscription. Please try again."
     end
   end
 

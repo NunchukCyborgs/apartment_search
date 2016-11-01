@@ -25,5 +25,15 @@ class PaymentRequest < ActiveRecord::Base
 
   has_one :contact, as: :contactable
 
-  accepts_nested_attributes_for :contact, reject_if: :all_blank, allow_destroy: true 
+  accepts_nested_attributes_for :contact, reject_if: :all_blank, allow_destroy: true
+
+  delegate :address1, :address2, to: :property, allow_nil: true, prefix: true
+
+  def description
+    "Payment made for #{property_address1}#{" unit: #{property_address2}" if property_address2.present?} by #{name}."
+  end
+
+  def amount_in_cents
+    subtotal * 100
+  end
 end
