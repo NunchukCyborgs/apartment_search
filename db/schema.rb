@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028213707) do
+ActiveRecord::Schema.define(version: 20161101033302) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -126,6 +126,21 @@ ActiveRecord::Schema.define(version: 20161028213707) do
 
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
+
+  create_table "payment_requests", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.integer  "property_id",       limit: 4
+    t.datetime "verified_at"
+    t.text     "potential_address", limit: 65535
+    t.date     "due_on"
+    t.string   "name",              limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.float    "subtotal",          limit: 24
+  end
+
+  add_index "payment_requests", ["property_id"], name: "index_payment_requests_on_property_id", using: :btree
+  add_index "payment_requests", ["user_id"], name: "index_payment_requests_on_user_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
     t.string   "address1",                limit: 255
@@ -256,5 +271,7 @@ ActiveRecord::Schema.define(version: 20161028213707) do
   add_foreign_key "license_instances", "licenses"
   add_foreign_key "license_instances", "users"
   add_foreign_key "licenses", "users"
+  add_foreign_key "payment_requests", "properties"
+  add_foreign_key "payment_requests", "users"
   add_foreign_key "properties", "licenses"
 end
