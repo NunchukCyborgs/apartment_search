@@ -59,7 +59,7 @@ class Review < ActiveRecord::Base
   end
 
   def owned?(current_user)
-    user_id == current_user.id
+    current_user && current_user.id == user_id
   end
 
   def update_averages
