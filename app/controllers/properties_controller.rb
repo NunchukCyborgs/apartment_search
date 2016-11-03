@@ -48,7 +48,7 @@ class PropertiesController < ::ApplicationController
   #   per_page
   # returns: array of properties
   def filtered_results
-    results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page], params[:q])
+    results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page], params[:query])
     respond_to do |format|
       format.json { render json: results.to_json }
     end
