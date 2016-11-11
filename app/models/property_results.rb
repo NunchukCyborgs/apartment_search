@@ -26,7 +26,7 @@ class PropertyResults
 
   attr_accessor :filter_array, :page, :per_page, :offset
 
-  def initialize(facets, page = 1, per_page = Settings.properties_per_page, offset = 0 search_query="")
+  def initialize(facets, page = 1, per_page = Settings.properties_per_page, offset = 0, search_query="")
     @filter_array = PropertyFilter.filter_array(facets)
     #using OR here to ensure defaults if 'nil' is entered as a value
     @page = page || 1
