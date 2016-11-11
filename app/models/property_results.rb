@@ -24,12 +24,14 @@ class PropertyResults
     resultr.returned_records
   end
 
-  attr_accessor :filter_array, :page, :per_page
+  attr_accessor :filter_array, :page, :per_page, :offset
 
-  def initialize(facets, page = 1, per_page = Settings.properties_per_page, search_query="")
+  def initialize(facets, page = 1, per_page = Settings.properties_per_page, offset = 0 search_query="")
     @filter_array = PropertyFilter.filter_array(facets)
-    @page = page
-    @per_page = per_page
+    #using OR here to ensure defaults if 'nil' is entered as a value
+    @page = page || 1
+    @per_page = per_page || Settings.properties_per_page
+    @offset = offset || 0
     @search_query = search_query
   end
 
@@ -99,7 +101,7 @@ class PropertyResults
   end
 
   def calculate_from
-    ((page - 1) * per_page) rescue 0
+    ((page - 1) * per_page) - offset rescue 0
   end
 
   class FakeImage

@@ -44,11 +44,13 @@ class PropertiesController < ::ApplicationController
   # expects:
   #   facet hash (shown above)
   # optional:
-  #   page
+  #   page (defaults to 1)
   #   per_page
+  #   offset (defaults to 0, can be used to have different # of results on
+  #   different pages without screwing up the math)
   # returns: array of properties
   def filtered_results
-    results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page], params[:query])
+    results = PropertyResults.paginated_results(params[:facets], params[:page], params[:per_page], params[:offset], params[:query])
     respond_to do |format|
       format.json { render json: results.to_json }
     end
