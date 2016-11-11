@@ -1,26 +1,26 @@
 class PropertyResults
 
   #returns hash with total results and an array of hashes directly from ES which includes main image url
-  def self.paginated_results(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
-    resultr = PropertyResults.new(facets, page, per_page, search_query)
+  def self.paginated_results(facets, page = 1, per_page = Settings.properties_per_page, offset = 0, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, offset, search_query)
     resultr.paginated_results
   end
 
   #returns array of hashes directly from ES
-  def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
-    resultr = PropertyResults.new(facets, page, per_page, search_query)
+  def self.parsed_results(facets, page = 1, per_page = Settings.properties_per_page, offset = 0, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, offset, search_query)
     resultr.parsed_results
   end
 
   #returns array of hashes directly from ES which includes main image url
-  def self.parsed_results_with_images(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
-    resultr = PropertyResults.new(facets, page, per_page, search_query)
+  def self.parsed_results_with_images(facets, page = 1, per_page = Settings.properties_per_page, offset = 0, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, offset, search_query)
     resultr.parsed_results_with_images
   end
 
   #returns an array of the ActiveRecord objects that match the facets
-  def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page, search_query = "")
-    resultr = PropertyResults.new(facets, page, per_page, search_query)
+  def self.returned_records(facets, page = 1, per_page = Settings.properties_per_page, offset = 0, search_query = "")
+    resultr = PropertyResults.new(facets, page, per_page, offset, search_query)
     resultr.returned_records
   end
 
