@@ -14,6 +14,7 @@ namespace :rentals do
         prop.zipcode = address.zip
         prop.city = address.city.first
         prop.state = address.state
+        prop.units = line["Total_UNITS"]
         prop.latitude = line["Latitude"]
         prop.longitude = line["Longitude"]
         prop.lease_length = 12

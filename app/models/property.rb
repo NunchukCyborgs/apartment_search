@@ -27,6 +27,7 @@
 #  state                   :string(255)
 #  average_property_rating :float(24)
 #  average_combined_rating :float(24)
+#  units                   :integer
 #
 # Indexes
 #
