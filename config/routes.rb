@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get "/properties/filtered_results" => "properties#filtered_results"
 
   resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
+    collection do
+      get 'search'
+    end
     member do
       delete 'images/:image_id', to: 'properties#delete_image'
     end
