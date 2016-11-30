@@ -14,7 +14,6 @@ namespace :rentals do
         prop.zipcode = address.zip
         prop.city = address.city.first
         prop.state = address.state
-        prop.units = line["Total_UNITS"]
         prop.latitude = line["Latitude"]
         prop.longitude = line["Longitude"]
         prop.lease_length = 12
@@ -24,6 +23,8 @@ namespace :rentals do
         license.name = line["Owner"]
         license.landlord_name = line["Landlord"]
       end
+
+      prop.units = line["Total_UNITS"]
       property.save
       # 5.times{ property.amenities.push(Amenity.find(1 + Random.rand(Amenity.all.size - 1))) }
 
