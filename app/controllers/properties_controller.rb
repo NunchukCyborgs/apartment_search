@@ -1,5 +1,5 @@
 class PropertiesController < ::ApplicationController
-  before_action :authenticate_user!, except: [:facets, :filtered_results, :show]
+  before_action :authenticate_user!, except: [:facets, :filtered_results, :show, :search]
   #skip_authorization_check :only => [:facets, :filtered_results, :show]
   authorize_resource
   before_action :set_property, only: [:show, :update, :images, :delete_image]
