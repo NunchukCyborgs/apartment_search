@@ -57,12 +57,12 @@ class PropertiesController < ::ApplicationController
   end
 
   def search
-    @properties = PropertySearchService.new(params[:per_page], params[:page]. 6, params[:q])
+    @properties = PropertySearchService.new(params[:per_page], params[:page], 6, params[:q])
   end
 
   def index
     render_404 and return unless current_user.has_role? :superuser
-    @properties = PropertySearchService.new(params[:per_page], params[:page]. 100, params[:q])
+    @properties = PropertySearchService.new(params[:per_page], params[:page], 100, params[:q])
   end
 
   def show
