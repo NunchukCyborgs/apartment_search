@@ -8,6 +8,6 @@ class PropertySearchService
 
   def search
     response = @query.present? ? Property.search(@query).records.limit(@per_page) : Property.limit(@per_page)
-    response.offset((@page - 1) * @per_page).includes(:images, :amenities, reviews: :user)
+    response.offset((@page.to_i - 1) * @per_page.to_i).includes(:images, :amenities, reviews: :user)
   end
 end
