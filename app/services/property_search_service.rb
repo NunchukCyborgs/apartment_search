@@ -6,7 +6,7 @@ class PropertySearchService
     @query = query
   end
 
-  def search # Is this implicitly used somewhere? I can't find any references to it -JB
+  def search
     response = @query.present? ? Property.search(@query).records.limit(@per_page) : Property.limit(@per_page)
     response.offset((@page - 1) * @per_page).includes(:images, :amenities, reviews: :user)
   end
