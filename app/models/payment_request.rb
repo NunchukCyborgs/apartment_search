@@ -12,6 +12,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  subtotal          :float(24)
+#  unit              :integer
 #
 # Indexes
 #

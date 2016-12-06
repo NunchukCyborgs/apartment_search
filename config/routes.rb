@@ -14,11 +14,7 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
 
-  resources :payments, only: [:create] do
-    collection do
-      post 'request', to: 'payments#request_payment'
-    end
-  end
+  resources :payments, only: [:create]
   resources :contacts, only: [:create, :update, :show], format: :json
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

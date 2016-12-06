@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101163933) do
+ActiveRecord::Schema.define(version: 20161206014255) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20161101163933) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.float    "subtotal",          limit: 24
+    t.integer  "unit",              limit: 4
   end
 
   add_index "payment_requests", ["property_id"], name: "index_payment_requests_on_property_id", using: :btree
@@ -179,6 +180,7 @@ ActiveRecord::Schema.define(version: 20161101163933) do
     t.string   "state",                   limit: 255
     t.float    "average_property_rating", limit: 24
     t.float    "average_combined_rating", limit: 24
+    t.integer  "units",                   limit: 4
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree
