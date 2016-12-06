@@ -20,6 +20,8 @@ class Payment < ActiveRecord::Base
   belongs_to :user
   belongs_to :payment_request
 
+  attr_accessor :errors
+
   def capture!
     PaymentCaptureService.new(self).capture!
   end
