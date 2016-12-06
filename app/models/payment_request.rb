@@ -12,7 +12,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  subtotal          :float(24)
-#  unit              :integer
+#  unit              :string(255)
 #
 # Indexes
 #
@@ -37,6 +37,6 @@ class PaymentRequest < ActiveRecord::Base
   end
 
   def amount_in_cents
-    subtotal * 100
+    (subtotal * 100).to_i
   end
 end
