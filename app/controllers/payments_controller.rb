@@ -13,6 +13,11 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def fees
+    payment_fee_service = PaymentFeeService.new(params[:subtotal])
+    render json: { value: payment_fee_service.fees, message: payment_fee_service.message }
+  end
+
   private
 
   def payment_request_params
