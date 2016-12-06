@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
-  mount_devise_token_auth_for 'User', at: 'auth'
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: { passwords: 'devise/passwords' }
 
   mount Maily::Engine, at: 'maily'
   resources :user_sessions
@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get "/properties/filtered_results" => "properties#filtered_results"
 
   resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
+    collection do
+      get 'search'
+    end
     member do
       delete 'images/:image_id', to: 'properties#delete_image'
     end

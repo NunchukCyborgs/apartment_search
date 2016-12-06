@@ -7,6 +7,8 @@ SitemapGenerator::Sitemap.create do
 
   add "/faq"
   add "/privacy-policy"
+  add "/cape-girardeau-rentals"
+  # add "/cape-girardeau-landlords" Add in when it's ready to go
 
   Property.find_each do |property|
     add "/#{default_tenant}/#{property.slug}"
