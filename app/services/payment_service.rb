@@ -29,6 +29,7 @@ class PaymentService
       payment.charge_id = charge.id
       @current_user.update(stripe_customer_id: customer.id)
       payment.save
+      payment
 
     rescue Stripe::CardError => e
       # Since it's a decline, Stripe::CardError will be caught
