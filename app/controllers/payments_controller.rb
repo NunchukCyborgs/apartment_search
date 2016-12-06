@@ -1,5 +1,4 @@
 class PaymentsController < ApplicationController
-  before_action :debug
   before_action :authenticate_user!
   skip_authorization_check only: [:create, :request_payment]
 
