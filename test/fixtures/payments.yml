@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: payments
+#
+#  id                 :integer          not null, primary key
+#  user_id            :integer
+#  payment_request_id :integer
+#  charge_id          :string(255)
+#  captured_at        :datetime
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+# Indexes
+#
+#  index_payments_on_payment_request_id  (payment_request_id)
+#  index_payments_on_user_id             (user_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  payment_request_id: 
+  charge_id: MyString
+  captured_at: 2016-11-01 11:39:33
+
+two:
+  user_id: 
+  payment_request_id: 
+  charge_id: MyString
+  captured_at: 2016-11-01 11:39:33

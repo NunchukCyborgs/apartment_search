@@ -10,3 +10,6 @@ staging:
   access_key_id: AKIAIRUWPYD4BBCNI7IA
   secret_access_key: 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
 
+test:
+  access_key_id: "123abc"
+  secret_access_key: "blahblahblah"
