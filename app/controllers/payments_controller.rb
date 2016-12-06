@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
   def create
     payment_request = PaymentRequest.create(payment_request_params)
     @payment = PaymentService.new(current_user, payment_request, params[:stripeToken]).create!
-    if @payment.errors.nil?
+    if @payment.err.nil?
       render json: { }, status: :ok
     else
       render json: { errors: @payment.errors }, alert: "There was a problem with your subscription. Please try again."

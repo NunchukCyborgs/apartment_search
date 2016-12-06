@@ -33,7 +33,7 @@ class PaymentService
     rescue Stripe::CardError => e
       # Since it's a decline, Stripe::CardError will be caught
       body = e.json_body
-      payment.errors  = body[:error]
+      payment.err  = body[:error]
       return payment
     end
   end
