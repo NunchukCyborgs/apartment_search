@@ -7,7 +7,7 @@
 #  property_id       :integer
 #  verified_at       :datetime
 #  potential_address :text(65535)
-#  due_on            :date
+#  due_on            :integer
 #  name              :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
