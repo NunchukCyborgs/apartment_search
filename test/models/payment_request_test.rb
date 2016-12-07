@@ -13,10 +13,12 @@
 #  updated_at        :datetime         not null
 #  subtotal          :float(24)
 #  unit              :string(255)
+#  token             :string(255)
 #
 # Indexes
 #
 #  index_payment_requests_on_property_id  (property_id)
+#  index_payment_requests_on_token        (token)
 #  index_payment_requests_on_user_id      (user_id)
 #
 

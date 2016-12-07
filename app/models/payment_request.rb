@@ -13,10 +13,12 @@
 #  updated_at        :datetime         not null
 #  subtotal          :float(24)
 #  unit              :string(255)
+#  token             :string(255)
 #
 # Indexes
 #
 #  index_payment_requests_on_property_id  (property_id)
+#  index_payment_requests_on_token        (token)
 #  index_payment_requests_on_user_id      (user_id)
 #
 
@@ -32,11 +34,19 @@ class PaymentRequest < ActiveRecord::Base
 
   delegate :address1, :address2, to: :property, allow_nil: true, prefix: true
 
+  after_create :generate_token
+
   def description
     "Payment made for #{property_address1}#{" unit: #{property_address2}" if property_address2.present?} by #{name}."
   end
 
   def amount_in_cents
     (subtotal * 100).to_i
+  end
+
+  private
+
+  def generate_token
+    Digest::SHA1.hexdigest("#{self.to_s}-#{self.id}-#{self.created_at}-[roomhere-#{self.id.to_s(36)}]-[#{rand(-200..200).days.ago}]")
   end
 end

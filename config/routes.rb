@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: { passwords: 'devise/passwords' }
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: { passwords: 'devise/passwords', registrations: 'devise/registrations' }
 
   mount Maily::Engine, at: 'maily'
   resources :user_sessions

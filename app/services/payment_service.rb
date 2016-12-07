@@ -1,7 +1,7 @@
 class PaymentService
 
   def initialize(current_user, payment_request, token)
-    @current_user = current_user
+    @current_user = UserHolder.new(current_user)
     @payment_request = payment_request
     @token = token
   end
@@ -39,4 +39,19 @@ class PaymentService
     end
   end
 
+end
+
+class UserHolder
+  attr_reader :id, :email
+  def initialize(user)
+    @user = user
+    if user
+      @id = user.id
+      @email = user.email
+    end
+  end
+
+  def update(params)
+    @user.update(params) if @user
+  end
 end
