@@ -26,6 +26,7 @@ class PaymentRequest < ActiveRecord::Base
   belongs_to :user
   belongs_to :property
 
+  has_one :payment
   has_one :contact, as: :contactable
 
   validates :property_id, presence: true
