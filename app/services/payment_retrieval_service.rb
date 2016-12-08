@@ -16,9 +16,9 @@ class PaymentRetrievalService
       charge = Stripe::Charge.retrieve(payment.charge_id)
       customer = Stripe::Customer.retrieve(charge.customer)
 
-      customer.email = user.email
+      customer.email = @user.email
       customer.save
-      user.update(stripe_customer_id: customer.id)
+      @user.update(stripe_customer_id: customer.id)
     end
   end
 end
