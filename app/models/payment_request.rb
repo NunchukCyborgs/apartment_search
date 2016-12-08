@@ -45,6 +45,10 @@ class PaymentRequest < ActiveRecord::Base
     (subtotal * 100).to_i
   end
 
+  def total
+    subtotal + PaymentFeeService.new(subtotal).fees
+  end
+
   private
 
   def generate_token

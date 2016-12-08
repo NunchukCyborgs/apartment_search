@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
 
-  resources :payments, only: [:create] do
+  resources :payments, only: [:create, :index] do
     collection do
       get 'fees'
     end
