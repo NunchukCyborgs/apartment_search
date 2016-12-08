@@ -47,6 +47,6 @@ class PaymentRequest < ActiveRecord::Base
   private
 
   def generate_token
-    Digest::SHA1.hexdigest("#{self.to_s}-#{self.id}-#{self.created_at}-[roomhere-#{self.id.to_s(36)}]-[#{rand(-200..200).days.ago}]")
+    update(token: Digest::SHA1.hexdigest("#{self.to_s}-#{self.id}-#{self.created_at}-[roomhere-#{self.id.to_s(36)}]-[#{rand(-200..200).days.ago}]"))
   end
 end
