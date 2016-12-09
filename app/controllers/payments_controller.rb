@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_authorization_check only: [:create, :request_payment]
+  skip_authorization_check only: [:create, :request_payment, :index]
   before_action :load_property, only: [:create]
   before_action :create_property_request, only: [:create]
 
