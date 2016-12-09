@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207212320) do
+ActiveRecord::Schema.define(version: 20161209172132) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(version: 20161207212320) do
     t.float    "subtotal",          limit: 24
     t.string   "unit",              limit: 255
     t.string   "token",             limit: 255
+    t.datetime "rejected_at"
+    t.datetime "completed_at"
   end
 
   add_index "payment_requests", ["property_id"], name: "index_payment_requests_on_property_id", using: :btree

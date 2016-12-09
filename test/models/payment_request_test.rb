@@ -14,6 +14,8 @@
 #  subtotal          :float(24)
 #  unit              :string(255)
 #  token             :string(255)
+#  rejected_at       :datetime
+#  completed_at      :datetime
 #
 # Indexes
 #

@@ -1,11 +1,12 @@
 class PaymentsController < ApplicationController
   skip_authorization_check only: [:create, :request_payment]
+  before_action :load_property, only: [:create]
+  before_action :create_property_request, only: [:create]
 
   def create
-    payment_request = PaymentRequest.create(payment_request_params)
-    @payment = PaymentService.new(current_user, payment_request, params[:stripeToken]).create!
+    @payment = PaymentService.new(current_user, @payment_request, params[:stripeToken]).create!
     if @payment.err.nil?
-      render json: { token: payment_request.token }, status: :ok
+      render json: { token: @payment_request.token }, status: :ok
     else
       render json: { errors: @payment.errors }, alert: "There was a problem with your subscription. Please try again."
     end
@@ -22,8 +23,19 @@ class PaymentsController < ApplicationController
 
   private
 
+  def create_property_request
+    @payment_request = PaymentRequest.new(payment_request_params)
+    @payment_request.property = @property
+    @payment_request.save
+  end
+
+  def load_property
+    # wow ugly
+    @property = Property.friendly.find(params.require(:payment_request).permit(:property_slug)[:property_slug])
+  end
+
   def payment_request_params
-    params.require(:payment_request).permit(:property_id, :due_on, :name, :subtotal, :unit)
+    params.require(:payment_request).permit(:due_on, :name, :subtotal, :unit)
   end
 
 end
