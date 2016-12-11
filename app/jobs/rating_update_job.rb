@@ -2,6 +2,7 @@ class RatingUpdateJob
 
   def initialize(property_id)
     @property_id = property_id
+    @property = Property.friendly.find(@property_id)
   end
 
   def perform
@@ -22,8 +23,8 @@ class RatingUpdateJob
   end
 
   def update_property_rating
-    avg = property.reviews.validated.average(:property_rating)
-    property.update_attributes!(average_property_rating: avg)
+    avg = @property.reviews.validated.average(:property_rating)
+    @property.update_attributes!(average_property_rating: avg)
   end
 
   # used for sorting results, combined weighted averages for property/landlord
@@ -32,10 +33,10 @@ class RatingUpdateJob
     weighted_property_rating = property_weight * property.average_property_rating
     weighted_landlord_rating = landlord_weight * license.average_landlord_rating
     combined_avg = (weighted_property_rating + weighted_landlord_rating) / 2
-    property.update_attributes!(average_combined_rating: combined_avg)
+    @property.update_attributes!(average_combined_rating: combined_avg)
   end
 
   def license
-    @license ||= Property.find(@property_id).license
+    @license ||= @property.license
   end
 end
