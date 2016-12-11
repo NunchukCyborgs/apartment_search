@@ -53,7 +53,7 @@ class PaymentsController < ApplicationController
 
   def load_property
     # wow ugly - slightly better
-    load_property_from_slug(params[:property_request][:property_slug])
+    load_property_from_slug(params[:payment_request][:property_slug])
   end
 
   def load_property_from_slug(slug=nil)
