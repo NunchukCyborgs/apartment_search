@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = PaymentService.new(current_user, @payment_request, params[:stripe_token]).create!
     if @payment.err.nil?
-      render 'payments/show' status: :ok
+      render 'payments/show', status: :ok
     else
       @errors = @payment.err
       render 'payments/errors', status: :unprocessable_entity
