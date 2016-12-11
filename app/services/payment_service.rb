@@ -28,6 +28,7 @@ class PaymentService
       )
       payment.charge_id = charge.id
       @current_user.update(stripe_customer_id: customer.id)
+      payment_request.update(user_id: @current_user.id)
       payment.save
       payment
 
