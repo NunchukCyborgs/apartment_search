@@ -20,6 +20,7 @@ class PaymentsController < ApplicationController
   end
 
   def index
+    authorize! :index, Payment
     @payment_requests = current_user.payment_requests
   end
 
