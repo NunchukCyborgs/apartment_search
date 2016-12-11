@@ -27,6 +27,7 @@ class PaymentsController < ApplicationController
   def request_payment
     @payment_request = PaymentRequest.new(payment_request_params)
     @payment_request.property = @property
+    @payment_request.user = current_user
 
     if @payment_request.save
       render 'payments/show', status: :ok

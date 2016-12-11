@@ -1,9 +1,7 @@
 class PaymentService
 
   def initialize(current_user, payment_request, token)
-    Rails.logger.info("<><><><><><><>#{current_user.inspect}<><><><><><><><><>")
     @current_user = UserHolder.new(current_user)
-    Rails.logger.info("<><><><><><><>#{@current_user.inspect}<><><><><><><><><>")
     @payment_request = payment_request
     @token = token
   end
@@ -30,7 +28,6 @@ class PaymentService
       )
       payment.charge_id = charge.id
       @current_user.update(stripe_customer_id: customer.id)
-      payment_request.update(user_id: @current_user.id)
       payment.save
       payment
 
