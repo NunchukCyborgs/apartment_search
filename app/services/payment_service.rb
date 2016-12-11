@@ -10,6 +10,7 @@ class PaymentService
     begin
       Stripe.api_key = ENV["STRIPE_PRIVATE_KEY"]
 
+      return AlreadyPaidError.new if @payment_request.payment
       payment = Payment.new(user_id: @current_user.id, payment_request_id: @payment_request.id)
 
       # Create a Customer
@@ -34,7 +35,7 @@ class PaymentService
     rescue Stripe::CardError => e
       # Since it's a decline, Stripe::CardError will be caught
       body = e.json_body
-      payment.err  = body[:error]
+      payment.err  = [body[:error]]
       return payment
     end
   end
@@ -53,5 +54,11 @@ class UserHolder
 
   def update(params)
     @user.update(params) if @user
+  end
+end
+
+class AlreadyPaidError
+  def err
+    ["That payment request already has a payment submitted"]
   end
 end
