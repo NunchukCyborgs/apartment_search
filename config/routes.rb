@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :payments, only: [:create, :index] do
     collection do
       get 'fees'
+      post 'requests', to: 'payments#request_payment'
+      patch 'requests/:token', to: 'payments#update_request'
     end
   end
   resources :contacts, only: [:create, :update, :show], format: :json

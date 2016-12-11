@@ -1,14 +1,16 @@
 class PaymentsController < ApplicationController
-  skip_authorization_check only: [:create, :request_payment, :index]
+  skip_authorization_check only: [:create, :request_payment, :update_request, :fees]
   before_action :load_property, only: [:create]
-  before_action :create_property_request, only: [:create]
+  before_action :load_property_from_slug, only: [:fees]
+  before_action :load_payment_request, only: [:create, :update_request]
 
   def create
-    @payment = PaymentService.new(current_user, @payment_request, params[:stripeToken]).create!
+    @payment = PaymentService.new(current_user, @payment_request, params[:stripe_token]).create!
     if @payment.err.nil?
-      render json: { token: @payment_request.token }, status: :ok
+      render 'payments/show' status: :ok
     else
-      render json: { errors: @payment.errors }, alert: "There was a problem with your subscription. Please try again."
+      @errors = @payment.err
+      render 'payments/errors', status: :unprocessable_entity
     end
   end
 
@@ -21,17 +23,40 @@ class PaymentsController < ApplicationController
     @payment_requests = current_user.payment_requests
   end
 
-  private
-
-  def create_property_request
+  def request_payment
     @payment_request = PaymentRequest.new(payment_request_params)
     @payment_request.property = @property
-    @payment_request.save
+
+    if @payment_request.save
+      render 'payments/show', status: :ok
+    else
+      @errors = @payment_request.errors
+      render 'payments/errors', status: :unprocessable_entity
+    end
+  end
+
+  def update_request
+    if @payment_request.payment.nil? && @payment_request.update(payment_request_params)
+      render json: { token: @payment_request.token }, status: :ok
+    else
+      @errors = @payment_request.errors
+      render 'payments/errors', status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def load_payment_request
+    @payment_request = PaymentRequest.find_by(token: params[:token])
   end
 
   def load_property
-    # wow ugly
-    @property = Property.friendly.find(params.require(:payment_request).permit(:property_slug)[:property_slug])
+    # wow ugly - slightly better
+    load_property_from_slug(params.require(:payment_request).permit(:property_slug)[:property_slug])
+  end
+
+  def load_property_from_slug(slug=nil)
+    @property = Property.friendly.find(slug ? slug : params[:property_slug])
   end
 
   def payment_request_params

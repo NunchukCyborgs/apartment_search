@@ -12,6 +12,7 @@ class PaymentRetrievalService
 
       payment = payment_request.payment
       payment.update(user_id: @user.id)
+      payment_request.update(user_id: @user.id)
 
       charge = Stripe::Charge.retrieve(payment.charge_id)
       customer = Stripe::Customer.retrieve(charge.customer)
