@@ -34,6 +34,7 @@ class Ability
     can [:index, :show], User if user && user.superuser?
     can [:update], Contact if user && user.can_manage_contact?(params[:id])
     can [:update, :destroy], User if user && user.can_manage_user?(params[:id])
+    can [:index], Payment if user
 
     #whitelist unauthorized endpoints
     can [:me], User
