@@ -1,7 +1,9 @@
 class PaymentService
 
   def initialize(current_user, payment_request, token)
+    Rails.logger.info("<><><><><><><>#{current_user.inspect}<><><><><><><><><>")
     @current_user = UserHolder.new(current_user)
+    Rails.logger.info("<><><><><><><>#{@current_user.inspect}<><><><><><><><><>")
     @payment_request = payment_request
     @token = token
   end
