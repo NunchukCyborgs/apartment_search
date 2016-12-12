@@ -36,6 +36,10 @@ class RatingUpdateJob
   end
 
   def license
-    @license ||= Property.find(@property_id).license
+    @license ||= property.license
+  end
+
+  def property
+    @property ||= Property.friendly.find(@property_id)
   end
 end

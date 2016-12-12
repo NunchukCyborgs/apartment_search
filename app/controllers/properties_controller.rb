@@ -1,5 +1,5 @@
 class PropertiesController < ::ApplicationController
-  before_action :authenticate_user!, except: [:facets, :filtered_results, :show]
+  before_action :authenticate_user!, except: [:facets, :filtered_results, :show, :search]
   #skip_authorization_check :only => [:facets, :filtered_results, :show]
   authorize_resource
   before_action :set_property, only: [:show, :update, :images, :delete_image]
@@ -56,12 +56,13 @@ class PropertiesController < ::ApplicationController
     end
   end
 
+  def search
+    @properties = PropertySearchService.new(params[:per_page], params[:page], 6, params[:q]).search
+  end
+
   def index
     render_404 and return unless current_user.has_role? :superuser
-    per_page = params[:per_page].to_i || 100
-    page = params[:page].to_i || 1
-    response = params[:q].present? ? Property.search(params[:q]).records.limit(per_page) : Property.limit(per_page)
-    @properties = response.offset((page - 1) * per_page).includes(:images, :amenities, reviews: :user)
+    @properties = PropertySearchService.new(params[:per_page], params[:page], 100, params[:q]).search
   end
 
   def show

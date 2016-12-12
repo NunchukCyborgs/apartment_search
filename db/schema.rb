@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028213707) do
+ActiveRecord::Schema.define(version: 20161209172132) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -127,6 +127,38 @@ ActiveRecord::Schema.define(version: 20161028213707) do
   add_index "locations_properties", ["location_id"], name: "index_locations_properties_on_location_id", using: :btree
   add_index "locations_properties", ["property_id"], name: "index_locations_properties_on_property_id", using: :btree
 
+  create_table "payment_requests", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.integer  "property_id",       limit: 4
+    t.datetime "verified_at"
+    t.text     "potential_address", limit: 65535
+    t.integer  "due_on",            limit: 4
+    t.string   "name",              limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.float    "subtotal",          limit: 24
+    t.string   "unit",              limit: 255
+    t.string   "token",             limit: 255
+    t.datetime "rejected_at"
+    t.datetime "completed_at"
+  end
+
+  add_index "payment_requests", ["property_id"], name: "index_payment_requests_on_property_id", using: :btree
+  add_index "payment_requests", ["token"], name: "index_payment_requests_on_token", using: :btree
+  add_index "payment_requests", ["user_id"], name: "index_payment_requests_on_user_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id",            limit: 4
+    t.integer  "payment_request_id", limit: 4
+    t.string   "charge_id",          limit: 255
+    t.datetime "captured_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "payments", ["payment_request_id"], name: "index_payments_on_payment_request_id", using: :btree
+  add_index "payments", ["user_id"], name: "index_payments_on_user_id", using: :btree
+
   create_table "properties", force: :cascade do |t|
     t.string   "address1",                limit: 255
     t.string   "address2",                limit: 255
@@ -152,6 +184,7 @@ ActiveRecord::Schema.define(version: 20161028213707) do
     t.string   "state",                   limit: 255
     t.float    "average_property_rating", limit: 24
     t.float    "average_combined_rating", limit: 24
+    t.integer  "units",                   limit: 4
   end
 
   add_index "properties", ["license_id"], name: "index_properties_on_license_id", using: :btree
@@ -256,5 +289,9 @@ ActiveRecord::Schema.define(version: 20161028213707) do
   add_foreign_key "license_instances", "licenses"
   add_foreign_key "license_instances", "users"
   add_foreign_key "licenses", "users"
+  add_foreign_key "payment_requests", "properties"
+  add_foreign_key "payment_requests", "users"
+  add_foreign_key "payments", "payment_requests"
+  add_foreign_key "payments", "users"
   add_foreign_key "properties", "licenses"
 end

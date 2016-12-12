@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
-  mount_devise_token_auth_for 'User', at: 'auth', controllers: { passwords: 'devise/passwords' }
+  mount_devise_token_auth_for 'User', at: 'auth', controllers: { passwords: 'devise/passwords', registrations: 'devise/registrations', confirmations: 'devise/confirmations' }
 
   mount Maily::Engine, at: 'maily'
   resources :user_sessions
@@ -14,7 +14,13 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
 
-  resources :payments, only: [:create]
+  resources :payments, only: [:create, :index] do
+    collection do
+      get 'fees'
+      post 'requests', to: 'payments#request_payment'
+      patch 'requests/:token', to: 'payments#update_request'
+    end
+  end
   resources :contacts, only: [:create, :update, :show], format: :json
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -26,6 +32,9 @@ Rails.application.routes.draw do
   get "/properties/filtered_results" => "properties#filtered_results"
 
   resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
+    collection do
+      get 'search'
+    end
     member do
       delete 'images/:image_id', to: 'properties#delete_image'
     end
