@@ -37,7 +37,7 @@ class Image < ActiveRecord::Base
     },
     convert_options: {
       original_compressed: "-quality 75 -strip"
-    }
+    },
     processors: [:thumbnail, :compression]
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
