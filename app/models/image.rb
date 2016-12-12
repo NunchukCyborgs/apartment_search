@@ -29,12 +29,10 @@ class Image < ActiveRecord::Base
       {
         thumb: "64x64#",
         medium: "600x400#",
-        full: "#{a.instance.width}x#{a.instance.height}#",
-        full_compressed: "#{a.instance.width}x#{a.instance.height}#"
       }
     },
     convert_options: {
-      full_compressed: "-quality 75 -strip"
+      original_compressed: "-quality 75 -strip"
     },
     processors: [:thumbnail, :compression]
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
