@@ -26,14 +26,18 @@ class Image < ActiveRecord::Base
 
   has_attached_file :file, default_url: "http://placehold.it/600x400",
     styles: lambda { |a|
+      Rails.logger.info("------------------------")
+      Rails.logger.info("gahhh: #{a.instance.width}x#{a.instance.height}#")
+      Rails.logger.info("------------------------")
       {
         thumb: "64x64#",
         medium: "600x400#",
-        original_compressed: {
-          quality: 75
-        }
+        original_compressed: "#{a.instance.width}x#{a.instance.height}#"
       }
     },
+    convert_options: {
+      original_compressed: "-quality 75 -strip"
+    }
     processors: [:thumbnail, :compression]
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\Z/
 
