@@ -29,6 +29,7 @@ gem 'elasticsearch-rails'
 gem 'geocoder'
 gem 'annotate'
 gem 'paperclip'
+gem "paperclip-compression"
 gem 'aws-sdk'
 gem 'cocoon'
 gem 'config'
