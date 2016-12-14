@@ -1,7 +1,8 @@
 class PropertiesController < ::ApplicationController
-  before_action :authenticate_user!, except: [:facets, :filtered_results, :show, :search]
+  before_action :authenticate_user!, except: [:facets, :filtered_results, :show, :search, :request_property]
   #skip_authorization_check :only => [:facets, :filtered_results, :show]
   authorize_resource
+  skip_authorization_check only: [:request_property]
   before_action :set_property, only: [:show, :update, :images, :delete_image]
 
 
@@ -65,6 +66,15 @@ class PropertiesController < ::ApplicationController
     @properties = PropertySearchService.new(params[:per_page], params[:page], 100, params[:q]).search
   end
 
+  def request_property
+    @property_request = PropertyRequest.new(property_request_params)
+    if @property_request.save
+      head :ok, content_type: "application/json"
+    else
+      render json: @property_request.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
   def show
     render json: { status: "Not Found" }, status: 404 and return unless @property
     respond_to do |format|
@@ -126,5 +136,9 @@ class PropertiesController < ::ApplicationController
 
   def create_property_image_params
     params.require(:property).permit(:files)
+  end
+
+  def property_request_params
+    params.permit(:contact_email, :address)
   end
 end

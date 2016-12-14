@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :properties, only: [:show, :update, :index], defaults: { format: :json } do
     collection do
       get 'search'
+      post 'request', to: 'properties#request_property'
     end
     member do
       delete 'images/:image_id', to: 'properties#delete_image'
