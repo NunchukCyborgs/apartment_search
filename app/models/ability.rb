@@ -40,7 +40,7 @@ class Ability
     can [:me], User
     can [:update, :delete], Review if user && user.can_control_review?(params[:id])
     can [:create, :read], Review
-    can [:facets, :filtered_results, :show, :user, :search], Property
+    can [:facets, :filtered_results, :show, :user, :search, :request_property], Property
     can [:show, :create, :update], Contact
     can [:authenticate], :license
     can [:create], :payment
