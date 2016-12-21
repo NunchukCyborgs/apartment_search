@@ -46,7 +46,7 @@ class PaymentsController < ApplicationController
   def update_request
     @payment_request = current_user.payment_requests.unprocessed.for_token(params[:token])
     if @payment_request.update(payment_update_params)
-      render json: { token: @payment_request.token }, status: :ok
+      render 'payments/show', status: :ok
     else
       @errors = @payment_request.errors
       render 'payments/errors', status: :unprocessable_entity
