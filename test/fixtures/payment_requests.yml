@@ -16,6 +16,7 @@
 #  token             :string(255)
 #  rejected_at       :datetime
 #  completed_at      :datetime
+#  phone             :string(255)
 #
 # Indexes
 #
