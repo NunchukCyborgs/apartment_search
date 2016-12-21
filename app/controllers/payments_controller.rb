@@ -17,6 +17,7 @@ class PaymentsController < ApplicationController
   def destroy
     @payment_request = current_user.payment_requests.unprocessed.for_token(params[:token])
     @payment_request.destroy
+    render json: "", status: 204
   end
 
   def fees
@@ -43,8 +44,8 @@ class PaymentsController < ApplicationController
   end
 
   def update_request
-    @payment_request = current_user.payment_requests.for_token(params[:token])
-    if @payment_request.payment.nil? && @payment_request.update(payment_request_params)
+    @payment_request = current_user.payment_requests.unprocessed.for_token(params[:token])
+    if @payment_request.update(payment_update_params)
       render json: { token: @payment_request.token }, status: :ok
     else
       @errors = @payment_request.errors
@@ -69,6 +70,10 @@ class PaymentsController < ApplicationController
 
   def payment_request_params
     params.require(:payment_request).permit(:due_on, :name, :subtotal, :unit, :phone)
+  end
+
+  def payment_update_params
+    params.require(:payment_request).permit(:due_on, :name, :unit, :phone)
   end
 
 end

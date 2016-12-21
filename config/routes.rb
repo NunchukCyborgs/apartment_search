@@ -14,11 +14,12 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', :as => :login
   get 'logout' => 'user_sessions#destroy', :as => :logout
 
-  resources :payments, only: [:create, :index, :destroy] do
+  resources :payments, only: [:create, :index] do
     collection do
       get 'fees'
       post 'requests', to: 'payments#request_payment'
       patch 'requests/:token', to: 'payments#update_request'
+      delete '/:token', to: 'payments#destroy'
     end
   end
   resources :contacts, only: [:create, :update, :show], format: :json
