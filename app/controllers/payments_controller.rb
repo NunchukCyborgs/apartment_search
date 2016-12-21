@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-    @payment_request = current_user.payment_requests.uncompleted.for_token(params[:token])
+    @payment_request = current_user.payment_requests.unprocessed.for_token(params[:token])
     @payment_request.destroy
   end
 
