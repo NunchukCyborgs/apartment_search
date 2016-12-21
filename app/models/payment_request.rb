@@ -42,7 +42,7 @@ class PaymentRequest < ActiveRecord::Base
   after_create :generate_token
 
   scope :unprocessed, -> { where("completed_at IS NULL AND rejected_at IS NULL") }
-  scope :for_token, -> { |token| find_by!(token: token) }
+  scope :for_token, -> (token) { find_by!(token: token) }
 
   def description
     "Payment made for #{property_address1}#{" unit: #{property_address2}" if property_address2.present?} by #{name}."
