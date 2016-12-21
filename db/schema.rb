@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221181011) do
+ActiveRecord::Schema.define(version: 20161221185000) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -142,8 +142,10 @@ ActiveRecord::Schema.define(version: 20161221181011) do
     t.datetime "rejected_at"
     t.datetime "completed_at"
     t.string   "phone",             limit: 255
+    t.datetime "deleted_at"
   end
 
+  add_index "payment_requests", ["deleted_at"], name: "index_payment_requests_on_deleted_at", using: :btree
   add_index "payment_requests", ["property_id"], name: "index_payment_requests_on_property_id", using: :btree
   add_index "payment_requests", ["token"], name: "index_payment_requests_on_token", using: :btree
   add_index "payment_requests", ["user_id"], name: "index_payment_requests_on_user_id", using: :btree

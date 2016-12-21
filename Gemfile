@@ -42,6 +42,7 @@ gem 'daemons'
 gem 'maily'
 gem 'premailer-rails'
 gem 'honeybadger', '~> 2.0'
+gem "paranoia"
 
 gem 'friendly_id'
 gem "rolify"

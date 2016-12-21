@@ -16,16 +16,21 @@
 #  token             :string(255)
 #  rejected_at       :datetime
 #  completed_at      :datetime
-#  phone             :string
+#  phone             :string(255)
+#  deleted_at        :datetime
 #
 # Indexes
 #
+#  index_payment_requests_on_deleted_at   (deleted_at)
 #  index_payment_requests_on_property_id  (property_id)
 #  index_payment_requests_on_token        (token)
 #  index_payment_requests_on_user_id      (user_id)
 #
 
 class PaymentRequest < ActiveRecord::Base
+
+  acts_as_paranoid
+
   belongs_to :user
   belongs_to :property
 
