@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
   skip_authorization_check only: [:create, :request_payment, :update_request, :fees, :destroy]
   before_action :load_property, only: [:request_payment]
   before_action :load_property_from_slug, only: [:fees]
-  before_action :load_payment_request, only: [:create, :update_request]
+  before_action :load_payment_request, only: [:create]
 
   def create
     @payment = PaymentService.new(current_user, @payment_request, params[:stripe_token]).create!
@@ -43,6 +43,7 @@ class PaymentsController < ApplicationController
   end
 
   def update_request
+    @payment_request = current_user.payment_requests.for_token(params[:token])
     if @payment_request.payment.nil? && @payment_request.update(payment_request_params)
       render json: { token: @payment_request.token }, status: :ok
     else
@@ -67,7 +68,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_request_params
-    params.require(:payment_request).permit(:due_on, :name, :subtotal, :unit)
+    params.require(:payment_request).permit(:due_on, :name, :subtotal, :unit, :phone)
   end
 
 end
