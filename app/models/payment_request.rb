@@ -16,6 +16,7 @@
 #  token             :string(255)
 #  rejected_at       :datetime
 #  completed_at      :datetime
+#  phone             :string
 #
 # Indexes
 #
@@ -32,12 +33,16 @@ class PaymentRequest < ActiveRecord::Base
   has_one :contact, as: :contactable
 
   validates :property_id, presence: true
+  validates :phone, presence: true
 
   accepts_nested_attributes_for :contact, reject_if: :all_blank, allow_destroy: true
 
   delegate :address1, :address2, :slug, to: :property, allow_nil: true, prefix: true
 
   after_create :generate_token
+
+  scope :unprocessed, -> { where("completed_at IS NULL AND rejected_at IS NULL") }
+  scope :for_token, -> { |token| find_by!(token: token) }
 
   def description
     "Payment made for #{property_address1}#{" unit: #{property_address2}" if property_address2.present?} by #{name}."
