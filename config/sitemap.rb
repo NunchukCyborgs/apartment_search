@@ -5,13 +5,15 @@ default_tenant = "cape-girardeau"
 
 SitemapGenerator::Sitemap.create do
 
-  add "/faq"
-  add "/privacy-policy"
-  add "/cape-girardeau-rentals"
-  # add "/cape-girardeau-landlords" Add in when it's ready to go
+  add "/p/faq"
+  add "/p/privacy-policy"
+  add "/p/cape-girardeau-rentals"
+  add "/p/cape-girardeau-landlords"
+  add "/p/pay-rent-online"
 
   Property.find_each do |property|
     add "/#{default_tenant}/#{property.slug}"
+    add "/pay-rent/#{property.slug}"
   end
 
   # Put links creation logic here.
