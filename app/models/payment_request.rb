@@ -42,7 +42,8 @@ class PaymentRequest < ActiveRecord::Base
 
   accepts_nested_attributes_for :contact, reject_if: :all_blank, allow_destroy: true
 
-  delegate :address1, :address2, :slug, to: :property, allow_nil: true, prefix: true
+  delegate :email, to: :user, allow_nil: true, prefix: true
+  delegate :address1, :address2, :slug, :main_image_url, to: :property, allow_nil: true, prefix: true
 
   after_create :generate_token
 

@@ -36,6 +36,7 @@ class PaymentsController < ApplicationController
     @payment_request.user = current_user
 
     if @payment_request.save
+      Delayed::Job.enqueue PaymentRequestConfirmationJob.new(@payment_request.id)
       render 'payments/show', status: :ok
     else
       @errors = @payment_request.errors

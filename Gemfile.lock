@@ -282,6 +282,7 @@ GEM
       builder (~> 3.0)
     slack-notifier (1.5.1)
     slop (3.6.0)
+    smtpapi (0.1.0)
     spreadsheet (1.1.3)
       ruby-ole (>= 1.0)
     spring (1.7.2)
@@ -369,6 +370,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sitemap_generator
   slack-notifier
+  smtpapi
   spring
   stripe
   turbolinks
