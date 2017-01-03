@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@roomhere.io"
+  default from: "Roomhere <noreply@roomhere.io>"
   layout 'mailer'
 end

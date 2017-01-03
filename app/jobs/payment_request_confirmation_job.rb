@@ -6,6 +6,6 @@ class PaymentRequestConfirmationJob
 
   def perform
     PaymentMailer.request_confirmation(@payment_request_id).deliver!
-    SlackNotificationService.new.post("Payment Request ##{@payment_request_id}. No further action needed")
+    SlackNotificationService.new.post("Payment Request ##{@payment_request_id}. Confirmation and Payment Capture needed.")
   end
 end
