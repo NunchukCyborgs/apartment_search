@@ -49,6 +49,7 @@ class Property < ActiveRecord::Base
   accepts_nested_attributes_for :images, reject_if: :all_blank, allow_destroy: true
 
   delegate :primary_contact, to: :license, prefix: true, allow_nil: true
+  delegate :url, to: :main_image, prefix: true, allow_nil: true
 
   scope :like_address, ->(address_string) { where("address1 LIKE ?", "%#{address_string}%") }
 

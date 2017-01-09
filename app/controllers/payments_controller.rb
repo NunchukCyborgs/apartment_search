@@ -7,6 +7,7 @@ class PaymentsController < ApplicationController
   def create
     @payment = PaymentService.new(current_user, @payment_request, params[:stripe_token]).create!
     if @payment.err.nil?
+      Delayed::Job.enqueue PaymentRequestConfirmationJob.new(@payment_request.id)
       render 'payments/show', status: :ok
     else
       @errors = @payment.err

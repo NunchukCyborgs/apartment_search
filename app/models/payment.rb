@@ -24,5 +24,6 @@ class Payment < ActiveRecord::Base
 
   def capture!
     PaymentCaptureService.new(self).capture!
+    Delayed::Job.enqueue PaymentRequestCompletionJob.new(payment_request_id)
   end
 end
