@@ -3,7 +3,11 @@ namespace :mappings do
   desc "Create mapping for properties"
   task :create_property_mapping do
     #initiate ES client
-    client = Elasticsearch::Client.new host: '10.128.0.4'
+    if Rails.env.production?
+        Elasticsearch::Model.client = Elasticsearch::Client.new host: '10.128.0.4'
+    else
+        Elasticsearch::Model.client = Elasticsearch::Client.new log: true
+    end
 
     body = {
       analysis: {

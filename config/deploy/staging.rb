@@ -17,9 +17,9 @@
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, %w{ubuntu@ec2-35-165-220-132.us-west-2.compute.amazonaws.com}
-role :web, %w{ubuntu@ec2-35-165-220-132.us-west-2.compute.amazonaws.com}
-role :db, %w{ubuntu@ec2-35-165-220-132.us-west-2.compute.amazonaws.com}
+role :app, %w{deploy@demo.roomhere.io}
+role :web, %w{deploy@demo.roomhere.io}
+role :db, %w{deploy@demo.roomhere.io}
 
 set :delayed_job_workers, 1
 
