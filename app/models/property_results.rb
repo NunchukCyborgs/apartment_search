@@ -102,11 +102,11 @@ class PropertyResults
 
   def address_query_search
     {
-      query_string: {
+      multi_match: {
         query: @search_query,
         fields: [ "address1^3", "address1.synonyms^3", "address2", "address2.synonyms" "city", "state", "zipcode" ],
         fuzzy_prefix_length: 2,
-        fuzziness: 1
+        fuzziness: "AUTO",
       }
     }
   end
