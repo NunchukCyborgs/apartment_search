@@ -26,7 +26,7 @@ namespace :mappings do
             type:     "ngram",
             min_gram: 4,
             max_gram: 4
-          }
+          },
           address_synonyms: {
             type: "synonym",
             synonyms: [
@@ -80,7 +80,7 @@ namespace :mappings do
             type: "custom",
             tokenizer: "keyword",
             filter:  [ "lowercase" ]
-          }
+          },
           address: {
             type: "custom",
             tokenizer: "standard",
