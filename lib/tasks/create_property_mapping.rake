@@ -27,6 +27,29 @@ namespace :mappings do
             min_gram: 4,
             max_gram: 4
           }
+          address_synonyms: {
+            type: "synonym",
+            synonyms: [
+              "1st,first","2nd,second","3rd,third","4th,fourth","5th,fifth",
+              "6th,sixth","7th,seventh","8th,eighth","9th,ninth","10th,tenth",
+              "11th,eleventh","12th,twelfth", "13th,thirteenth", "14th, fourteenth",
+              "15th,fifteenth","16th,sixteenth","17th,seventeenth","18th,eighteenth",
+              "19th,nineteenth",
+              "20th,twentieth",
+              "21st,twenty-first,twenty first",
+              "22nd,twenty-second,twenty second",
+              "23rd,twenty-third,twenty third",
+              "24th,twnty-fourth,twenty fourth",
+              "25th,twenty-fifth,twenty fifth",
+              "26th,twenty-sixth,twenty sixth",
+              "27th,twenty-seventh,twenty seventh",
+              "28th,twenty-eighth,twenty eighth",
+              "29th,twenty-ninth,twenty ninth",
+              "n,north,n.","s,south,s.","w,west,w.","e,east,e.","nw, northwest, nw.",
+              "ne,northeast,ne.","sw,southwest,sw.","se,southeast,se.",
+              "ct,court,ct.,st,street,st.,dr,drive,dr.,blvd,boulevard,blvd.,rd,road,rd.,rte,rt,route,rte.,rt."
+            ]
+          }
         },
         analyzer: {
           autocomplete: {
@@ -57,6 +80,14 @@ namespace :mappings do
             type: "custom",
             tokenizer: "keyword",
             filter:  [ "lowercase" ]
+          }
+          address: {
+            type: "custom",
+            tokenizer: "standard",
+            filter: [
+              "lowercase",
+              "address_synonyms"
+            ]
           }
         }
       }

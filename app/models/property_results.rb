@@ -96,8 +96,17 @@ class PropertyResults
         }
       }
     }
-    q[:query][:filtered][:query] = { query_string: { query: @search_query, fields: [ "address1^3", "address2", "city", "state", "zipcode" ] } } if @search_query.present?
+    q[:query][:filtered][:query] = address_query_search if @search_query.present?
     q
+  end
+
+  def address_query_search
+    {
+      query_string: {
+        query: @search_query,
+        fields: [ "address1^3", "address1.synonyms^3", "address2", "address2.synonyms" "city", "state", "zipcode" ]
+      }
+    }
   end
 
   def calculate_from

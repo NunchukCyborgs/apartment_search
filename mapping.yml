@@ -7,8 +7,16 @@
       :type: string
     :address1:
       :type: string
+      :fields:
+        synonyms:
+          :type: string
+          :analyzer: address
     :address2:
       :type: string
+      :fields:
+        synonyms:
+          :type: string
+          :analyzer: address
     :zipcode:
       :type: string
     :price:
