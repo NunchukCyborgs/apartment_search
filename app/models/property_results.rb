@@ -104,7 +104,8 @@ class PropertyResults
     {
       query_string: {
         query: @search_query,
-        fields: [ "address1^3", "address1.synonyms^3", "address2", "address2.synonyms" "city", "state", "zipcode" ]
+        fields: [ "address1^3", "address1.synonyms^3", "address2", "address2.synonyms" "city", "state", "zipcode" ],
+        fuzziness: 1
       }
     }
   end
