@@ -14,9 +14,11 @@
 #  imageable_type    :string(255)
 #  height            :string(255)
 #  width             :string(255)
+#  deleted_at        :datetime
 #
 # Indexes
 #
+#  index_images_on_deleted_at                       (deleted_at)
 #  index_images_on_imageable_type_and_imageable_id  (imageable_type,imageable_id)
 #
 

@@ -14,15 +14,19 @@
 #  imageable_type    :string(255)
 #  height            :string(255)
 #  width             :string(255)
+#  deleted_at        :datetime
 #
 # Indexes
 #
+#  index_images_on_deleted_at                       (deleted_at)
 #  index_images_on_imageable_type_and_imageable_id  (imageable_type,imageable_id)
 #
 
 class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
   before_create :extract_dimensions
+
+  acts_as_paranoid
 
   has_attached_file :file, default_url: "http://placehold.it/600x400",
     styles: lambda { |a|
