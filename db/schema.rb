@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221185000) do
+ActiveRecord::Schema.define(version: 20170120212647) do
 
   create_table "amenities", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -80,8 +80,10 @@ ActiveRecord::Schema.define(version: 20161221185000) do
     t.string   "imageable_type",    limit: 255
     t.string   "height",            limit: 255
     t.string   "width",             limit: 255
+    t.datetime "deleted_at"
   end
 
+  add_index "images", ["deleted_at"], name: "index_images_on_deleted_at", using: :btree
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "license_instances", force: :cascade do |t|

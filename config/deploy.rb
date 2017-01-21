@@ -6,6 +6,7 @@ set :repo_url, 'git@github.com:NunchukCyborgs/apartment_search.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/apartment_search'
