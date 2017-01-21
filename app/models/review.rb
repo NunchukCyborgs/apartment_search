@@ -34,6 +34,8 @@ class Review < ActiveRecord::Base
 
   after_save :update_averages
 
+  after_save :send_notification
+
   def anonymous?
     anonymous_at.present?
   end
@@ -73,5 +75,9 @@ class Review < ActiveRecord::Base
 
   def is_anonymous=(anon)
     self.anonymous = anon
+  end
+
+  def send_notification
+    Delayed::Job.enqueue ReviewCreatedNotificationJob.new(self.id)
   end
 end
