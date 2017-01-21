@@ -17,12 +17,12 @@ class RatingUpdateJob
   end
 
   def update_landlord_rating
-    avg = license.reviews.validated.average(:landlord_rating)
+    avg = license.reviews.validated.average(:landlord_rating) || 0
     license.update_attributes!(average_landlord_rating: avg)
   end
 
   def update_property_rating
-    avg = property.reviews.validated.average(:property_rating)
+    avg = property.reviews.validated.average(:property_rating) || 0
     property.update_attributes!(average_property_rating: avg)
   end
 
