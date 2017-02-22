@@ -56,6 +56,7 @@ gem 'cancan'
 gem 'slack-notifier'
 gem 'sitemap_generator'
 gem 'smtpapi'
+gem 'seed_dump'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
